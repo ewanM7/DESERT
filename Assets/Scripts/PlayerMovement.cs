@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Controller.isGrounded)
         {
-            VerticalMovement = -2f;
+            VerticalMovement = -3f;
         }
         else
         {
