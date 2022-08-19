@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float MoveSpeed;
     public float TurnRate;
 
-    public Vector2 InputMovement;
+    public Vector2 MovementInput;
     public float VerticalMovement;
     public Vector3 CameraForward;
     public Vector3 CameraRight;
@@ -40,12 +40,15 @@ public class PlayerMovement : MonoBehaviour
             VerticalMovement = Mathf.Clamp(VerticalMovement, TerminalVelocity, -TerminalVelocity);
         }
 
+        CameraForward = GameManager.Instance._CameraManager.MainCamera.transform.forward;
+        CameraRight = GameManager.Instance._CameraManager.MainCamera.transform.right;
+
         CameraForward.y = 0;
         CameraForward.Normalize();
         CameraRight.y = 0;
         CameraRight.Normalize();
 
-        Vector3 FinalMovement = ((CameraRight * InputMovement.x) + (CameraForward * InputMovement.y)).normalized * MoveSpeed;
+        Vector3 FinalMovement = ((CameraRight * MovementInput.x) + (CameraForward * MovementInput.y)).normalized * MoveSpeed;
 
         targetPlayerForward = new Vector3(FinalMovement.x, 0, FinalMovement.z);
         transform.forward = Vector3.Slerp(currentPlayerForward, targetPlayerForward, TurnRate * Time.deltaTime);

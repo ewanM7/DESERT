@@ -5,13 +5,14 @@ using System.IO;
 
 public class PlayerSave
 {
-    public int TestInt;
     public int Day;
     public Weekday WeekDay;
     public float TimeOfDay;
 
     public PlayerSave()
     {
-        TestInt = 0;
+        Day = 1;
+        WeekDay = Weekday.Monday;
+        TimeOfDay = 0f;
     }
 }

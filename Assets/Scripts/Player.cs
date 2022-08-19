@@ -13,4 +13,9 @@ public class Player : MonoBehaviour
     public int Hunger;
     public int Thirst;
 
+    public void OnPlayerInteract()
+    {
+
+    }
+
 }

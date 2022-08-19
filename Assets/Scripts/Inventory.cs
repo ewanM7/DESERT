@@ -45,7 +45,7 @@ public class Inventory
     /// </summary>
     /// <param name="itemToAdd"></param>
     /// <returns></returns>
-    public bool AddItem(Item itemToAdd, bool toPlayerInventory)
+    public bool AddItem(Item itemToAdd)
     {
         int z = 0;
 

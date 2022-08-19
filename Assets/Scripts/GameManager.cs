@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
 
     public SettingsManager _SettingsManager;
 
+    public Player _Player;
     public PlayerMovement _PlayerMovement;
 
-    public PlayerSave playerSave;
+    public CameraManager _CameraManager;
 
-    public CinemachineFreeLook PlayerCamera;
-    public Camera MainCam;
+    public MainUI _MainUI;
+
+    public PlayerSave playerSave;
 
     public ItemDatabase _ItemDatabase;
 
@@ -65,14 +67,24 @@ public class GameManager : MonoBehaviour
         //Cursor.visible = true;
 
         Application.targetFrameRate = 60;
+
+        _CameraManager.FindCameras();
+
+        Day = 1;
+        WeekDay = Weekday.Monday;
+        TimeOfDay = 0f;
+
+        StartCoroutine(TimeOfDayCoroutine());
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
+        _Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        _MainUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUI>();
     }
 
-    private IEnumerator DayTimeCoroutine()
+    private IEnumerator TimeOfDayCoroutine()
     {
         while(TimeOfDay < 100f)
         {
@@ -81,11 +93,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void IncrementDay()
     {
-        _PlayerMovement.CameraForward = MainCam.transform.forward;
-        _PlayerMovement.CameraRight = MainCam.transform.right;
+        WeekDay = WeekDay.NextDay();
+        Day++;
+        TimeOfDay = 0f;
     }
+
+    
 
     /// <summary>
     /// Saves player data to file
@@ -142,15 +157,12 @@ public class GameManager : MonoBehaviour
 
     void OnPlayerMove(InputValue value)
     {
-        Debug.Log("movement: " + value.Get<Vector2>());
-        _PlayerMovement.InputMovement = value.Get<Vector2>();
-        
+        _PlayerMovement.MovementInput = value.Get<Vector2>();
     }
 
-    void OnCameraMove(InputValue value)
+    public void OnPlayerInteract()
     {
-        PlayerCamera.m_XAxis.Value += value.Get<Vector2>().x * Time.deltaTime * 10f;
-        PlayerCamera.m_YAxis.Value -= value.Get<Vector2>().y * Time.deltaTime / 10f;
+        _Player.OnPlayerInteract();
     }
 }
 
@@ -177,6 +189,18 @@ static class WeekdayExtensions
 
             default:
                 return true;
+        }
+    }
+
+    public static Weekday NextDay(this Weekday day)
+    {
+        if(day == Weekday.Sunday)
+        {
+            return Weekday.Monday;
+        }
+        else
+        {
+            return day + 1;
         }
     }
 }
