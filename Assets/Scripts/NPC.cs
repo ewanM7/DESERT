@@ -67,7 +67,7 @@ public class NPC : MonoBehaviour
                 return true;
             }
 
-            if(item.itemData.Type == itemSpecifier.Type)
+            if(item.HasDescriptors(itemSpecifier.Descriptors))
             {
                 return true;
             }
@@ -91,12 +91,12 @@ public class NPC : MonoBehaviour
         //to do - add multipliers for npc traits to the value
         float perceivedValueMultiplier = 1f;
 
-        if (Traits.Contains(Trait.Alcoholic) && item.itemData.Type == ItemType.Alcohol)
+        if (Traits.Contains(Trait.Alcoholic) && item.HasDescriptor(ItemDescriptor.Alcohol))
         {
             //add to multiplier
         }
 
-        if (Traits.Contains(Trait.SweetTooth) && item.itemData.Type == ItemType.Sweet)
+        if (Traits.Contains(Trait.SweetTooth) && item.HasDescriptor(ItemDescriptor.Sweet))
         {
             //add to multiplier
         }
@@ -177,7 +177,7 @@ public struct TradeOffer
 public struct ItemSpecifier
 {
     public ItemID ID;
-    public ItemType Type;
+    public ItemDescriptor[] Descriptors;
     public ItemCategory Category;
 }
 

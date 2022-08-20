@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     public ItemCategory Category;
-    public ItemType Type;
+    public ItemDescriptor[] Descriptors;
     public ItemID ID;
 
     public int BaseValue;
@@ -37,7 +37,7 @@ public enum ItemID
     None,
 }
 
-public enum ItemType
+public enum ItemDescriptor
 {
     Meat = 0,
     Fruit,

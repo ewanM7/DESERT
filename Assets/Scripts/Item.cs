@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Item
 {
@@ -21,6 +22,24 @@ public class Item
         {
             return Mathf.RoundToInt(GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality) * itemData.BaseValue);
         }
+    }
+
+    public bool HasDescriptor(ItemDescriptor descriptor)
+    {
+        return itemData.Descriptors.Contains(descriptor);
+    }
+
+    public bool HasDescriptors(ItemDescriptor[] descriptors)
+    {
+        foreach(ItemDescriptor descriptor in descriptors)
+        {
+            if (!itemData.Descriptors.Contains(descriptor))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public ItemQuality StarQuality()

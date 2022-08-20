@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: GoldEmeraldRing
   m_EditorClassIdentifier: 
   Category: 3
-  Type: 3000
+  Descriptors: 70170000b80b0000
   ID: 4
   BaseValue: 150
-  ItemName: Emerald Ring (Gold)
+  Name: 
+  HealthRestored: 0
+  HungerRestored: 0
+  ThirstRestored: 0
+  IsStackable: 0
   UISprite: {fileID: 0}
