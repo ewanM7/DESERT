@@ -18,3 +18,45 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b44735adb67ec9b42a1a9f0080c20945, type: 2}
   - {fileID: 11400000, guid: 6a20dcfd39c15d54b9b1833caba385be, type: 2}
   - {fileID: 11400000, guid: e87902f67e59d65488e7f1f6594cf01d, type: 2}
+  QualityValueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 0.25
+      inSlope: 0.055555556
+      outSlope: 0.083333336
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 1
+      inSlope: 0.083333336
+      outSlope: 0.1
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 20
+      value: 2
+      inSlope: 0.1
+      outSlope: 0.1
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    - serializedVersion: 3
+      time: 30
+      value: 3
+      inSlope: 0.1
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

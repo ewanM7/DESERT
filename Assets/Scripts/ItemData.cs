@@ -10,7 +10,8 @@ public class ItemData : ScriptableObject
     public ItemID ID;
 
     public int BaseValue;
-    public string ItemName;
+
+    public string Name;
 
     public int HealthRestored;
     public int HungerRestored;
@@ -33,6 +34,7 @@ public enum ItemID
     LeatherGloves,
 
     //ALWAYS ADD IDs TO THE END OF THE ENUM, OR IT WILL MOVE ALL OTHER ITEM IDs
+    None,
 }
 
 public enum ItemType
@@ -43,6 +45,7 @@ public enum ItemType
     Spice,
     Drink,
     Alcohol,
+    Sweet,
 
     Gloves = 1000,
     Scarf,

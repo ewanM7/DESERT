@@ -6,6 +6,8 @@ using UnityEngine;
 public class ItemDatabase : ScriptableObject
 {
     public List<ItemData> AllItems;
+
+    public AnimationCurve QualityValueCurve;
 }
 
 

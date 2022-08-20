@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item
 {
-    public ItemQuality Quality;
+    public int Quality;
     public ItemData itemData;
 
     public Item(ItemData data)
@@ -12,21 +12,37 @@ public class Item
         itemData = data;
     }
 
-    public static ItemQuality QualityForRoll(int roll)
+    /// <summary>
+    /// The value of the item when taking quality into account
+    /// </summary>
+    public int Value
     {
-        if(roll <= 4)
+        get
+        {
+            return Mathf.RoundToInt(GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality) * itemData.BaseValue);
+        }
+    }
+
+    public ItemQuality StarQuality()
+    {
+        if(Quality == -1)
+        {
+            return ItemQuality.None;
+        }
+
+        if(Quality <= 4)
         {
             return ItemQuality.OneStar;
         }
-        else if(roll >= 5 && roll <= 8)
+        else if(Quality >= 5 && Quality <= 8)
         {
             return ItemQuality.TwoStar;
         }
-        else if(roll >= 9 && roll <= 12)
+        else if(Quality >= 9 && Quality <= 12)
         {
             return ItemQuality.ThreeStar;
         }
-        else if(roll >= 13 && roll <= 16)
+        else if(Quality >= 13 && Quality <= 16)
         {
             return ItemQuality.FourStar;
         }
