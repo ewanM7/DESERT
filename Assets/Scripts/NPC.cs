@@ -62,17 +62,17 @@ public class NPC : MonoBehaviour
     {
         foreach(ItemSpecifier itemSpecifier in WantsToBuy)
         {
-            if(item.itemData.Category == itemSpecifier.Category)
+            if(item.BaseItemData.Category != ItemCategory.None && item.BaseItemData.Category == itemSpecifier.Category)
             {
                 return true;
             }
 
-            if(item.HasDescriptors(itemSpecifier.Descriptors))
+            if (item.BaseItemData.ID != ItemID.None && item.BaseItemData.ID == itemSpecifier.ID)
             {
                 return true;
             }
 
-            if(item.itemData.ID == itemSpecifier.ID)
+            if (item.HasDescriptors(itemSpecifier.Descriptors))
             {
                 return true;
             }

@@ -10,11 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 724735f8f299c28458c7ab894b80a48f, type: 3}
-  m_Name: GoldNugget
+  m_Name: Crown
   m_EditorClassIdentifier: 
-  Category: 6
-  Type: 6000
-  ID: 1
-  BaseValue: 100
-  ItemName: Gold Nugget
-  UISprite: {fileID: 0}
+  Category: 4
+  BaseDescriptors: bc0b0000
+  ID: 0
+  BaseName: 
+  BaseValue: 75
+  HealthRestored: 0
+  HungerRestored: 0
+  ThirstRestored: 0
+  IsStackable: 0
+  MaterialMultipliers:
+  - Multiplier: 2
+    Material: 6000
+  - Multiplier: 1.8
+    Material: 6001
+  - Multiplier: 1.6
+    Material: 6002
+  - Multiplier: 1.2
+    Material: 6003

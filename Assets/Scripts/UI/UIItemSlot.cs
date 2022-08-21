@@ -38,7 +38,7 @@ public class UIItemSlot : MonoBehaviour
             return;
         }
 
-        ItemNameText.text = item.itemData.Name;
+        ItemNameText.text = item.Name;
 
         if(count == 1)
         {

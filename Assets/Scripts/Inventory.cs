@@ -51,12 +51,12 @@ public class Inventory
 
         bool addedToStack = false;
         //add the item to a stack if there is a stack of the given item in the inventory already, and it is a stackable item
-        if (itemToAdd.itemData.IsStackable)
+        if (itemToAdd.BaseItemData.IsStackable)
         {
             for (int i = z; i < ItemStacks.Length; i++)
             {
                 //item id and quality must be the same in order for them to stack
-                if (ItemStacks[i].item.itemData.ID == itemToAdd.itemData.ID && ItemStacks[i].item.Quality == itemToAdd.Quality)
+                if (ItemStacks[i].item.BaseItemData.ID == itemToAdd.BaseItemData.ID && ItemStacks[i].item.Quality == itemToAdd.Quality)
                 {
                     if (ItemStacks[i].count < MAX_STACK_SIZE)
                     {

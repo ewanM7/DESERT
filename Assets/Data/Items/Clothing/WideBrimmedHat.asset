@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 724735f8f299c28458c7ab894b80a48f, type: 3}
-  m_Name: LeatherGloves
+  m_Name: WideBrimmedHat
   m_EditorClassIdentifier: 
-  Category: 1
-  Type: 1000
-  ID: 6
-  BaseValue: 20
-  ItemName: Leather Gloves
-  UISprite: {fileID: 0}
+  Category: 2
+  BaseDescriptors: ee030000
+  ID: 0
+  BaseName: Wide Brimmed Hat
+  BaseValue: 50
+  HealthRestored: 0
+  HungerRestored: 0
+  ThirstRestored: 0
+  IsStackable: 0
+  MaterialMultipliers:
+  - Multiplier: 1.4
+    Material: 6013
+  - Multiplier: 1.8
+    Material: 6014
