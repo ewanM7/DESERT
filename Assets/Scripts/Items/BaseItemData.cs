@@ -17,7 +17,17 @@ public class BaseItemData : ScriptableObject
     public int HungerRestored;
     public int ThirstRestored;
 
+    public Sprite _UISprite;
+
     public bool IsStackable;
+
+    public virtual Sprite UISprite
+    {
+        get
+        {
+            return _UISprite;
+        }
+    }
 
     [SerializeField]
     public MaterialMultiplier[] MaterialMultipliers;
@@ -62,6 +72,8 @@ public enum ItemID
     TigerHide,
     SheepHide,
     Lens,
+
+    Cash,
 
     Orange = 1000,
     Lemon,

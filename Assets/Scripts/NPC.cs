@@ -19,10 +19,31 @@ public class NPC : MonoBehaviour
     /// </summary>
     public float PriceTolerance;
 
-    public int Interest;
+    /// <summary>
+    /// NPC buy offers are multiplied by this value
+    /// </summary>
+    public float BuyMultiplier;
+
+    /// <summary>
+    /// This is the muliplier of how much an NPC increases its buy offer after a rejection
+    /// </summary>
+    public float OfferMultiplier;
+
+    /// <summary>
+    /// NPC sale prices are multiplied by this value
+    /// </summary>
+    public float SellMultiplier;
+
+    public int FirstOfferValue;
+    public int PreviousOfferValue;
+
+    /// <summary>
+    /// Interest in continuing the trade on a scale from 1 to 10 - trade ends if the interest drops to 0
+    /// </summary>
+    public int TradeInterest;
+
+
     public NPCState State;
-
-
 
     public GameObject SpeechCanvas;
     public TextMeshProUGUI SpeechText;
@@ -36,6 +57,11 @@ public class NPC : MonoBehaviour
         {
             inventory.AddItem(item);
         }
+    }
+
+    private void Start()
+    {
+        PreviousOfferValue = 0;
     }
 
     private void Update()
@@ -60,6 +86,11 @@ public class NPC : MonoBehaviour
 
     public bool IsLookingForItem(Item item)
     {
+        if(item == null)
+        {
+            return false;
+        }
+
         foreach(ItemSpecifier itemSpecifier in WantsToBuy)
         {
             if(item.BaseItemData.Category != ItemCategory.None && item.BaseItemData.Category == itemSpecifier.Category)
@@ -90,6 +121,11 @@ public class NPC : MonoBehaviour
     {
         //to do - add multipliers for npc traits to the value
         float perceivedValueMultiplier = 1f;
+
+        if(item.BaseItemData.ID == ItemID.Cash)
+        {
+            return 1;
+        }
 
         if (Traits.Contains(Trait.Alcoholic) && item.HasDescriptor(ItemDescriptor.Alcohol))
         {
@@ -126,52 +162,151 @@ public class NPC : MonoBehaviour
     {
         int perceivedOfferValue = PerceivedValueForOffer(PlayerOffer);
 
+        if(CurrentTradeOffer == null)
+        {
+            CurrentTradeOffer = new TradeOffer();
+        }
 
-        TradeOffer response = new TradeOffer();
+        //to do - affect NPC interest based on the difference between the offer and the wanted price. interest should also decline when offered items they aren't looking for
 
         if (IsSelling)
         {
             //npc is selling to the player
-
-            
-            if(perceivedOfferValue >= CurrentTradeOffer.WantedValue * (1 - PriceTolerance))
+            for(int i = 0; i < CurrentTradeOffer.Items.Length; i++)
             {
-                //player offer is above or equal to wanted value - accept the trade
-                response.Items = CurrentTradeOffer.Items;
-                response.Accepted = true;
+                //discard items that the player is not interested in buying
+                if (CurrentTradeOffer.Items[i] != null && !PlayerOffer.WantedItemIndexes[i])
+                {
+                    CurrentTradeOffer.Items[i] = null;
+                }
             }
 
+            CurrentTradeOffer.WantedValue = 0;
+
+            foreach(Item item in CurrentTradeOffer.Items)
+            {
+                if (item != null)
+                {
+                    CurrentTradeOffer.WantedValue += item.Value;
+                }
+            }
+
+            CurrentTradeOffer.WantedValue = Mathf.RoundToInt(CurrentTradeOffer.WantedValue * SellMultiplier);
+
+            if (perceivedOfferValue >= CurrentTradeOffer.WantedValue * (1 - PriceTolerance))
+            {
+                //player offer is above or equal to the wanted value including the price tolerance - accept the trade
+                CurrentTradeOffer.Accepted = true;
+            }
         }
         else
         {
             //npc is buying from the player
+            int z = 0;
+            bool makeOffer = true;
 
-            
-            if (PlayerOffer.WantedValue <= perceivedOfferValue)
+            foreach(Item item in PlayerOffer.Items)
             {
-                //value the player wants is below or equal to the perceived value - make an offer at or below the wanted value
+                if(item != null)
+                {
+                    if (IsLookingForItem(item))
+                    {
+                        CurrentTradeOffer.WantedItemIndexes[z] = true;
 
+                        //to do - take traits into account here to check if they want more of the same item, or more of similar items. NPCs should also have a chance to want multiple of the same item, depening on which item it is
+                    }
+                    else
+                    {
+                        makeOffer = false;
+                    }
+                }
+
+                z++;
             }
-            else
-            {
-                //the player wants more than the perceived value - offer around the perceived value up the the price tolerance max
 
+            if (makeOffer)
+            {
+                if (PlayerOffer.WantedValue <= perceivedOfferValue)
+                {
+                    //value the player wants is below or equal to the perceived value - make an offer at or below the wanted value
+                    if(PreviousOfferValue == 0)
+                    {
+                        //first offer, start lowest
+                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, Mathf.Clamp(Mathf.RoundToInt(PlayerOffer.WantedValue * Random.Range(0.7f, 0.9f) * BuyMultiplier), 0, PlayerOffer.WantedValue));
+
+                        //to do - include items in the offer from the NPCs inventory
+
+
+                        foreach (Item item in CurrentTradeOffer.Items)
+                        {
+                            if (item != null)
+                            {
+                                PreviousOfferValue += item.CashValue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //player wants more value - new offer should be higher than the previous, or close the trade
+                        PreviousOfferValue = Mathf.Clamp(Mathf.RoundToInt(PreviousOfferValue * OfferMultiplier), 0, PlayerOffer.WantedValue);
+                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, PreviousOfferValue);
+
+                        
+                        //to do - remove items from the offer the player is not interested in, and increase cash value appropriately
+
+                    }
+                }
+                else
+                {
+                    //the player wants more than the perceived value - offer around the perceived value up the the price tolerance max
+
+                    if(PreviousOfferValue == 0)
+                    {
+                        //first offer, start lowest
+                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, Mathf.Clamp(Mathf.RoundToInt(perceivedOfferValue * BuyMultiplier), 0, PlayerOffer.WantedValue));
+
+                        //to do - include items in the offer from the NPCs inventory
+
+                        foreach (Item item in CurrentTradeOffer.Items)
+                        {
+                            if (item != null)
+                            {
+                                PreviousOfferValue += item.CashValue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //player wants more value - new offer should be higher than the previous, up to the price tolerance or the player's wanted value. or close the trade
+                        PreviousOfferValue = (int)Mathf.Clamp(PreviousOfferValue * OfferMultiplier, 0, Mathf.Min((1 + PriceTolerance) * FirstOfferValue, PlayerOffer.WantedValue));
+                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, PreviousOfferValue);
+                    }
+                }
             }
         }
 
 
 
-        CurrentTradeOffer = response;
-        return response;
+        return CurrentTradeOffer;
     }
 
 }
 
-public struct TradeOffer
+public class TradeOffer
 {
+    public TradeOffer()
+    {
+        Items = new Item[9];
+        WantedValue = 0;
+        Accepted = false;
+        WantedItemIndexes = new bool[] { false, false, false, false, false, false, false, false, false };
+    }
+
     public Item[] Items;
     public int WantedValue;
     public bool Accepted;
+
+    public bool[] WantedItemIndexes;
 }
 
 public struct ItemSpecifier
@@ -207,5 +342,6 @@ public enum NPCState
 {
     Traveling,
     Trading,
+    ClosingTrade,
     Speaking,
 }

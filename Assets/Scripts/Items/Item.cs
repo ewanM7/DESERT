@@ -10,6 +10,12 @@ public class Item
 
     public ItemDescriptor[] DynamicDescriptors;
 
+
+    /// <summary>
+    /// Used for value when the item is cash. This is -1 if the item is not cash
+    /// </summary>
+    public int CashValue;
+
     public virtual string Name
     {
         get
@@ -29,15 +35,37 @@ public class Item
     public Item(BaseItemData data)
     {
         BaseItemData = data;
+
+        if(data.ID != ItemID.Cash)
+        {
+            CashValue = -1;
+        }
     }
 
     /// <summary>
-    /// The value of the item when taking quality into account
+    /// Constructor used to create cash items
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="CashValue"></param>
+    public Item(BaseItemData data, int CashValue)
+    {
+        BaseItemData = data;
+
+        this.CashValue = CashValue;
+    }
+
+    /// <summary>
+    /// The value of the item, taking quality into account
     /// </summary>
     public virtual int Value
     {
         get
         {
+            if(BaseItemData.ID == ItemID.Cash)
+            {
+                return CashValue;
+            }
+
             return Mathf.RoundToInt(GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality) * BaseItemData.BaseValue);
         }
     }

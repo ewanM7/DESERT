@@ -7,6 +7,8 @@ public class ItemDatabase : ScriptableObject
 {
     public List<BaseItemData> AllItems;
 
+    public BaseItemData Cash;
+
     public AnimationCurve QualityValueCurve;
 
 }
