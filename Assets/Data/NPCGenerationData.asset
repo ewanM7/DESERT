@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f0d6ce38102331439110b715427a1e2, type: 3}
+  m_Name: NPCGenerationData
+  m_EditorClassIdentifier: 
+  MaxBuyItemNumberTable:
+  - MaxBuyItemNumber: 1
+    Chance: 0.18
+  - MaxBuyItemNumber: 2
+    Chance: 0.2
+  - MaxBuyItemNumber: 3
+    Chance: 0.16
+  - MaxBuyItemNumber: 4
+    Chance: 0.11
+  - MaxBuyItemNumber: 5
+    Chance: 0.09
+  - MaxBuyItemNumber: 6
+    Chance: 0.08
+  - MaxBuyItemNumber: 7
+    Chance: 0.07
+  - MaxBuyItemNumber: 8
+    Chance: 0.06
+  - MaxBuyItemNumber: 9
+    Chance: 0.05

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public PlayerSave playerSave;
 
     public ItemDatabase _ItemDatabase;
+    public NPCGenerationData _NPCGenerationData;
 
     public Weekday WeekDay;
     public int Day;

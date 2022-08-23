@@ -36,10 +36,7 @@ public class Item
     {
         BaseItemData = data;
 
-        if(data.ID != ItemID.Cash)
-        {
-            CashValue = -1;
-        }
+        CashValue = -1;
     }
 
     /// <summary>
@@ -61,7 +58,7 @@ public class Item
     {
         get
         {
-            if(BaseItemData.ID == ItemID.Cash)
+            if(CashValue != -1)
             {
                 return CashValue;
             }

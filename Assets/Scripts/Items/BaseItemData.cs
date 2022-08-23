@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "Data/BaseItemData")]
+[CreateAssetMenu(fileName = "Item", menuName = "Data/Base Item Data")]
 public class BaseItemData : ScriptableObject
 {
     public ItemCategory Category;
@@ -50,81 +50,7 @@ public enum ItemID
 {
     None,
 
-    Oil = 1,
-    Coal,
-    Stone,
-    PineLog,
-    MahoganyLog,
-    AcaciaLog,
-    Tusk,
-    ScrapIron,
-    IronBar,
-    GoldNugget,
-    GoldBar,
-    Rope,
-    String,
-    Seashell1,
-    Seashell2,
-    Seashell3,
-    Cloth,
-    ClothRoll,
-    Leather,
-    TigerHide,
-    SheepHide,
-    Lens,
-
-    Cash,
-
-    Orange = 1000,
-    Lemon,
-    Date,
-    PricklyPear,
-    CoffeeBeans,
-
-    Bread,
-    Rice,
-    Wheat,
-    Beef,
-    Mutton,
-    Fish,
-    Flour,
-    Butter,
-    Sugar,
-    Milk,
-    Tomatoes,
-    Eggplant,
-    Pepper,
-    GrainSpirit,
-
-    Murakkaba,
-    FruitSalad,
-
-    CuredFish,
-    MintLamb,
-    BeefStew,
-    RiceBowl,
-    BatteredFish,
-    CousCous,
-
-    Mint,
-    Lavender,
-    Sage,
-    Wormwood,
-    Tea,
-
-    Salt,
-    Peppercorns,
-    Cinmamon,
-    Saffron,
-    Ginger,
-    Cloves,
-
-    WideBrimmedHat = 2000,
-    FulaniHat,
-    Goggles,
-
-
-    Shovel = 3000,
+    
 
     //ALWAYS ADD IDs TO THE END OF THE ENUM, OR IT WILL MOVE ALL OTHER ITEM IDs
 }
@@ -185,7 +111,7 @@ public enum ItemDescriptor
 
     //tools
     Sword = 4000,
-    
+    Shovel,
     Spear,
     Pickaxe,
     Axe,
@@ -260,6 +186,81 @@ public enum ItemDescriptor
     Damaged,
     Stolen,
     CanStoreLiquid,
+    IsDyeable,
+    CanHoldGem,
+
+    //SPECIFIC ITEMS
+    Oil = 9000,
+    Coal,
+    StoneItem,
+    PineLog,
+    MahoganyLog,
+    AcaciaLog,
+    Tusk,
+    ScrapIronItem,
+    IronBar,
+    GoldNugget,
+    GoldBar,
+    Rope,
+    StringItem,
+    Seashell1,
+    Seashell2,
+    Seashell3,
+    ClothItem,
+    ClothRoll,
+    LeatherItem,
+    TigerHide,
+    SheepHide,
+    Lens,
+
+    Cash,
+
+    Orange,
+    Lemon,
+    Date,
+    PricklyPear,
+    CoffeeBeans,
+
+    Bread,
+    Rice,
+    Wheat,
+    BeefItem,
+    MuttonItem,
+    FishItem,
+    Flour,
+    Butter,
+    Sugar,
+    Milk,
+    Tomatoes,
+    Eggplant,
+    Pepper,
+    GrainSpirit,
+
+    Murakkaba,
+    FruitSalad,
+
+    CuredFish,
+    MintLamb,
+    BeefStew,
+    RiceBowl,
+    BatteredFish,
+    CousCous,
+
+    MintItem,
+    LavenderItem,
+    Sage,
+    Wormwood,
+    Tea,
+
+    Salt,
+    Peppercorns,
+    Cinmamon,
+    Saffron,
+    Ginger,
+    Cloves,
+
+    
+
 }
 
 public enum ItemCategory
@@ -275,6 +276,7 @@ public enum ItemCategory
     Plant,
     Decorative,
     
+    CATEGORY_MAX,
 }
 
 public enum ItemQuality

@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f06109ac0141d4b9b61e994e93342f, type: 3}
   m_Name: ItemDatabase
   m_EditorClassIdentifier: 
-  AllItems:
-  - {fileID: 11400000, guid: 16cdaa76ccf756c4696bb3917f02e154, type: 2}
-  - {fileID: 11400000, guid: 6355e544c213aa648870cc07531defa5, type: 2}
-  - {fileID: 11400000, guid: b44735adb67ec9b42a1a9f0080c20945, type: 2}
-  - {fileID: 11400000, guid: 6a20dcfd39c15d54b9b1833caba385be, type: 2}
-  - {fileID: 11400000, guid: e87902f67e59d65488e7f1f6594cf01d, type: 2}
+  AllItems: []
   Cash: {fileID: 11400000, guid: 5fc87d99ed3288e41a0438ce940e3c82, type: 2}
   QualityValueCurve:
     serializedVersion: 2
@@ -70,3 +65,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  NPCBuyCategories: 010000000200000003000000040000000600000009000000
+  FoodDescriptors: 0a0000000500000006000000070000000800000009000000
+  ClothingDescriptors: e8030000e9030000ea030000ec030000ed030000ee030000ef030000f0030000f1030000
+  JewelryDescriptors: b80b0000b90b0000ba0b0000bb0b0000bc0b0000bd0b0000
+  ToolDescriptors: a00f0000a10f0000a20f0000a30f0000a40f0000a50f0000a60f0000a70f0000a80f0000a90f0000aa0f0000ab0f0000ac0f0000ad0f0000ae0f0000af0f0000
+  DecorativeDescriptors: 95110000961100009711000098110000991100009a1100009b110000

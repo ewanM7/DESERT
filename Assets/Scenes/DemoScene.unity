@@ -1288,6 +1288,7 @@ MonoBehaviour:
   _CameraManager: {fileID: 393565500}
   _MainUI: {fileID: 0}
   _ItemDatabase: {fileID: 11400000, guid: 9bd774c5041d89d4a8a4d4d584804663, type: 2}
+  _NPCGenerationData: {fileID: 11400000, guid: 5cc80bd21b288544895f277d3dcfe5e3, type: 2}
   WeekDay: 0
   Day: 0
   TimeOfDay: 0
@@ -3513,8 +3514,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Traits: 
   IsSelling: 0
+  NumberOfBuyItems: 0
   PriceTolerance: 0
-  Interest: 0
+  BuyMultiplier: 0
+  OfferMultiplier: 0
+  SellMultiplier: 0
+  FirstOfferValue: 0
+  PreviousOfferValue: 0
+  TradeInterest: 0
   State: 0
   SpeechCanvas: {fileID: 754641333}
   SpeechText: {fileID: 486544459}
@@ -4027,8 +4034,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005180060}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 14.829, y: 1.934, z: 10.05}
+  m_LocalRotation: {x: 0.16018225, y: 0, z: 0, w: 0.9870875}
+  m_LocalPosition: {x: 15.746, y: 6, z: -5.0200005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

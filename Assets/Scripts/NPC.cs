@@ -10,9 +10,10 @@ public class NPC : MonoBehaviour
     public Trait[] Traits;
     public Inventory inventory;
     public ItemSpecifier[] WantsToBuy;
-    public ItemSpecifier[] WantsToSell;
     public bool IsSelling;
     private TradeOffer CurrentTradeOffer;
+
+    public int MaxNumberOfBuyItems;
 
     /// <summary>
     /// Percentage of how much the npc is willing to offer over for items they're buying, or accept offers under for items they're selling
@@ -51,6 +52,8 @@ public class NPC : MonoBehaviour
     public float SpeechCanvasHorizontalOffset;
     public Vector3 SpeechCanvasVerticalOffset;
 
+    
+
     public void SetItems(Item[] items)
     {
         foreach(Item item in items)
@@ -59,9 +62,129 @@ public class NPC : MonoBehaviour
         }
     }
 
+
+
     private void Start()
     {
         PreviousOfferValue = 0;
+
+        //set price multipliers
+        PriceTolerance = Random.Range(0f, 0.25f);
+        BuyMultiplier = Random.Range(0.8f, 1.2f);
+        SellMultiplier = Random.Range(0.8f, 1.2f);
+
+        //set max number of items the npc will buy
+        MaxNumberOfBuyItems = GameManager.Instance._NPCGenerationData.GetMaxBuyItemNumber();
+
+        //set traits
+        int traitCount = Random.Range(1, 5);
+
+        Traits = new Trait[traitCount];
+
+        for(int i = 0; i < traitCount; i++)
+        {
+            Trait newTrait = (Trait)Random.Range(1, (int)Trait.TRAIT_MAX);
+            bool addTrait = true;
+
+            //make sure mutually exclusive traits aren't added
+            foreach(Trait trait in Traits)
+            {
+                if (trait.IsMutuallyExclusive(newTrait))
+                {
+                    addTrait = false;
+                    break;
+                }
+            }
+
+            if (addTrait)
+            {
+                Traits[i] = newTrait;
+            }
+        }
+
+        //set up inventory items
+        inventory = new Inventory(9);
+
+        //set items the npc is looking for
+        float seed = Random.Range(0f, 100f);
+
+        //to do - get the first random category from a loot table instead of a purely random one. the loot table should we weighted by what items are in the player's inventory
+        ItemCategory typeCategory = GameManager.Instance._ItemDatabase.NPCBuyCategories[Random.Range(0, GameManager.Instance._ItemDatabase.NPCBuyCategories.Count)];
+        ItemCategory typeCategory2;
+
+        do
+        {
+            typeCategory2 = GameManager.Instance._ItemDatabase.NPCBuyCategories[Random.Range(0, GameManager.Instance._ItemDatabase.NPCBuyCategories.Count)];
+        } while (typeCategory == typeCategory2 || typeCategory2 == ItemCategory.Animal);
+
+        //TO DO - INCLUDE chance to get a category, but also have a material descriptor (eg. looking for any clothes, but made of leather)
+
+        if (seed < 15f)
+        {
+            //15% chance to just want a single category
+
+            WantsToBuy = new ItemSpecifier[1];
+            WantsToBuy[0].Category = typeCategory;
+            WantsToBuy[0].Descriptors = new ItemDescriptor[0];
+        }
+        else if(seed < 75f)
+        {
+            //60% chance to want a few types of items
+
+            int typesCount = 0;
+
+            float typeSeed = Random.Range(0f, 100f);
+
+            if (typeCategory == ItemCategory.Animal)
+            {
+                typeSeed = 1f;
+            }
+
+            if (typeSeed < 60f)
+            {
+                //60% chance to want a single type
+                WantsToBuy = new ItemSpecifier[1];
+                typesCount = 1;
+            }
+            else if(typeSeed < 90f)
+            {
+                //30% chance to want 2 types
+                WantsToBuy = new ItemSpecifier[2];
+                typesCount = 2;
+            }
+            else
+            {
+                //10% chance to want 3 types
+                WantsToBuy = new ItemSpecifier[3];
+                typesCount = 3;
+            }
+
+            ItemDescriptor[] descriptors = GameManager.Instance._ItemDatabase.RandomDescriptorsInCategory(typeCategory, typesCount);
+
+            if(typesCount > 1 && Random.Range(0, 100f) < 10f && typeCategory != ItemCategory.Animal)
+            {
+                //10% chance for one of the types to be replaced by another from a random category (not including animals)
+
+                descriptors[Random.Range(0, descriptors.Length)] = GameManager.Instance._ItemDatabase.RandomDescriptorInCategory(typeCategory2);
+            }
+
+            for (int i = 0; i < WantsToBuy.Length; i++)
+            {
+                WantsToBuy[i].Descriptors = new ItemDescriptor[1];
+                WantsToBuy[i].Descriptors[0] = descriptors[i];
+            }
+            
+        }
+        else
+        {
+            //25% chance to want a few specific items
+
+        }
+
+
+        WantsToBuy = new ItemSpecifier[0];
+
+
     }
 
     private void Update()
@@ -86,19 +209,19 @@ public class NPC : MonoBehaviour
 
     public bool IsLookingForItem(Item item)
     {
-        if(item == null)
+        if(item == null || item.HasDescriptor(ItemDescriptor.None))
         {
             return false;
+        }
+
+        if(item.CashValue != -1)
+        {
+            return true;
         }
 
         foreach(ItemSpecifier itemSpecifier in WantsToBuy)
         {
             if(item.BaseItemData.Category != ItemCategory.None && item.BaseItemData.Category == itemSpecifier.Category)
-            {
-                return true;
-            }
-
-            if (item.BaseItemData.ID != ItemID.None && item.BaseItemData.ID == itemSpecifier.ID)
             {
                 return true;
             }
@@ -122,9 +245,9 @@ public class NPC : MonoBehaviour
         //to do - add multipliers for npc traits to the value
         float perceivedValueMultiplier = 1f;
 
-        if(item.BaseItemData.ID == ItemID.Cash)
+        if (item.CashValue != -1)
         {
-            return 1;
+            return item.CashValue;
         }
 
         if (Traits.Contains(Trait.Alcoholic) && item.HasDescriptor(ItemDescriptor.Alcohol))
@@ -158,7 +281,7 @@ public class NPC : MonoBehaviour
         return value;
     }
 
-    public TradeOffer ResponseForTradeOffer(TradeOffer PlayerOffer)
+    public void SetResponseForTradeOffer(TradeOffer PlayerOffer)
     {
         int perceivedOfferValue = PerceivedValueForOffer(PlayerOffer);
 
@@ -204,6 +327,8 @@ public class NPC : MonoBehaviour
             //npc is buying from the player
             int z = 0;
             bool makeOffer = true;
+
+            //to do - use the max buy items field to limit the number of items the npc is interested in
 
             foreach(Item item in PlayerOffer.Items)
             {
@@ -284,10 +409,6 @@ public class NPC : MonoBehaviour
                 }
             }
         }
-
-
-
-        return CurrentTradeOffer;
     }
 
 }
@@ -311,13 +432,13 @@ public class TradeOffer
 
 public struct ItemSpecifier
 {
-    public ItemID ID;
     public ItemDescriptor[] Descriptors;
     public ItemCategory Category;
 }
 
 public enum Trait
 {
+    None,
     Alcoholic,
     SweetTooth,
     Moral,
@@ -336,6 +457,51 @@ public enum Trait
     Naive,
     LocalTrader,
     Tourist,
+
+    TRAIT_MAX,
+    
+}
+
+static class TraitExtensions
+{
+    public static bool IsMutuallyExclusive(this Trait trait, Trait otherTrait)
+    {
+        switch (trait)
+        {
+            case Trait.Moral:
+                return otherTrait == Trait.Shady;
+
+            case Trait.Shady:
+                return otherTrait == Trait.Moral;
+
+            case Trait.Haggler:
+                return otherTrait == Trait.Impatient;
+
+            case Trait.Impatient:
+                return otherTrait == Trait.Haggler;
+
+            case Trait.Modest:
+                return otherTrait == Trait.Vain;
+
+            case Trait.Vain:
+                return otherTrait == Trait.Modest;
+
+            case Trait.Cynical:
+                return otherTrait == Trait.Naive;
+
+            case Trait.Naive:
+                return otherTrait == Trait.Cynical;
+
+            case Trait.LocalTrader:
+                return otherTrait == Trait.Tourist;
+
+            case Trait.Tourist:
+                return otherTrait == Trait.LocalTrader;
+
+            default:
+                return false;
+        }
+    }
 }
 
 public enum NPCState
