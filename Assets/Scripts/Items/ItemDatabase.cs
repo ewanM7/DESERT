@@ -6,12 +6,23 @@ using System.Linq;
 [CreateAssetMenu(fileName = "Item", menuName = "Data/Item Database")]
 public class ItemDatabase : ScriptableObject
 {
-    public List<BaseItemData> AllItems;
-
     public BaseItemData Cash;
 
     public AnimationCurve QualityValueCurve;
 
+    public BaseItemData BraceletData;
+    public BaseItemData CrownData;
+    public BaseItemData EarringsData;
+    public BaseItemData NecklaceData;
+    public BaseItemData RingData;
+
+    public BaseItemData GlovesData;
+    public BaseItemData HeadscarfData;
+    public BaseItemData RobesData;
+    public BaseItemData BagData;
+    public BaseItemData DressData;
+
+    public BaseItemData CarvingData;
 
     public List<ItemCategory> NPCBuyCategories;
 
@@ -20,6 +31,12 @@ public class ItemDatabase : ScriptableObject
     public List<ItemDescriptor> JewelryDescriptors;
     public List<ItemDescriptor> ToolDescriptors;
     public List<ItemDescriptor> DecorativeDescriptors;
+
+    public List<ItemDescriptor> DyeDescriptors;
+    public List<ItemDescriptor> HerbAndSpiceItems;
+    public List<ItemDescriptor> MealAndSweetItems;
+    public List<ItemDescriptor> AlcoholDescriptors;
+    public List<ItemDescriptor> SpecificAnimalItems;
 
     public ItemDescriptor RandomDescriptorInCategory(ItemCategory category)
     {
@@ -90,10 +107,98 @@ public class ItemDatabase : ScriptableObject
         }
     }
 
-    public ItemDescriptor RandomSubdescriptorForDescriptor(ItemDescriptor descriptor)
+    public ItemDescriptor[] SubDescriptorsForItem(ItemDescriptor descriptor)
     {
-        return ItemDescriptor.Acacia;
+
+        switch (descriptor)
+        {
+            //Jewelry
+            case ItemDescriptor.Bracelet:
+                return BraceletData.SubDescriptors;
+
+            case ItemDescriptor.Crown:
+                return CrownData.SubDescriptors;
+
+            case ItemDescriptor.Earrings:
+                return CrownData.SubDescriptors;
+
+            case ItemDescriptor.Necklace:
+                return NecklaceData.SubDescriptors;
+
+            case ItemDescriptor.Ring:
+                return RingData.SubDescriptors;
+
+            //Clothing
+            case ItemDescriptor.Bag:
+                return BagData.SubDescriptors.Concat(DyeDescriptors).ToArray();
+
+            case ItemDescriptor.Dress:
+                return DressData.SubDescriptors.Concat(DyeDescriptors).ToArray();
+
+            case ItemDescriptor.Hat:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Glasses:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Gloves:
+                return GlovesData.SubDescriptors.Concat(DyeDescriptors).ToArray();
+
+            case ItemDescriptor.Goggles:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Headscarf:
+                return HeadscarfData.SubDescriptors.Concat(DyeDescriptors).ToArray();
+
+            case ItemDescriptor.Robes:
+                return RobesData.SubDescriptors.Concat(DyeDescriptors).ToArray();
+
+            case ItemDescriptor.Sandals:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Vase:
+                return DyeDescriptors.ToArray();
+
+            case ItemDescriptor.Urn:
+                return DyeDescriptors.ToArray();
+
+            case ItemDescriptor.Jug:
+                return DyeDescriptors.ToArray();
+
+            case ItemDescriptor.Painting:
+                return new ItemDescriptor[] { ItemDescriptor.LargePainting, ItemDescriptor.MediumPainting, ItemDescriptor.SmallPainting };
+
+            case ItemDescriptor.Flag:
+                return new ItemDescriptor[] { ItemDescriptor.White, ItemDescriptor.Black, ItemDescriptor.Red, ItemDescriptor.Green, ItemDescriptor.Blue, ItemDescriptor.Purple, ItemDescriptor.Yellow };
+
+            case ItemDescriptor.Carving:
+                return CarvingData.SubDescriptors.ToArray();
+
+            case ItemDescriptor.Herb:
+            case ItemDescriptor.Spice:
+                return HerbAndSpiceItems.ToArray();
+
+            case ItemDescriptor.Sweet:
+            case ItemDescriptor.Meal:
+                return MealAndSweetItems.ToArray();
+
+            case ItemDescriptor.Alcohol:
+                return AlcoholDescriptors.ToArray();
+        }
+
+        return new ItemDescriptor[0];
     }
+
+    public ItemDescriptor GetRandomAnimalItem()
+    {
+        return SpecificAnimalItems[Random.Range(0, SpecificAnimalItems.Count)];
+    }
+
+    public ItemDescriptor GetRandomToolItem()
+    {
+        return ToolDescriptors[Random.Range(0, ToolDescriptors.Count)];
+    }
+
 }
 
 [System.Serializable]

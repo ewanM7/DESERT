@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: WideBrimmedHat
   m_EditorClassIdentifier: 
   Category: 2
-  BaseDescriptors: ee030000
-  ID: 0
+  BaseDescriptors: ee03000065230000
   BaseName: Wide Brimmed Hat
   BaseValue: 50
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
   - Multiplier: 1.4
     Material: 6013
   - Multiplier: 1.8
     Material: 6014
+  SubDescriptors: 

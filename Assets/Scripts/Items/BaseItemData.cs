@@ -7,7 +7,6 @@ public class BaseItemData : ScriptableObject
 {
     public ItemCategory Category;
     public ItemDescriptor[] BaseDescriptors;
-    public ItemID ID;
 
     public string BaseName;
 
@@ -32,6 +31,8 @@ public class BaseItemData : ScriptableObject
     [SerializeField]
     public MaterialMultiplier[] MaterialMultipliers;
 
+    public ItemDescriptor[] SubDescriptors;
+
     public float MultiplierForMaterial(ItemDescriptor material)
     {
         for(int i = 0; i < MaterialMultipliers.Length; i++)
@@ -46,44 +47,55 @@ public class BaseItemData : ScriptableObject
     }
 }
 
-public enum ItemID
-{
-    None,
-
-    
-
-    //ALWAYS ADD IDs TO THE END OF THE ENUM, OR IT WILL MOVE ALL OTHER ITEM IDs
-}
-
 public enum ItemDescriptor
 {
     None,
 
     //food
+    [InspectorName("Food/Meat")]
     Meat = 1,
+    [InspectorName("Food/Fruit")]
     Fruit,
+    [InspectorName("Food/Vegetable")]
     Vegetable,
+    [InspectorName("Food/Dairy")]
     Dairy,
+    [InspectorName("Food/Spice")]
     Spice,
+    [InspectorName("Food/Herb")]
     Herb,
+    [InspectorName("Food/Drink")]
     Drink,
+    [InspectorName("Food/Alcohol")]
     Alcohol,
+    [InspectorName("Food/Sweet")]
     Sweet,
+    [InspectorName("Food/Meal")]
     Meal,
 
+    [InspectorName("Food/FruitCake")]
     FruitCake,
+    [InspectorName("Food/TurkishDelight")]
     TurkishDelight,
 
+    [InspectorName("Food/MeatPita")]
     MeatPita,
+    [InspectorName("Food/VegetablePita")]
     VegetablePita,
 
+    [InspectorName("Food/Beef")]
     Beef,
+    [InspectorName("Food/Mutton")]
     Mutton,
+    [InspectorName("Food/Fish")]
     Fish,
 
+    [InspectorName("Food/Mint")]
     Mint,
+    [InspectorName("Food/Lavender")]
     Lavender,
-    Cinammon,
+    [InspectorName("Food/Cinammon")]
+    Cinnammon,
 
     //plants
     Seeds = 999,
@@ -180,6 +192,16 @@ public enum ItemDescriptor
     //animals
     Pet = 6500,
     Large,
+    Camel,
+    Gazelle,
+    Bustard,
+    Goat,
+    Horse,
+    SandCat,
+    HornedViper,
+    SpinyTailedLizard,
+    Wagtail,
+    SaharaFrog,
 
     //conditions
     Refurbished = 7000,
@@ -188,6 +210,12 @@ public enum ItemDescriptor
     CanStoreLiquid,
     IsDyeable,
     CanHoldGem,
+    NoGem,
+    UnDyed,
+
+    LargePainting,
+    MediumPainting,
+    SmallPainting,
 
     //SPECIFIC ITEMS
     Oil = 9000,
@@ -209,57 +237,99 @@ public enum ItemDescriptor
     ClothItem,
     ClothRoll,
     LeatherItem,
-    TigerHide,
-    SheepHide,
+    AnimalHideItem,
     Lens,
 
     Cash,
 
+    [InspectorName("Food/Orange")]
     Orange,
+    [InspectorName("Food/Lemon")]
     Lemon,
+    [InspectorName("Food/Date")]
     Date,
+    [InspectorName("Food/PricklyPear")]
     PricklyPear,
+    [InspectorName("Food/CoffeeBeans")]
     CoffeeBeans,
 
+    [InspectorName("Food/Bread")]
     Bread,
+    [InspectorName("Food/Rice")]
     Rice,
+    [InspectorName("Food/Wheat")]
     Wheat,
+    [InspectorName("Food/BeefItem")]
     BeefItem,
+    [InspectorName("Food/MuttonItem")]
     MuttonItem,
+    [InspectorName("Food/FishItem")]
     FishItem,
+    [InspectorName("Food/Flour")]
     Flour,
+    [InspectorName("Food/Butter")]
     Butter,
+    [InspectorName("Food/Sugar")]
     Sugar,
+    [InspectorName("Food/Milk")]
     Milk,
+    [InspectorName("Food/Tomatoes")]
     Tomatoes,
+    [InspectorName("Food/Eggplant")]
     Eggplant,
+    [InspectorName("Food/Pepper")]
     Pepper,
+    [InspectorName("Food/GrainSpirit")]
     GrainSpirit,
 
-    Murakkaba,
+    [InspectorName("Food/Pancakes")]
+    Pancakes,
+    [InspectorName("Food/FruitSalad")]
     FruitSalad,
 
+    [InspectorName("Food/CuredFish")]
     CuredFish,
+    [InspectorName("Food/MintLamb")]
     MintLamb,
+    [InspectorName("Food/BeefStew")]
     BeefStew,
+    [InspectorName("Food/RiceBowl")]
     RiceBowl,
-    BatteredFish,
+    [InspectorName("Food/CousCous")]
     CousCous,
 
+    [InspectorName("Food/MintItem")]
     MintItem,
+    [InspectorName("Food/LavenderItem")]
     LavenderItem,
+    [InspectorName("Food/CinammonItem")]
+    CinnammonItem,
+    [InspectorName("Food/Sage")]
     Sage,
+    [InspectorName("Food/Wormwood")]
     Wormwood,
+    [InspectorName("Food/Tea")]
     Tea,
 
+    [InspectorName("Food/TeaDrink")]
+    TeaDrink,
+    [InspectorName("Food/CoffeeDrink")]
+    CoffeeDrink,
+
+
+    [InspectorName("Food/Salt")]
     Salt,
+    [InspectorName("Food/Peppercorns")]
     Peppercorns,
-    Cinmamon,
+    [InspectorName("Food/Saffron")]
     Saffron,
+    [InspectorName("Food/Ginger")]
     Ginger,
+    [InspectorName("Food/Cloves")]
     Cloves,
 
-    
+    FulaniHat,
+    WideBrimmedHat,
 
 }
 

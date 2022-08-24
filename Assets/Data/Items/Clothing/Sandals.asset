@@ -20,9 +20,11 @@ MonoBehaviour:
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
   - Multiplier: 1.4
     Material: 6013
   - Multiplier: 1.8
     Material: 6014
+  SubDescriptors: 

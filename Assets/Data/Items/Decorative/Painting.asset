@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 724735f8f299c28458c7ab894b80a48f, type: 3}
-  m_Name: FulaniHat
+  m_Name: Painting
   m_EditorClassIdentifier: 
-  Category: 2
-  BaseDescriptors: ee03000064230000
-  BaseName: Fulani Hat
-  BaseValue: 60
+  Category: 9
+  BaseDescriptors: 99110000
+  BaseName: Painting
+  BaseValue: 100
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 1.4
-    Material: 6013
-  - Multiplier: 1.8
-    Material: 6014
+  - Multiplier: 2
+    Material: 7008
+  - Multiplier: 1
+    Material: 7009
+  - Multiplier: 0.5
+    Material: 7010
   SubDescriptors: 

@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Headscarf
   m_EditorClassIdentifier: 
   Category: 2
-  BaseDescriptors: e9030000
+  BaseDescriptors: e90300005c1b0000
   ID: 0
   BaseName: Headscarf
   BaseValue: 40
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
   - Multiplier: 1
     Material: 6012
   - Multiplier: 2
     Material: 6019
+  SubDescriptors: 7c17000083170000

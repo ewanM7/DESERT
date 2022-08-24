@@ -22,13 +22,9 @@ public class FoodItem : Item
             {
                 return BaseItemData.BaseName;
             }
-            else if (DynamicDescriptors.Length == 1)
-            {
-                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
-            }
             else
             {
-                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName + " (" + DynamicDescriptors[1] + ")";
+                return BaseItemData.BaseName + " " + DynamicDescriptors[0].ToString();
             }
         }
     }
@@ -38,7 +34,7 @@ public class FoodItem : Item
     {
         get
         {
-            return Mathf.RoundToInt((BaseItemData.BaseValue) * BaseItemData.MultiplierForMaterial(DynamicDescriptors[0]) * GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality));
+            return Mathf.RoundToInt(BaseItemData.BaseValue * GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality));
         }
     }
 }

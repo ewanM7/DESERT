@@ -46,11 +46,10 @@ public class Inventory
     /// <param name="itemToAdd"></param>
     /// <returns></returns>
     public bool AddItem(Item itemToAdd)
-    {
-        int z = 0;
-
+    { 
         bool addedToStack = false;
         //add the item to a stack if there is a stack of the given item in the inventory already, and it is a stackable item
+        /*
         if (itemToAdd.BaseItemData.IsStackable)
         {
             for (int i = z; i < ItemStacks.Length; i++)
@@ -65,7 +64,7 @@ public class Inventory
                     }
                 }
             }
-        }
+        }*/
 
         if (addedToStack)
         {

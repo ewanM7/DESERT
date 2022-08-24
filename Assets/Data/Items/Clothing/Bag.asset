@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Bag
   m_EditorClassIdentifier: 
   Category: 2
-  BaseDescriptors: ed030000
+  BaseDescriptors: ed0300005c1b0000
   ID: 0
   BaseName: Bag
   BaseValue: 55
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
   - Multiplier: 1.4
     Material: 6013
   - Multiplier: 1.8
     Material: 6014
+  SubDescriptors: 7d1700007e170000
