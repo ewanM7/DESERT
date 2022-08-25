@@ -167,7 +167,7 @@ public enum ItemDescriptor
     ScrapIron,
     Stone,
     Wood,
-    Pine,
+    Padouk,
     Mahogany,
     Acacia,
     Ivory,
@@ -221,7 +221,7 @@ public enum ItemDescriptor
     Oil = 9000,
     Coal,
     StoneItem,
-    PineLog,
+    PadoukLog,
     MahoganyLog,
     AcaciaLog,
     Tusk,
@@ -248,8 +248,8 @@ public enum ItemDescriptor
     Lemon,
     [InspectorName("Food/Date")]
     Date,
-    [InspectorName("Food/PricklyPear")]
-    PricklyPear,
+    [InspectorName("Food/Cacombara")]
+    Cacombara,
     [InspectorName("Food/CoffeeBeans")]
     CoffeeBeans,
 

@@ -103,7 +103,15 @@ public class NPC : MonoBehaviour
         }
 
         //set up inventory items
-        inventory = new Inventory(9);
+        inventory = new Inventory(TradingUI.TradingSlotsCount);
+
+
+        //to do - give npc a number of items they want to sell
+        for (int i = 0; i < TradingUI.TradingSlotsCount; i++)
+        {
+
+        }
+
 
         //set items the npc is looking for
         float seed = Random.Range(0f, 100f);
@@ -119,15 +127,24 @@ public class NPC : MonoBehaviour
 
         //TO DO - INCLUDE chance to get a category, but also have a material descriptor (eg. looking for any clothes, but made of leather)
 
-        if (seed < 15f)
+        if (seed < 10f)
         {
-            //15% chance to just want a single category
+            //10% chance to just want a single category
 
             WantsToBuy = new ItemSpecifier[1];
             WantsToBuy[0].Category = typeCategory;
             WantsToBuy[0].Descriptors = new ItemDescriptor[0];
         }
-        else if(seed < 75f)
+        else if(seed < 20f && typeCategory != ItemCategory.Tool)
+        {
+            //10% chance to want a single category with a random subDescriptor restriction, doesnt incldue tools
+
+            WantsToBuy = new ItemSpecifier[1];
+            WantsToBuy[0].Category = typeCategory;
+            WantsToBuy[0].Descriptors = new ItemDescriptor[1];
+            WantsToBuy[0].Descriptors[0] = GameManager.Instance._ItemDatabase.RandomSubDescriptorInCategory(typeCategory);
+        }
+        else if(seed < 80f)
         {
             //60% chance to want a few types of items
 
@@ -170,6 +187,7 @@ public class NPC : MonoBehaviour
 
             for (int i = 0; i < WantsToBuy.Length; i++)
             {
+                WantsToBuy[i].Category = ItemCategory.None;
                 WantsToBuy[i].Descriptors = new ItemDescriptor[1];
                 WantsToBuy[i].Descriptors[0] = descriptors[i];
             }
@@ -177,14 +195,41 @@ public class NPC : MonoBehaviour
         }
         else
         {
-            //25% chance to want a few specific items
+            //20% chance to want a few specific items
+            int itemCount = Random.Range(1, 3);
+
+            WantsToBuy = new ItemSpecifier[itemCount];
+            ItemDescriptor[] descriptors = GameManager.Instance._ItemDatabase.RandomDescriptorsInCategory(typeCategory, itemCount);
+
+            if (itemCount > 1 && Random.Range(0, 100f) < 5f && typeCategory != ItemCategory.Animal)
+            {
+                //5% chance for one of the types to be replaced by another from a random category (not including animals)
+
+                descriptors[Random.Range(0, descriptors.Length)] = GameManager.Instance._ItemDatabase.RandomDescriptorInCategory(typeCategory2);
+            }
+
+            for (int i = 0; i < WantsToBuy.Length; i++)
+            {
+                ItemDescriptor[] subDescriptors = GameManager.Instance._ItemDatabase.SubDescriptorsForItem(descriptors[i]);
+
+                WantsToBuy[i].Category = ItemCategory.None;
+
+                if (subDescriptors.Length > 0)
+                {
+                    
+                    WantsToBuy[i].Descriptors = new ItemDescriptor[2];
+
+                    WantsToBuy[i].Descriptors[0] = descriptors[i];
+                    WantsToBuy[i].Descriptors[1] = subDescriptors[Random.Range(0, subDescriptors.Length)];
+                }
+                else
+                {
+                    WantsToBuy[i].Descriptors = new ItemDescriptor[1];
+                    WantsToBuy[i].Descriptors[0] = descriptors[i];
+                }
+            }
 
         }
-
-
-        WantsToBuy = new ItemSpecifier[0];
-
-
     }
 
     private void Update()
@@ -219,20 +264,25 @@ public class NPC : MonoBehaviour
             return true;
         }
 
-        foreach(ItemSpecifier itemSpecifier in WantsToBuy)
+        bool rightCategory = false;
+        bool hasRightDescriptors = false;
+
+        foreach (ItemSpecifier itemSpecifier in WantsToBuy)
         {
+
+            
             if(item.BaseItemData.Category != ItemCategory.None && item.BaseItemData.Category == itemSpecifier.Category)
             {
-                return true;
+                rightCategory = true;
             }
 
             if (item.HasDescriptors(itemSpecifier.Descriptors))
             {
-                return true;
+                hasRightDescriptors = true;
             }
         }
 
-        return false;
+        return rightCategory && hasRightDescriptors;
     }
 
     public void OnPlayerInteract()
@@ -417,7 +467,7 @@ public class TradeOffer
 {
     public TradeOffer()
     {
-        Items = new Item[9];
+        Items = new Item[16];
         WantedValue = 0;
         Accepted = false;
         WantedItemIndexes = new bool[] { false, false, false, false, false, false, false, false, false };

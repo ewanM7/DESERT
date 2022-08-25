@@ -33,10 +33,42 @@ public class ItemDatabase : ScriptableObject
     public List<ItemDescriptor> DecorativeDescriptors;
 
     public List<ItemDescriptor> DyeDescriptors;
-    public List<ItemDescriptor> HerbAndSpiceItems;
-    public List<ItemDescriptor> MealAndSweetItems;
+    public List<ItemDescriptor> HerbItems;
+    public List<ItemDescriptor> SpiceItems;
+    public List<ItemDescriptor> MealItems;
+    public List<ItemDescriptor> SweetItems;
     public List<ItemDescriptor> AlcoholDescriptors;
     public List<ItemDescriptor> SpecificAnimalItems;
+
+    public List<ItemDescriptor> FoodSubDescriptors;
+    public List<ItemDescriptor> ClothingSubDescriptors;
+    public List<ItemDescriptor> JewelrySubDescriptors;
+    public List<ItemDescriptor> AnimalSubDescriptors;
+
+    public ItemDescriptor RandomSubDescriptorInCategory(ItemCategory category)
+    {
+        switch (category)
+        {
+            case ItemCategory.Animal:
+                return AnimalSubDescriptors[Random.Range(0, AnimalSubDescriptors.Count)];
+
+            case ItemCategory.Food:
+                return FoodSubDescriptors[Random.Range(0, FoodSubDescriptors.Count)];
+
+            case ItemCategory.Clothing:
+                ItemDescriptor[] final = ClothingSubDescriptors.Concat(DyeDescriptors).ToArray();
+                return final[Random.Range(0, final.Length)];
+
+            case ItemCategory.Decorative:
+                return DyeDescriptors[Random.Range(0, DyeDescriptors.Count)];
+
+            case ItemCategory.Jewelry:
+                return JewelrySubDescriptors[Random.Range(0, JewelrySubDescriptors.Count)];
+
+            default:
+                return ItemDescriptor.None;
+        }
+    }
 
     public ItemDescriptor RandomDescriptorInCategory(ItemCategory category)
     {
@@ -175,12 +207,16 @@ public class ItemDatabase : ScriptableObject
                 return CarvingData.SubDescriptors.ToArray();
 
             case ItemDescriptor.Herb:
+                return HerbItems.ToArray();
+
             case ItemDescriptor.Spice:
-                return HerbAndSpiceItems.ToArray();
+                return SpiceItems.ToArray();
 
             case ItemDescriptor.Sweet:
+                return SweetItems.ToArray();
+
             case ItemDescriptor.Meal:
-                return MealAndSweetItems.ToArray();
+                return MealItems.ToArray();
 
             case ItemDescriptor.Alcohol:
                 return AlcoholDescriptors.ToArray();
