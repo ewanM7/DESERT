@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WideBrimmedHat
   m_EditorClassIdentifier: 
   Category: 2
-  BaseDescriptors: ee03000065230000
+  BaseDescriptors: ee0300006a230000
   BaseName: Wide Brimmed Hat
   BaseValue: 50
   HealthRestored: 0

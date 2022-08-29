@@ -201,7 +201,7 @@ public class ItemDatabase : ScriptableObject
                 return new ItemDescriptor[] { ItemDescriptor.LargePainting, ItemDescriptor.MediumPainting, ItemDescriptor.SmallPainting };
 
             case ItemDescriptor.Flag:
-                return new ItemDescriptor[] { ItemDescriptor.White, ItemDescriptor.Black, ItemDescriptor.Red, ItemDescriptor.Green, ItemDescriptor.Blue, ItemDescriptor.Purple, ItemDescriptor.Yellow };
+                return new ItemDescriptor[] { ItemDescriptor.White, ItemDescriptor.Black, ItemDescriptor.Red, ItemDescriptor.Green, ItemDescriptor.Blue, ItemDescriptor.Purple };
 
             case ItemDescriptor.Carving:
                 return CarvingData.SubDescriptors.ToArray();

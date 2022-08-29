@@ -878,7 +878,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 1
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 1712720325}
   m_Follow: {fileID: 1712720325}
@@ -3513,6 +3513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Traits: 
   IsSelling: 0
+  SalesType: 0
   MaxNumberOfBuyItems: 0
   PriceTolerance: 0
   BuyMultiplier: 0
@@ -3584,7 +3585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852420234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.53, y: 1.02, z: 17.92}
+  m_LocalPosition: {x: 5, y: 1, z: 16.7}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

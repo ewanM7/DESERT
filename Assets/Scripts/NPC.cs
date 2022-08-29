@@ -11,6 +11,7 @@ public class NPC : MonoBehaviour
     public Inventory inventory;
     public ItemSpecifier[] WantsToBuy;
     public bool IsSelling;
+    public SellerType SalesType;
     private TradeOffer CurrentTradeOffer;
 
     public int MaxNumberOfBuyItems;
@@ -106,11 +107,30 @@ public class NPC : MonoBehaviour
         inventory = new Inventory(TradingUI.TradingSlotsCount);
 
 
-        //to do - give npc a number of items they want to sell
-        for (int i = 0; i < TradingUI.TradingSlotsCount; i++)
+        IsSelling = Random.Range(0, 100f) < 33f;
+
+
+
+        if (IsSelling)
         {
+            SalesType = (SellerType)Random.Range(1, (int)SellerType.Buyer);
+
+            BaseItemData[] itemData = GameManager.Instance._NPCGenerationData.ItemsForSellerType(SalesType);
+
+            foreach (BaseItemData item in itemData)
+            {
+                inventory.AddItem(new Item(item));
+            }
+
+
 
         }
+        else
+        {
+            SalesType = SellerType.Buyer;
+        }
+
+        
 
 
         //set items the npc is looking for
@@ -510,6 +530,20 @@ public enum Trait
 
     TRAIT_MAX,
     
+}
+
+public enum SellerType
+{
+    None,
+    HerbsAndSpices,
+    Food,
+    Mining,
+    Animals,
+    Fabrics,
+    Naturals,
+    Scholar,
+    SecondHand,
+    Buyer,
 }
 
 static class TraitExtensions

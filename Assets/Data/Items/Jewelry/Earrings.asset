@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 4
   BaseDescriptors: bb0b0000
-  ID: 0
   BaseName: 
   BaseValue: 30
   HealthRestored: 0
@@ -39,6 +38,6 @@ MonoBehaviour:
     Material: 6009
   - Multiplier: 1.3
     Material: 6010
-  - Multiplier: 0.9
+  - Multiplier: 1
     Material: 6004
   SubDescriptors: 8417000085170000861700008717000088170000891700008a1700005e1b000070170000711700007217000073170000741700007717000078170000791700007a170000

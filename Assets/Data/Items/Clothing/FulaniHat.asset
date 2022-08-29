@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FulaniHat
   m_EditorClassIdentifier: 
   Category: 2
-  BaseDescriptors: ee03000064230000
+  BaseDescriptors: ee03000069230000
   BaseName: Fulani Hat
   BaseValue: 60
   HealthRestored: 0

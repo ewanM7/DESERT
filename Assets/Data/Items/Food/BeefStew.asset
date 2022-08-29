@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: BeefStew
   m_EditorClassIdentifier: 
   Category: 1
-  BaseDescriptors: 010000000a000000
-  ID: 1023
+  BaseDescriptors: 010000000a00000059230000
   BaseName: Beef Stew
   BaseValue: 40
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers: []
+  SubDescriptors: 

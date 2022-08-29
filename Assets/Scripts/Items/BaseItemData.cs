@@ -49,287 +49,349 @@ public class BaseItemData : ScriptableObject
 
 public enum ItemDescriptor
 {
-    None,
+    None = 0,
 
     //food
     [InspectorName("Food/Meat")]
     Meat = 1,
     [InspectorName("Food/Fruit")]
-    Fruit,
+    Fruit = 2,
     [InspectorName("Food/Vegetable")]
-    Vegetable,
+    Vegetable = 3,
     [InspectorName("Food/Dairy")]
-    Dairy,
+    Dairy = 4,
     [InspectorName("Food/Spice")]
-    Spice,
+    Spice = 5,
     [InspectorName("Food/Herb")]
-    Herb,
+    Herb = 6,
     [InspectorName("Food/Drink")]
-    Drink,
+    Drink = 7,
     [InspectorName("Food/Alcohol")]
-    Alcohol,
+    Alcohol = 8,
     [InspectorName("Food/Sweet")]
-    Sweet,
+    Sweet = 9,
     [InspectorName("Food/Meal")]
-    Meal,
+    Meal = 10,
 
     [InspectorName("Food/FruitCake")]
-    FruitCake,
+    FruitCake = 11,
     [InspectorName("Food/TurkishDelight")]
-    TurkishDelight,
+    TurkishDelight = 12,
 
     [InspectorName("Food/MeatPita")]
-    MeatPita,
+    MeatPita = 13,
     [InspectorName("Food/VegetablePita")]
-    VegetablePita,
+    VegetablePita = 14,
 
     [InspectorName("Food/Beef")]
-    Beef,
+    Beef = 15,
     [InspectorName("Food/Mutton")]
-    Mutton,
+    Mutton = 16,
     [InspectorName("Food/Fish")]
-    Fish,
+    Fish = 17,
 
     [InspectorName("Food/Mint")]
-    Mint,
+    Mint = 18,
     [InspectorName("Food/Lavender")]
-    Lavender,
+    Lavender = 19,
     [InspectorName("Food/Cinammon")]
-    Cinnammon,
+    Cinnammon = 20,
 
     //plants
     Seeds = 999,
 
     //clothing
     Gloves = 1000,
-    Headscarf,
-    Robes,
-    Shoe,
-    Sandals,
-    Bag,
-    Hat,
+    Headscarf = 1001,
+    Robes = 1002,
+    Shoe = 1003,
+    Sandals = 1004,
+    Bag = 1005,
+    Hat = 1006,
 
-    Dress,
-    Glasses,
-    Goggles,
+    Dress = 1007,
+    Glasses = 1008,
+    Goggles = 1009,
 
     //jewelry
     Ring = 3000,
-    Bracelet,
-    Necklace,
-    Earrings,
-    Crown,
-    Watch,
+    Bracelet = 3001,
+    Necklace = 3002,
+    Earrings = 3003,
+    Crown = 3004,
+    Watch = 3005,
 
     //tools
     Sword = 4000,
-    Shovel,
-    Spear,
-    Pickaxe,
-    Axe,
-    Spyglass,
-    Compass,
-    Knife,
-    Hoe,
-    Staff,
-    Bowl,
-    Cup,
-    Bottle,
-    Lantern,
-    Lockbox,
-    TinderBox,
-    Canteen,
+    Shovel = 4001,
+    Spear = 4002,
+    Pickaxe = 4003,
+    Axe = 4004,
+    Spyglass = 4005,
+    Compass = 4006,
+    Knife = 4007,
+    Hoe = 4008,
+    Staff = 4009,
+    Bowl = 4010,
+    Cup = 4011,
+    Bottle = 4012,
+    Lantern = 4013,
+    Lockbox = 4014,
+    TinderBox = 4015,
+    Canteen = 4016,
 
     //decorative
     Pottery = 4500,
-    Vase,
-    Urn,
-    Jug,
-    Rug,
-    Painting,
-    Flag,
-    Carving,
+    Vase = 4501,
+    Urn = 4502,
+    Jug = 4503,
+    Rug = 4504,
+    Painting = 4505,
+    Flag = 4506,
+    Carving = 4507,
 
     //dyes
-    White,
-    Black,
-    Red,
-    Green,
-    Blue,
-    Purple,
-    Yellow,
+    [InspectorName("Dye/White")]
+    White = 4508,
+    [InspectorName("Dye/Black")]
+    Black = 4509,
+    [InspectorName("Dye/Red")]
+    Red = 4510,
+    [InspectorName("Dye/Green")]
+    Green = 4511,
+    [InspectorName("Dye/Blue")]
+    Blue = 4512,
+    [InspectorName("Dye/Purple")]
+    Purple = 4513,
 
     //raw materials
+    [InspectorName("Metal/Gold")]
     Gold = 6000,
-    Silver,
-    Brass,
-    Iron,
-    ScrapIron,
-    Stone,
-    Wood,
-    Padouk,
-    Mahogany,
-    Acacia,
-    Ivory,
-    Gem,
-    Cloth,
-    AnimalHide,
-    Leather,
-    Ceramic,
-    Dye,
-    Fuel,
-    String,
-    Silk,
+    [InspectorName("Metal/Silver")]
+    Silver = 6001,
+    [InspectorName("Metal/Brass")]
+    Brass = 6002,
+    [InspectorName("Metal/Iron")]
+    Iron = 6003,
+    [InspectorName("Metal/ScrapIron")]
+    ScrapIron = 6004,
+    Stone = 6005,
+    Wood = 6006,
+    Padauk = 6007,
+    Mahogany = 6008,
+    Acacia = 6009,
+    Ivory = 6010,
+    Gem = 6011,
+    [InspectorName("Fabric/Cloth")]
+    Cloth = 6012,
+    [InspectorName("Fabric/AnimalHide")]
+    AnimalHide = 6013,
+    [InspectorName("Fabric/SmallHide")]
+    SmallHide = 6027,
+    [InspectorName("Fabric/Leather")]
+    Leather = 6014,
+    Ceramic = 6015,
+    Clay = 6027,
+    [InspectorName("Dye/Dye")]
+    Dye = 6016,
+    Fuel = 6017,
+    [InspectorName("Fabric/String")]
+    String = 6018,
+    [InspectorName("Fabric/Silk")]
+    Silk = 6019,
 
-    Ruby,
-    Emerald,
-    Pearl,
-    Sapphire,
-    Amethyst,
-    Amber,
-    Seashell,
+    Ruby = 6020,
+    Emerald = 6021,
+    Pearl = 6022,
+    Sapphire = 6023,
+    Amethyst = 6024,
+    Amber = 6025,
+    Seashell = 6026,
 
     //animals
+    [InspectorName("Animals/Pet")]
     Pet = 6500,
-    Large,
-    Camel,
-    Gazelle,
-    Bustard,
-    Goat,
-    Horse,
-    SandCat,
-    HornedViper,
-    SpinyTailedLizard,
-    Wagtail,
-    SaharaFrog,
+    [InspectorName("Animals/Large")]
+    Large = 6501,
+    [InspectorName("Animals/Camel")]
+    Camel = 6502,
+    [InspectorName("Animals/Gazelle")]
+    Gazelle = 6503,
+    [InspectorName("Animals/Bustard")]
+    Bustard = 6504,
+    [InspectorName("Animals/Goat")]
+    Goat = 6505,
+    [InspectorName("Animals/Sandcat")]
+    SandCat = 6507,
+    [InspectorName("Animals/HornedViper")]
+    HornedViper = 6508,
+    [InspectorName("Animals/SpinyTailedLizard")]
+    SpinyTailedLizard = 6509,
+    [InspectorName("Animals/Wagtail")]
+    Wagtail = 6510,
+    [InspectorName("Animals/SaharaFrog")]
+    SaharaFrog = 6511,
 
     //conditions
     Refurbished = 7000,
-    Damaged,
-    Stolen,
-    CanStoreLiquid,
-    IsDyeable,
-    CanHoldGem,
-    NoGem,
-    UnDyed,
+    Damaged = 7001,
+    Stolen = 7002,
+    CanStoreLiquid = 7003,
+    IsDyeable = 7004,
+    CanHoldGem = 7005,
+    NoGem = 7006,
+    UnDyed = 7007,
 
-    LargePainting,
-    MediumPainting,
-    SmallPainting,
+    LargePainting = 7008,
+    MediumPainting = 7009,
+    SmallPainting = 7010,
 
     //SPECIFIC ITEMS
     Oil = 9000,
-    Coal,
-    StoneItem,
-    PadoukLog,
-    MahoganyLog,
-    AcaciaLog,
-    Tusk,
-    ScrapIronItem,
-    IronBar,
-    GoldNugget,
-    GoldBar,
-    Rope,
-    StringItem,
-    Seashell1,
-    Seashell2,
-    Seashell3,
-    ClothItem,
-    ClothRoll,
-    LeatherItem,
-    AnimalHideItem,
-    Lens,
+    Coal = 9001,
+    StoneItem = 9002,
 
-    Cash,
+    [InspectorName("Wood/PadaukLog")]
+    PadaukLog = 9003,
+    [InspectorName("Wood/MahoganyLog")]
+    MahoganyLog = 9004,
+    [InspectorName("Wood/AcaciaLog")]
+    AcaciaLog = 9005,
+
+    Tusk = 9006,
+    [InspectorName("Metal/IronNugget")]
+    IronNugget = 9007,
+    [InspectorName("Metal/IronBar")]
+    IronBar = 9008,
+    [InspectorName("Metal/GoldNugget")]
+    GoldNugget = 9009,
+    [InspectorName("Metal/GoldBar")]
+    GoldBar = 9010,
+    [InspectorName("Metal/SilverBar")]
+    SilverBar = 9011,
+    [InspectorName("Metal/SilverNugget")]
+    SilverNugget = 9012,
+    [InspectorName("Metal/BrassNugget")]
+    BrassNugget = 9013,
+    [InspectorName("Metal/BrassBar")]
+    BrassBar = 9014,
+
+    Rope = 9015,
+    StringItem = 9016,
+    Seashell1 = 9017,
+    Seashell2 = 9018,
+    Seashell3 = 9019,
+    ClothItem = 9020,
+    ClothRoll = 9021,
+    [InspectorName("Fabric/LeatherPiece")]
+    LeatherPiece = 9022,
+    [InspectorName("Fabric/Canvas")]
+    Canvas = 9023,
+    Lens = 9024,
+
+    Cash = 9025,
 
     [InspectorName("Food/Orange")]
-    Orange,
+    Orange = 9026,
     [InspectorName("Food/Lemon")]
-    Lemon,
+    Lemon = 9027,
     [InspectorName("Food/Date")]
-    Date,
+    Date = 9028,
     [InspectorName("Food/Cacombara")]
-    Cacombara,
+    Cacombara = 9029,
     [InspectorName("Food/CoffeeBeans")]
-    CoffeeBeans,
+    CoffeeBeans = 9030,
 
     [InspectorName("Food/Bread")]
-    Bread,
+    Bread = 9031,
     [InspectorName("Food/Rice")]
-    Rice,
+    Rice = 9032,
     [InspectorName("Food/Wheat")]
-    Wheat,
+    Wheat = 9033,
     [InspectorName("Food/BeefItem")]
-    BeefItem,
+    BeefItem = 9034,
     [InspectorName("Food/MuttonItem")]
-    MuttonItem,
+    MuttonItem = 9035,
     [InspectorName("Food/FishItem")]
-    FishItem,
+    FishItem = 9036,
     [InspectorName("Food/Flour")]
-    Flour,
+    Flour = 9037,
     [InspectorName("Food/Butter")]
-    Butter,
+    Butter = 9038,
     [InspectorName("Food/Sugar")]
-    Sugar,
+    Sugar = 9039,
     [InspectorName("Food/Milk")]
-    Milk,
+    Milk = 9040,
     [InspectorName("Food/Tomatoes")]
-    Tomatoes,
+    Tomatoes = 9041,
     [InspectorName("Food/Eggplant")]
-    Eggplant,
+    Eggplant = 9042,
     [InspectorName("Food/Pepper")]
-    Pepper,
+    Pepper = 9043,
     [InspectorName("Food/GrainSpirit")]
-    GrainSpirit,
+    GrainSpirit = 9044,
 
     [InspectorName("Food/Pancakes")]
-    Pancakes,
+    Pancakes = 9045,
     [InspectorName("Food/FruitSalad")]
-    FruitSalad,
+    FruitSalad = 9046,
 
     [InspectorName("Food/CuredFish")]
-    CuredFish,
+    CuredFish = 9047,
     [InspectorName("Food/MintLamb")]
-    MintLamb,
+    MintLamb = 9048,
     [InspectorName("Food/BeefStew")]
-    BeefStew,
+    BeefStew = 9049,
     [InspectorName("Food/RiceBowl")]
-    RiceBowl,
+    RiceBowl = 9050,
     [InspectorName("Food/CousCous")]
-    CousCous,
+    CousCous = 9051,
 
     [InspectorName("Food/MintItem")]
-    MintItem,
+    MintItem = 9052,
     [InspectorName("Food/LavenderItem")]
-    LavenderItem,
+    LavenderItem = 9053,
     [InspectorName("Food/CinammonItem")]
-    CinnammonItem,
+    CinnammonItem = 9054,
     [InspectorName("Food/Sage")]
-    Sage,
+    Sage = 9055,
     [InspectorName("Food/Wormwood")]
-    Wormwood,
+    Wormwood = 9056,
     [InspectorName("Food/Tea")]
-    Tea,
+    Tea = 9057,
 
     [InspectorName("Food/TeaDrink")]
-    TeaDrink,
+    TeaDrink = 9058,
     [InspectorName("Food/CoffeeDrink")]
-    CoffeeDrink,
+    CoffeeDrink = 9059,
 
 
     [InspectorName("Food/Salt")]
-    Salt,
+    Salt = 9060,
     [InspectorName("Food/Peppercorns")]
-    Peppercorns,
+    Peppercorns = 9061,
     [InspectorName("Food/Saffron")]
-    Saffron,
+    Saffron = 9062,
     [InspectorName("Food/Ginger")]
-    Ginger,
+    Ginger = 9063,
     [InspectorName("Food/Cloves")]
-    Cloves,
+    Cloves = 9064,
 
-    FulaniHat,
-    WideBrimmedHat,
+    FulaniHat = 9065,
+    WideBrimmedHat = 9066,
+
+    [InspectorName("Books/Metalworking")]
+    MetalworkingBook,
+    [InspectorName("Books/FabricCraftsBook")]
+    FabricCraftsBook,
+    [InspectorName("Books/PotteryBook")]
+    PotteryBook,
+    [InspectorName("Books/BrewingBook")]
+    BrewingBook,
+    [InspectorName("Books/DyemakingBook")]
+    DyemakingBook,
+    [InspectorName("Books/RecipeBook")]
+    RecipeBook,
 
 }
 
@@ -345,7 +407,7 @@ public enum ItemCategory
     RawMaterial,
     Plant,
     Decorative,
-    
+    KnowledgeBook,
     CATEGORY_MAX,
 }
 

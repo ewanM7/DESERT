@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 4
   BaseDescriptors: ba0b0000
-  ID: 0
   BaseName: Necklace
   BaseValue: 50
   HealthRestored: 0
@@ -31,8 +30,8 @@ MonoBehaviour:
     Material: 6002
   - Multiplier: 1.2
     Material: 6003
-  - Multiplier: 0.9
+  - Multiplier: 1
     Material: 6004
-  - Multiplier: 0.7
+  - Multiplier: 0.8
     Material: 6018
   SubDescriptors: 8417000085170000861700008717000088170000891700008a1700005e1b0000701700007117000072170000731700007417000082170000

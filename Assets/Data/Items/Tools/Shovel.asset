@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Shovel
   m_EditorClassIdentifier: 
   Category: 6
-  BaseDescriptors: 00000000
-  ID: 3000
+  BaseDescriptors: a10f0000
   BaseName: Shovel
   BaseValue: 55
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers: []
+  SubDescriptors: 
