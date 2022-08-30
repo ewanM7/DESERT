@@ -113,7 +113,8 @@ public class NPC : MonoBehaviour
 
         if (IsSelling)
         {
-            SalesType = (SellerType)Random.Range(1, (int)SellerType.Buyer);
+            //to do - include second hand in generation when item table for them is done
+            SalesType = (SellerType)Random.Range(1, (int)SellerType.SecondHand);
 
             BaseItemData[] itemData = GameManager.Instance._NPCGenerationData.ItemsForSellerType(SalesType);
 
@@ -121,13 +122,17 @@ public class NPC : MonoBehaviour
             {
                 inventory.AddItem(new Item(item));
             }
-
-
-
         }
         else
         {
             SalesType = SellerType.Buyer;
+
+            Item[] inventoryItems = GameManager.Instance._NPCGenerationData.RandomItemsForBuyer();
+
+            foreach(Item item in inventoryItems)
+            {
+                inventory.AddItem(item);
+            }
         }
 
         
@@ -145,8 +150,6 @@ public class NPC : MonoBehaviour
             typeCategory2 = GameManager.Instance._ItemDatabase.NPCBuyCategories[Random.Range(0, GameManager.Instance._ItemDatabase.NPCBuyCategories.Count)];
         } while (typeCategory == typeCategory2 || typeCategory2 == ItemCategory.Animal);
 
-        //TO DO - INCLUDE chance to get a category, but also have a material descriptor (eg. looking for any clothes, but made of leather)
-
         if (seed < 10f)
         {
             //10% chance to just want a single category
@@ -157,7 +160,7 @@ public class NPC : MonoBehaviour
         }
         else if(seed < 20f && typeCategory != ItemCategory.Tool)
         {
-            //10% chance to want a single category with a random subDescriptor restriction, doesnt incldue tools
+            //10% chance to want a single category with a random subDescriptor restriction, doesnt include tools
 
             WantsToBuy = new ItemSpecifier[1];
             WantsToBuy[0].Category = typeCategory;
@@ -197,17 +200,25 @@ public class NPC : MonoBehaviour
             }
 
             ItemDescriptor[] descriptors = GameManager.Instance._ItemDatabase.RandomDescriptorsInCategory(typeCategory, typesCount);
+            int index = Random.Range(0, descriptors.Length);
 
-            if(typesCount > 1 && Random.Range(0, 100f) < 10f && typeCategory != ItemCategory.Animal)
+            if (typesCount > 1 && Random.Range(0, 100f) < 10f && typeCategory != ItemCategory.Animal)
             {
                 //10% chance for one of the types to be replaced by another from a random category (not including animals)
-
-                descriptors[Random.Range(0, descriptors.Length)] = GameManager.Instance._ItemDatabase.RandomDescriptorInCategory(typeCategory2);
+                descriptors[index] = GameManager.Instance._ItemDatabase.RandomDescriptorInCategory(typeCategory2);
             }
 
             for (int i = 0; i < WantsToBuy.Length; i++)
             {
-                WantsToBuy[i].Category = ItemCategory.None;
+                if(i == index)
+                {
+                    WantsToBuy[i].Category = typeCategory2;
+                }
+                else
+                {
+                    WantsToBuy[i].Category = typeCategory;
+                }
+                
                 WantsToBuy[i].Descriptors = new ItemDescriptor[1];
                 WantsToBuy[i].Descriptors[0] = descriptors[i];
             }
@@ -221,18 +232,28 @@ public class NPC : MonoBehaviour
             WantsToBuy = new ItemSpecifier[itemCount];
             ItemDescriptor[] descriptors = GameManager.Instance._ItemDatabase.RandomDescriptorsInCategory(typeCategory, itemCount);
 
+            int replaceIndex = Random.Range(0, descriptors.Length);
+
             if (itemCount > 1 && Random.Range(0, 100f) < 5f && typeCategory != ItemCategory.Animal)
             {
                 //5% chance for one of the types to be replaced by another from a random category (not including animals)
 
-                descriptors[Random.Range(0, descriptors.Length)] = GameManager.Instance._ItemDatabase.RandomDescriptorInCategory(typeCategory2);
+                descriptors[replaceIndex] = GameManager.Instance._ItemDatabase.RandomDescriptorInCategory(typeCategory2);
             }
 
             for (int i = 0; i < WantsToBuy.Length; i++)
             {
                 ItemDescriptor[] subDescriptors = GameManager.Instance._ItemDatabase.SubDescriptorsForItem(descriptors[i]);
 
-                WantsToBuy[i].Category = ItemCategory.None;
+                if(i == replaceIndex)
+                {
+                    WantsToBuy[i].Category = typeCategory2;
+                }
+                else
+                {
+                    WantsToBuy[i].Category = typeCategory;
+                }
+                
 
                 if (subDescriptors.Length > 0)
                 {

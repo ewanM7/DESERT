@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 121
+  controlID: 67
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 42
+  controlID: 19
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 122
+  controlID: 68
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -322,8 +322,8 @@ MonoBehaviour:
     y: 0
     width: 462.28564
     height: 1102
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -4116,7 +4116,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.14409666, y: 0.64157355, z: -0.1243107, w: -0.7432437}
     speed: 2
-    m_Value: {x: -0.14409664, y: 0.64157355, z: -0.1243107, w: -0.7432437}
+    m_Value: {x: -0.14407901, y: 0.641495, z: -0.12429549, w: -0.74315274}
   m_Size:
     m_Target: 1.2990698
     speed: 2
@@ -4204,7 +4204,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 06750000
+      m_SelectedIDs: 32720000
       m_LastClickedID: 0
       m_ExpandedIDs: 9cfaffff
       m_RenameOverlay:
@@ -4271,21 +4271,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Data/Items/SellerItems/Books
+    - Assets/Data
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Data/Items/SellerItems/Books
+  - Assets/Data
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Unity Projects\DESERT
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: ae740000
-    m_LastClickedID: 29870
+    m_SelectedIDs: 98740000
+    m_LastClickedID: 29848
     m_ExpandedIDs: 000000008c7400008e74000090740000927400009474000096740000987400009a7400009c7400009e740000a0740000a2740000ac740000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

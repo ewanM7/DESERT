@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Data/Base Item Data")]
 public class BaseItemData : ScriptableObject
@@ -31,6 +32,15 @@ public class BaseItemData : ScriptableObject
     [SerializeField]
     public MaterialMultiplier[] MaterialMultipliers;
 
+    public ItemDescriptor[] AllDescriptors
+    {
+        get
+        {
+            return MaterialDescriptors.Concat(SubDescriptors).ToArray();
+        }
+    }
+
+    public ItemDescriptor[] MaterialDescriptors;
     public ItemDescriptor[] SubDescriptors;
 
     public float MultiplierForMaterial(ItemDescriptor material)
@@ -101,53 +111,85 @@ public enum ItemDescriptor
     Seeds = 999,
 
     //clothing
+    [InspectorName("Clothing/Gloves")]
     Gloves = 1000,
+    [InspectorName("Clothing/Headscarf")]
     Headscarf = 1001,
+    [InspectorName("Clothing/Robes")]
     Robes = 1002,
+    [InspectorName("Clothing/Shoe")]
     Shoe = 1003,
+    [InspectorName("Clothing/Sandals")]
     Sandals = 1004,
+    [InspectorName("Clothing/Bag")]
     Bag = 1005,
+    [InspectorName("Clothing/Hat")]
     Hat = 1006,
-
+    [InspectorName("Clothing/Dress")]
     Dress = 1007,
+    [InspectorName("Clothing/Glasses")]
     Glasses = 1008,
+    [InspectorName("Clothing/Goggles")]
     Goggles = 1009,
 
     //jewelry
+    [InspectorName("Jewelry/Ring")]
     Ring = 3000,
+    [InspectorName("Jewelry/Bracelet")]
     Bracelet = 3001,
+    [InspectorName("Jewelry/Necklace")]
     Necklace = 3002,
+    [InspectorName("Jewelry/Earrings")]
     Earrings = 3003,
+    [InspectorName("Jewelry/Crown")]
     Crown = 3004,
+    [InspectorName("Jewelry/Watch")]
     Watch = 3005,
 
     //tools
+    [InspectorName("Tools/Sword")]
     Sword = 4000,
+    [InspectorName("Tools/Shovel")]
     Shovel = 4001,
+    [InspectorName("Tools/Spear")]
     Spear = 4002,
-    Pickaxe = 4003,
+    [InspectorName("Tools/Axe")]
     Axe = 4004,
+    [InspectorName("Tools/Spyglass")]
     Spyglass = 4005,
+    [InspectorName("Tools/Compass")]
     Compass = 4006,
-    Knife = 4007,
-    Hoe = 4008,
+    [InspectorName("Tools/Staff")]
     Staff = 4009,
+    [InspectorName("Tools/Bowl")]
     Bowl = 4010,
+    [InspectorName("Tools/Cup")]
     Cup = 4011,
+    [InspectorName("Tools/Bottle")]
     Bottle = 4012,
+    [InspectorName("Tools/Lantern")]
     Lantern = 4013,
+    [InspectorName("Tools/Lockbox")]
     Lockbox = 4014,
-    TinderBox = 4015,
+    [InspectorName("Tools/Canteen")]
     Canteen = 4016,
 
     //decorative
+    [InspectorName("Decorative/Pottery")]
     Pottery = 4500,
+    [InspectorName("Decorative/Vase")]
     Vase = 4501,
+    [InspectorName("Decorative/Urn")]
     Urn = 4502,
+    [InspectorName("Decorative/Jug")]
     Jug = 4503,
+    [InspectorName("Decorative/Rug")]
     Rug = 4504,
+    [InspectorName("Decorative/Painting")]
     Painting = 4505,
+    [InspectorName("Decorative/Flag")]
     Flag = 4506,
+    [InspectorName("Decorative/Carving")]
     Carving = 4507,
 
     //dyes
@@ -165,6 +207,8 @@ public enum ItemDescriptor
     Purple = 4513,
 
     //raw materials
+    [InspectorName("Metal/Metal")]
+    Metal = 6029,
     [InspectorName("Metal/Gold")]
     Gold = 6000,
     [InspectorName("Metal/Silver")]
@@ -180,7 +224,8 @@ public enum ItemDescriptor
     Padauk = 6007,
     Mahogany = 6008,
     Acacia = 6009,
-    Ivory = 6010,
+    Bone = 6010,
+    [InspectorName("Gem/Gem")]
     Gem = 6011,
     [InspectorName("Fabric/Cloth")]
     Cloth = 6012,
@@ -200,13 +245,22 @@ public enum ItemDescriptor
     [InspectorName("Fabric/Silk")]
     Silk = 6019,
 
+    [InspectorName("Gem/Ruby")]
     Ruby = 6020,
+    [InspectorName("Gem/Emerald")]
     Emerald = 6021,
+    [InspectorName("Gem/Pearl")]
     Pearl = 6022,
+    [InspectorName("Gem/Sapphire")]
     Sapphire = 6023,
+    [InspectorName("Gem/Amethyst")]
     Amethyst = 6024,
+    [InspectorName("Gem/Amber")]
     Amber = 6025,
+    [InspectorName("Gem/Seashell")]
     Seashell = 6026,
+
+    Glass = 6028,
 
     //animals
     [InspectorName("Animals/Pet")]
@@ -239,6 +293,7 @@ public enum ItemDescriptor
     CanStoreLiquid = 7003,
     IsDyeable = 7004,
     CanHoldGem = 7005,
+    [InspectorName("Gem/No Gem")]
     NoGem = 7006,
     UnDyed = 7007,
 
@@ -258,7 +313,6 @@ public enum ItemDescriptor
     [InspectorName("Wood/AcaciaLog")]
     AcaciaLog = 9005,
 
-    Tusk = 9006,
     [InspectorName("Metal/IronNugget")]
     IronNugget = 9007,
     [InspectorName("Metal/IronBar")]
@@ -278,9 +332,6 @@ public enum ItemDescriptor
 
     Rope = 9015,
     StringItem = 9016,
-    Seashell1 = 9017,
-    Seashell2 = 9018,
-    Seashell3 = 9019,
     ClothItem = 9020,
     ClothRoll = 9021,
     [InspectorName("Fabric/LeatherPiece")]
@@ -397,17 +448,15 @@ public enum ItemDescriptor
 
 public enum ItemCategory
 {
-    None,
-    Food,
-    Clothing,
-    Animal,
-    Jewelry,
-    Rarity,
-    Tool,
-    RawMaterial,
-    Plant,
-    Decorative,
-    KnowledgeBook,
+    None = 0,
+    Food = 1,
+    Clothing = 2,
+    Animal = 3,
+    Jewelry = 4,
+    Tool = 6,
+    RawMaterial = 7,
+    Decorative = 8,
+    KnowledgeBook = 9,
     CATEGORY_MAX,
 }
 

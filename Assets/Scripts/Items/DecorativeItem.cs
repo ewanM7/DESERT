@@ -7,7 +7,7 @@ public class DecorativeItem : Item
     public int DyeValue;
 
     /// <summary>
-    /// When creating a decorative item, the dye MUST be the first dynamic descriptor. For paintings, the size is the first descriptor.
+    /// When creating a decorative item, the material MUST be the first dynamic descriptor. the dye is the second descriptor. For paintings, the size is the first descriptor.
     /// </summary>
     /// <param name="data"></param>
     /// <param name="dynamicDescriptors"></param>
@@ -48,6 +48,10 @@ public class DecorativeItem : Item
             if (DynamicDescriptors == null)
             {
                 return BaseItemData.BaseName;
+            }
+            else if(DyeValue > 0)
+            {
+                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName + " " + DynamicDescriptors[1].ToString();
             }
             else
             {

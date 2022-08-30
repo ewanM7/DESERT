@@ -24,6 +24,9 @@ public class ItemDatabase : ScriptableObject
 
     public BaseItemData CarvingData;
 
+    public BaseItemData[] AnimalsData;
+    public BaseItemData[] RawMaterialData;
+
     public List<ItemCategory> NPCBuyCategories;
 
     public List<ItemDescriptor> FoodDescriptors;
@@ -68,6 +71,24 @@ public class ItemDatabase : ScriptableObject
             default:
                 return ItemDescriptor.None;
         }
+    }
+
+    public Item RandomItemInCategory(ItemCategory category)
+    {
+        Item item;
+
+        if(category == ItemCategory.RawMaterial)
+        {
+            return new Item(RawMaterialData[Random.Range(0, RawMaterialData.Length)]);
+        }
+        else if(category == ItemCategory.Animal)
+        {
+            return new Item(AnimalsData[Random.Range(0, AnimalsData.Length)]);
+        }
+
+        ItemDescriptor descriptor = RandomDescriptorInCategory(category);
+
+        return null;
     }
 
     public ItemDescriptor RandomDescriptorInCategory(ItemCategory category)
@@ -146,19 +167,19 @@ public class ItemDatabase : ScriptableObject
         {
             //Jewelry
             case ItemDescriptor.Bracelet:
-                return BraceletData.SubDescriptors;
+                return BraceletData.AllDescriptors;
 
             case ItemDescriptor.Crown:
-                return CrownData.SubDescriptors;
+                return CrownData.AllDescriptors;
 
             case ItemDescriptor.Earrings:
-                return CrownData.SubDescriptors;
+                return EarringsData.AllDescriptors;
 
             case ItemDescriptor.Necklace:
-                return NecklaceData.SubDescriptors;
+                return NecklaceData.AllDescriptors;
 
             case ItemDescriptor.Ring:
-                return RingData.SubDescriptors;
+                return RingData.AllDescriptors;
 
             //Clothing
             case ItemDescriptor.Bag:
@@ -188,6 +209,7 @@ public class ItemDatabase : ScriptableObject
             case ItemDescriptor.Sandals:
                 return new ItemDescriptor[0];
 
+            //decorative
             case ItemDescriptor.Vase:
                 return DyeDescriptors.ToArray();
 
@@ -206,6 +228,7 @@ public class ItemDatabase : ScriptableObject
             case ItemDescriptor.Carving:
                 return CarvingData.SubDescriptors.ToArray();
 
+            //food
             case ItemDescriptor.Herb:
                 return HerbItems.ToArray();
 
@@ -220,6 +243,31 @@ public class ItemDatabase : ScriptableObject
 
             case ItemDescriptor.Alcohol:
                 return AlcoholDescriptors.ToArray();
+
+            //tools
+            case ItemDescriptor.Axe:
+            case ItemDescriptor.Shovel:
+            case ItemDescriptor.Spear:
+                return new ItemDescriptor[] { ItemDescriptor.Stone, ItemDescriptor.Metal, ItemDescriptor.Wood };
+
+            case ItemDescriptor.Sword:
+                return new ItemDescriptor[] { ItemDescriptor.Metal, ItemDescriptor.Wood };
+
+            case ItemDescriptor.Bottle:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Bowl:
+            case ItemDescriptor.Cup:
+            case ItemDescriptor.Staff:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Lantern:
+            case ItemDescriptor.Lockbox:
+                return new ItemDescriptor[0];
+
+            case ItemDescriptor.Compass:
+            case ItemDescriptor.Spyglass:
+                return new ItemDescriptor[] { ItemDescriptor.Silver, ItemDescriptor.Brass, ItemDescriptor.Gold };
         }
 
         return new ItemDescriptor[0];

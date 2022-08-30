@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 724735f8f299c28458c7ab894b80a48f, type: 3}
-  m_Name: Shovel
+  m_Name: Lantern
   m_EditorClassIdentifier: 
   Category: 6
-  BaseDescriptors: a10f0000
-  BaseName: Shovel
-  BaseValue: 55
+  BaseDescriptors: ad0f0000
+  BaseName: Lantern
+  BaseValue: 0
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
@@ -23,16 +23,7 @@ MonoBehaviour:
   IsStackable: 0
   MaterialMultipliers:
   - Multiplier: 0
-    Material: 6007
-  - Multiplier: 0
-    Material: 6008
-  - Multiplier: 0
-    Material: 6009
-  - Multiplier: 0
-    Material: 6004
-  - Multiplier: 0
     Material: 6003
   - Multiplier: 0
-    Material: 6005
-  MaterialDescriptors: 
+    Material: 6004
   SubDescriptors: 

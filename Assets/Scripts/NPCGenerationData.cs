@@ -13,7 +13,43 @@ public class NPCGenerationData : ScriptableObject
     public ItemTableEntry[] AnimalSellerItems;
     public ItemTableEntry[] FabricsSellerItems;
     public ItemTableEntry[] NaturalsSellerItems;
+    public BaseItemData[] ScholarItems;
 
+    public ItemCategory[] BuyerItemCategories;
+
+
+    public Item[] RandomItemsForBuyer()
+    {
+        Item[] items;
+
+        float roll = Random.Range(0f, 100f);
+
+        if (roll < 33f)
+        {
+            //one item
+            items = new Item[1];
+        }
+        else if(roll < 67f)
+        {
+            //two items
+            items = new Item[2];
+        }
+        else
+        {
+            //three items
+            items = new Item[3];
+        }
+
+        for(int i = 0; i < items.Length; i++)
+        {
+
+            ItemCategory category = BuyerItemCategories[Random.Range(0, BuyerItemCategories.Length)];
+            items[i] = GameManager.Instance._ItemDatabase.RandomItemInCategory(category);
+        }
+
+
+        return items;
+    }
 
     public BaseItemData[] ItemsForSellerType(SellerType type)
     {
@@ -69,8 +105,7 @@ public class NPCGenerationData : ScriptableObject
                 break;
 
             case SellerType.Scholar:
-
-                break;
+                return ScholarItems;
         }
 
         return dataList.ToArray();
