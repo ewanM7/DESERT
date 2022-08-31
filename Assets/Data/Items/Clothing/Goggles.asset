@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 2
   BaseDescriptors: f1030000
-  ID: 0
   BaseName: Goggles
   BaseValue: 60
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
   - Multiplier: 1.8
     Material: 6014
   - Multiplier: 1.4
     Material: 6013
+  MaterialDescriptors: 7d1700007e170000
+  SubDescriptors: 

@@ -115,7 +115,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GrainColorBlend: 0.42
-    - _GrainPeriod: 4000
+    - _GrainPeriod: 2000
     - _GrainShineStrength: 0.58
     - _Metallic: 0
     - _NormalSampleRadius: 0.1

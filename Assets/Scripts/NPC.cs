@@ -113,14 +113,13 @@ public class NPC : MonoBehaviour
 
         if (IsSelling)
         {
-            //to do - include second hand in generation when item table for them is done
-            SalesType = (SellerType)Random.Range(1, (int)SellerType.SecondHand);
+            SalesType = (SellerType)Random.Range(1, (int)SellerType.Buyer);
 
             BaseItemData[] itemData = GameManager.Instance._NPCGenerationData.ItemsForSellerType(SalesType);
 
             foreach (BaseItemData item in itemData)
             {
-                inventory.AddItem(new Item(item));
+                inventory.AddItem(new Item(item, -1, 0));
             }
         }
         else
@@ -141,7 +140,7 @@ public class NPC : MonoBehaviour
         //set items the npc is looking for
         float seed = Random.Range(0f, 100f);
 
-        //to do - get the first random category from a loot table instead of a purely random one. the loot table should we weighted by what items are in the player's inventory
+        //to do - make it slightly more likely that the npc is looking for categories that are in the player's inventories. make people looking for animals quite rare.
         ItemCategory typeCategory = GameManager.Instance._ItemDatabase.NPCBuyCategories[Random.Range(0, GameManager.Instance._ItemDatabase.NPCBuyCategories.Count)];
         ItemCategory typeCategory2;
 
@@ -382,7 +381,7 @@ public class NPC : MonoBehaviour
         }
 
         //to do - affect NPC interest based on the difference between the offer and the wanted price. interest should also decline when offered items they aren't looking for
-
+        
         if (IsSelling)
         {
             //npc is selling to the player
@@ -419,9 +418,9 @@ public class NPC : MonoBehaviour
             int z = 0;
             bool makeOffer = true;
 
-            //to do - use the max buy items field to limit the number of items the npc is interested in
+            //to do - use MaxNumberOfBuyItems field to limit the number of items the npc is interested in
 
-            foreach(Item item in PlayerOffer.Items)
+            foreach (Item item in PlayerOffer.Items)
             {
                 if(item != null)
                 {
@@ -563,7 +562,6 @@ public enum SellerType
     Fabrics,
     Naturals,
     Scholar,
-    SecondHand,
     Buyer,
 }
 

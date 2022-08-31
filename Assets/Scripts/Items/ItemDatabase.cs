@@ -15,14 +15,27 @@ public class ItemDatabase : ScriptableObject
     public BaseItemData EarringsData;
     public BaseItemData NecklaceData;
     public BaseItemData RingData;
+    public BaseItemData WatchData;
 
     public BaseItemData GlovesData;
     public BaseItemData HeadscarfData;
     public BaseItemData RobesData;
     public BaseItemData BagData;
     public BaseItemData DressData;
+    public BaseItemData GlassesData;
+    public BaseItemData SandalsData;
+    public BaseItemData GogglesData;
 
     public BaseItemData CarvingData;
+
+    public BaseItemData AmethystData;
+    public BaseItemData PearlData;
+    public BaseItemData RubyData;
+    public BaseItemData EmeraldData;
+    public BaseItemData SapphireData;
+    public BaseItemData AmberData;
+    public BaseItemData SeashellData;
+
 
     public BaseItemData[] AnimalsData;
     public BaseItemData[] RawMaterialData;
@@ -73,20 +86,45 @@ public class ItemDatabase : ScriptableObject
         }
     }
 
-    public Item RandomItemInCategory(ItemCategory category)
+    public BaseItemData GemDataForDescriptor(ItemDescriptor descriptor)
     {
-        Item item;
-
-        if(category == ItemCategory.RawMaterial)
+        switch (descriptor)
         {
-            return new Item(RawMaterialData[Random.Range(0, RawMaterialData.Length)]);
-        }
-        else if(category == ItemCategory.Animal)
-        {
-            return new Item(AnimalsData[Random.Range(0, AnimalsData.Length)]);
+            case ItemDescriptor.Amethyst:
+                return AmethystData;
+
+            case ItemDescriptor.Amber:
+                return AmberData;
+
+            case ItemDescriptor.Pearl:
+                return PearlData;
+
+            case ItemDescriptor.Ruby:
+                return RubyData;
+
+            case ItemDescriptor.Emerald:
+                return EmeraldData;
+
+            case ItemDescriptor.Sapphire:
+                return SapphireData;
+
+            case ItemDescriptor.Seashell:
+                return SeashellData;
         }
 
-        ItemDescriptor descriptor = RandomDescriptorInCategory(category);
+        return null;
+    }
+
+    public BaseItemData DyeDataForDescriptor(ItemDescriptor descriptor)
+    {
+        switch(descriptor)
+        {
+            case ItemDescriptor.UnDyed:
+                return null;
+
+            case ItemDescriptor.White:
+                break;
+        }
 
         return null;
     }
@@ -180,6 +218,9 @@ public class ItemDatabase : ScriptableObject
 
             case ItemDescriptor.Ring:
                 return RingData.AllDescriptors;
+
+            case ItemDescriptor.Watch:
+                return new ItemDescriptor[0];
 
             //Clothing
             case ItemDescriptor.Bag:

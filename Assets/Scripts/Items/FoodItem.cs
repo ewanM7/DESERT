@@ -9,7 +9,7 @@ public class FoodItem : Item
     /// </summary>
     /// <param name="data"></param>
     /// <param name="dynamicDescriptors"></param>
-    public FoodItem(BaseItemData data, ItemDescriptor[] dynamicDescriptors) : base(data)
+    public FoodItem(BaseItemData data, ItemDescriptor[] dynamicDescriptors, int quality) : base(data, quality, 0)
     {
         DynamicDescriptors = dynamicDescriptors;
     }

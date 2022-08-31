@@ -12,6 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0d6ce38102331439110b715427a1e2, type: 3}
   m_Name: NPCGenerationData
   m_EditorClassIdentifier: 
+  MaxBuyItemNumberTable:
+  - MaxBuyItemNumber: 1
+    Chance: 0.15
+  - MaxBuyItemNumber: 2
+    Chance: 0.2
+  - MaxBuyItemNumber: 3
+    Chance: 0.2
+  - MaxBuyItemNumber: 4
+    Chance: 0.1
+  - MaxBuyItemNumber: 5
+    Chance: 0.09
+  - MaxBuyItemNumber: 6
+    Chance: 0.08
+  - MaxBuyItemNumber: 7
+    Chance: 0.07
+  - MaxBuyItemNumber: 8
+    Chance: 0.06
+  - MaxBuyItemNumber: 9
+    Chance: 0.05
   HerbAndSpiceSellerItems:
   - ItemData: {fileID: 0}
     Chance: 0
@@ -47,4 +66,23 @@ MonoBehaviour:
   - ItemData: {fileID: 0}
     Chance: 0
   ScholarItems: []
-  BuyerItemCategories: 01000000020000000300000004000000060000000800000007000000
+  BuyerItemCategories:
+  - Category: 1
+    Chance: 0.17
+  - Category: 2
+    Chance: 0.17
+  - Category: 3
+    Chance: 0.05
+  - Category: 4
+    Chance: 0.17
+  - Category: 6
+    Chance: 0.17
+  - Category: 7
+    Chance: 0.1
+  - Category: 8
+    Chance: 0.17
+  BuyerJewelryItems: 
+  BuyerClothingItems: 
+  BuyerFoodItems: 
+  BuyerToolItems: 
+  BuyerDecorativeItems: 

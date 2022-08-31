@@ -10,6 +10,7 @@ public class Item
 
     public ItemDescriptor[] DynamicDescriptors;
 
+    public const float DAMAGED_MULTIPLIER = 0.5f;
 
     /// <summary>
     /// Used for value when the item is cash. This is -1 if the item is not cash
@@ -32,10 +33,10 @@ public class Item
         }
     }
 
-    public Item(BaseItemData data)
+    public Item(BaseItemData data, int quality, int dummyParam)
     {
         BaseItemData = data;
-
+        Quality = quality;
         CashValue = -1;
     }
 
@@ -63,7 +64,14 @@ public class Item
                 return CashValue;
             }
 
-            return Mathf.RoundToInt(GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality) * BaseItemData.BaseValue);
+            int value = Mathf.RoundToInt(GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality) * BaseItemData.BaseValue);
+
+            if (HasDescriptor(ItemDescriptor.Damaged))
+            {
+                return Mathf.RoundToInt(value * DAMAGED_MULTIPLIER);
+            }
+
+            return value;
         }
     }
 
@@ -89,7 +97,7 @@ public class Item
     {
         get
         {
-            if (Quality == -1)
+            if (Quality < 1)
             {
                 return ItemQuality.None;
             }

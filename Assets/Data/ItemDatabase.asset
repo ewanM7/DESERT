@@ -69,12 +69,25 @@ MonoBehaviour:
   EarringsData: {fileID: 11400000, guid: 7030e1ffc4e83e741b4d3488bd334631, type: 2}
   NecklaceData: {fileID: 11400000, guid: 44d8e1fddd11e1948875ff405e5c436b, type: 2}
   RingData: {fileID: 11400000, guid: 16cdaa76ccf756c4696bb3917f02e154, type: 2}
+  WatchData: {fileID: 0}
   GlovesData: {fileID: 11400000, guid: 1661409af28dd9c4584f46f30bfc91d3, type: 2}
   HeadscarfData: {fileID: 11400000, guid: 74474fee4b8a02346aa1747341c04ea4, type: 2}
   RobesData: {fileID: 11400000, guid: 56326d64666f2974693f20ab4fe2b39e, type: 2}
   BagData: {fileID: 11400000, guid: e80ca90d0aad496468a5f120d778ad6f, type: 2}
   DressData: {fileID: 11400000, guid: 0ea62eced0f59fe41824f4808a828748, type: 2}
-  CarvingData: {fileID: 0}
+  GlassesData: {fileID: 0}
+  SandalsData: {fileID: 0}
+  GogglesData: {fileID: 0}
+  CarvingData: {fileID: 11400000, guid: d9eaa6839c357d4459972379b1c62ca5, type: 2}
+  AmethystData: {fileID: 11400000, guid: 85d0f386dc6d5134097d0a1fcf96de8c, type: 2}
+  PearlData: {fileID: 11400000, guid: a79efd95ff94c7e48851d52f04cc4eae, type: 2}
+  RubyData: {fileID: 11400000, guid: 9ab43f58f92178843b81f58572984574, type: 2}
+  EmeraldData: {fileID: 11400000, guid: cca9a3ed5e4aaeb4e87d1c4cc23ed835, type: 2}
+  SapphireData: {fileID: 11400000, guid: 4b041082f68d35a4ebeaa998d63ec57d, type: 2}
+  AmberData: {fileID: 11400000, guid: 403032ad8c0030d4e8ed53e1ebeca9f5, type: 2}
+  SeashellData: {fileID: 0}
+  AnimalsData: []
+  RawMaterialData: []
   NPCBuyCategories: 010000000200000003000000040000000600000009000000
   FoodDescriptors: 0a00000005000000060000000800000009000000
   ClothingDescriptors: e8030000e9030000ea030000ec030000ed030000ee030000ef030000f0030000f1030000

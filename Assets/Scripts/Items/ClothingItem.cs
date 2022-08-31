@@ -11,7 +11,7 @@ public class ClothingItem : Item
     /// </summary>
     /// <param name="data"></param>
     /// <param name="dynamicDescriptors"></param>
-    public ClothingItem(BaseItemData data, ItemDescriptor[] dynamicDescriptors, Item[] dyes) : base(data)
+    public ClothingItem(BaseItemData data, ItemDescriptor[] dynamicDescriptors, Item[] dyes, int quality) : base(data, quality, 0)
     {
         DynamicDescriptors = dynamicDescriptors;
         DyeValue = 0;

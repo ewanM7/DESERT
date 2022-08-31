@@ -11,7 +11,7 @@ public class JewelryItem : Item
     /// </summary>
     /// <param name="data"></param>
     /// <param name="dynamicDescriptors"></param>
-    public JewelryItem(BaseItemData data, ItemDescriptor[] dynamicDescriptors, Item[] gems) : base(data)
+    public JewelryItem(BaseItemData data, ItemDescriptor[] dynamicDescriptors, Item[] gems, int quality) : base(data, quality, 0)
     {
         DynamicDescriptors = dynamicDescriptors;
         GemValue = 0;
@@ -30,7 +30,7 @@ public class JewelryItem : Item
     {
         get
         {
-            if(DynamicDescriptors.Length == 1)
+            if(DynamicDescriptors[1] == ItemDescriptor.NoGem)
             {
                 return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
             }
