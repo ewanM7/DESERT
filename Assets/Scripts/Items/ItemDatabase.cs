@@ -26,8 +26,6 @@ public class ItemDatabase : ScriptableObject
     public BaseItemData SandalsData;
     public BaseItemData GogglesData;
 
-    public BaseItemData CarvingData;
-
     public BaseItemData AmethystData;
     public BaseItemData PearlData;
     public BaseItemData RubyData;
@@ -36,6 +34,32 @@ public class ItemDatabase : ScriptableObject
     public BaseItemData AmberData;
     public BaseItemData SeashellData;
 
+    public BaseItemData UrnData;
+    public BaseItemData JugData;
+    public BaseItemData VaseData;
+    public BaseItemData CarvingData;
+
+    public BaseItemData AxeData;
+    public BaseItemData ShovelData;
+    public BaseItemData SwordData;
+    public BaseItemData SpearData;
+    public BaseItemData BottleData;
+    public BaseItemData BowlData;
+    public BaseItemData CupData;
+    public BaseItemData LanternData;
+    public BaseItemData LockboxData;
+    public BaseItemData StaffData;
+
+    public BaseItemData[] HerbData;
+    public BaseItemData[] SpiceData;
+    public BaseItemData[] MeatData;
+    public BaseItemData[] FruitData;
+    public BaseItemData[] VegetableData;
+    public BaseItemData BreadData;
+    public BaseItemData MilkData;
+    public BaseItemData SugarData;
+    public BaseItemData WaterData;
+    
 
     public BaseItemData[] AnimalsData;
     public BaseItemData[] RawMaterialData;

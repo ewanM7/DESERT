@@ -47,9 +47,11 @@ public class NPCGenerationData : ScriptableObject
             items = new Item[2];
         }
 
-        for(int i = 0; i < items.Length; i++)
+        ItemCategory buyerCategory = GetBuyerItemCategory();
+
+        for (int i = 0; i < items.Length; i++)
         {
-            items[i] = RandomItemForBuyerCategory(GetBuyerItemCategory());
+            items[i] = RandomItemForBuyerCategory(buyerCategory);
         }
 
 
@@ -86,10 +88,6 @@ public class NPCGenerationData : ScriptableObject
 
                     case ItemDescriptor.Earrings:
                         data = GameManager.Instance._ItemDatabase.EarringsData;
-                        break;
-
-                    case ItemDescriptor.Watch:
-                        data = GameManager.Instance._ItemDatabase.WatchData;
                         break;
                 }
 
@@ -137,16 +135,8 @@ public class NPCGenerationData : ScriptableObject
                         data = GameManager.Instance._ItemDatabase.DressData;
                         break;
 
-                    case ItemDescriptor.Glasses:
-                        data = GameManager.Instance._ItemDatabase.GlassesData;
-                        break;
-
                     case ItemDescriptor.Gloves:
                         data = GameManager.Instance._ItemDatabase.GlovesData;
-                        break;
-
-                    case ItemDescriptor.Goggles:
-                        data = GameManager.Instance._ItemDatabase.GogglesData;
                         break;
 
                     case ItemDescriptor.Headscarf:
@@ -204,82 +194,177 @@ public class NPCGenerationData : ScriptableObject
                     descriptors[1] = GameManager.Instance._ItemDatabase.DyeDescriptors[Random.Range(0, GameManager.Instance._ItemDatabase.DyeDescriptors.Count)];
                     return new ClothingItem(data, descriptors, new Item[] { new Item(GameManager.Instance._ItemDatabase.DyeDataForDescriptor(descriptors[1]), -1, 0) }, quality);
                 }
+
+            case ItemCategory.Decorative:
+                data = null;
+
+                switch(descriptor)
+                {
+                    case ItemDescriptor.Urn:
+                        data = GameManager.Instance._ItemDatabase.UrnData;
+                        break;
+
+                    case ItemDescriptor.Jug:
+                        data = GameManager.Instance._ItemDatabase.JugData;
+                        break;
+
+                    case ItemDescriptor.Vase:
+                        data = GameManager.Instance._ItemDatabase.VaseData;
+                        break;
+
+                    case ItemDescriptor.Carving:
+                        data = GameManager.Instance._ItemDatabase.CarvingData;
+                        break;
+
+                }
+
+                quality = Random.Range(1, 13);
+
+                //50% chance for item to be damaged if it's 1 or 2 star quality
+                isDamaged = quality < 9 && Random.Range(0, 2) == 1;
+
+                if (data.BaseDescriptors.Contains(ItemDescriptor.IsDyeable))
+                {
+                    if (isDamaged)
+                    {
+                        descriptors = new ItemDescriptor[3];
+                        descriptors[2] = ItemDescriptor.Damaged;
+                    }
+                    else
+                    {
+                        descriptors = new ItemDescriptor[2];
+                    }
+                }
+                else
+                {
+                    if (isDamaged)
+                    {
+                        descriptors = new ItemDescriptor[2];
+                        descriptors[1] = ItemDescriptor.Damaged;
+                    }
+                    else
+                    {
+                        descriptors = new ItemDescriptor[1];
+                    }
+                }
+
+                descriptors[0] = data.MaterialDescriptors[Random.Range(0, data.MaterialDescriptors.Length)];
+
+                if (!data.BaseDescriptors.Contains(ItemDescriptor.IsDyeable))
+                {
+                    return new DecorativeItem(data, descriptors, new Item[0], quality);
+                }
+                else
+                {
+                    descriptors[1] = GameManager.Instance._ItemDatabase.DyeDescriptors[Random.Range(0, GameManager.Instance._ItemDatabase.DyeDescriptors.Count)];
+                    return new DecorativeItem(data, descriptors, new Item[] { new Item(GameManager.Instance._ItemDatabase.DyeDataForDescriptor(descriptors[1]), -1, 0) }, quality);
+                }
+
+            case ItemCategory.Food:
+                data = null;
+                switch (descriptor)
+                {
+                    //food
+                    case ItemDescriptor.Herb:
+                        data = GameManager.Instance._ItemDatabase.HerbData[Random.Range(0, GameManager.Instance._ItemDatabase.HerbData.Length)];
+                        break;
+
+                    case ItemDescriptor.Spice:
+                        data = GameManager.Instance._ItemDatabase.SpiceData[Random.Range(0, GameManager.Instance._ItemDatabase.SpiceData.Length)];
+                        break;
+
+                    case ItemDescriptor.Fruit:
+                        data = GameManager.Instance._ItemDatabase.FruitData[Random.Range(0, GameManager.Instance._ItemDatabase.FruitData.Length)];
+                        break;
+
+                    case ItemDescriptor.Vegetable:
+                        data = GameManager.Instance._ItemDatabase.VegetableData[Random.Range(0, GameManager.Instance._ItemDatabase.VegetableData.Length)];
+                        break;
+
+                    case ItemDescriptor.Meat:
+                        data = GameManager.Instance._ItemDatabase.MeatData[Random.Range(0, GameManager.Instance._ItemDatabase.MeatData.Length)];
+                        break;
+
+                    case ItemDescriptor.Sugar:
+                        data = GameManager.Instance._ItemDatabase.SugarData;
+                        break;
+
+                    case ItemDescriptor.Milk:
+                        data = GameManager.Instance._ItemDatabase.MilkData;
+                        break;
+
+                    case ItemDescriptor.Water:
+                        data = GameManager.Instance._ItemDatabase.WaterData;
+                        break;
+
+                    case ItemDescriptor.Bread:
+                        data = GameManager.Instance._ItemDatabase.BreadData;
+                        break;
+                }
+
+                return new FoodItem(data, new ItemDescriptor[0], -1);
+
+            case ItemCategory.Tool:
+                data = null;
+                switch(descriptor)
+                {
+                    case ItemDescriptor.Axe:
+                        data = GameManager.Instance._ItemDatabase.AxeData;
+                        break;
+
+                    case ItemDescriptor.Shovel:
+                        data = GameManager.Instance._ItemDatabase.ShovelData;
+                        break;
+
+                    case ItemDescriptor.Spear:
+                        data = GameManager.Instance._ItemDatabase.SpearData;
+                        break;
+
+                    case ItemDescriptor.Sword:
+                        data = GameManager.Instance._ItemDatabase.SwordData;
+                        break;
+
+                    case ItemDescriptor.Bottle:
+                        data = GameManager.Instance._ItemDatabase.BottleData;
+                        break;
+
+                    case ItemDescriptor.Bowl:
+                        data = GameManager.Instance._ItemDatabase.BowlData;
+                        break;
+
+                    case ItemDescriptor.Cup:
+                        data = GameManager.Instance._ItemDatabase.CupData;
+                        break;
+
+                    case ItemDescriptor.Staff:
+                        data = GameManager.Instance._ItemDatabase.StaffData;
+                        break;
+
+                    case ItemDescriptor.Lantern:
+                        data = GameManager.Instance._ItemDatabase.LanternData;
+                        break;
+
+                    case ItemDescriptor.Lockbox:
+                        data = GameManager.Instance._ItemDatabase.LockboxData;
+                        break;
+                }
+
+                quality = Random.Range(1, 13);
+
+                //50% chance for item to be damaged if it's 1 or 2 star quality
+                if (quality < 9 && Random.Range(0, 2) == 1)
+                {
+                    descriptors = new ItemDescriptor[2];
+                    descriptors[1] = ItemDescriptor.Damaged;
+                }
+                else
+                {
+                    descriptors = new ItemDescriptor[1];
+                }
+
+                descriptors[0] = data.MaterialDescriptors[Random.Range(0, data.MaterialDescriptors.Length)];
+                return new ToolItem(data, descriptors, quality);
         }
-
-        if (category == ItemCategory.RawMaterial)
-        {
-            
-        }
-        else if (category == ItemCategory.Animal)
-        {
-            
-        }
-        else
-        {
-            
-
-            switch (descriptor)
-            {
-                //Clothing
-                case ItemDescriptor.Bag:
-
-                case ItemDescriptor.Dress:
-
-                case ItemDescriptor.Glasses:
-
-                case ItemDescriptor.Gloves:
-
-                case ItemDescriptor.Goggles:
-
-                case ItemDescriptor.Headscarf:
-
-                case ItemDescriptor.Robes:
-
-                case ItemDescriptor.Sandals:
-
-                //decorative
-                case ItemDescriptor.Urn:
-
-                case ItemDescriptor.Jug:
-
-                case ItemDescriptor.Flag:
-
-                case ItemDescriptor.Carving:
-
-                //food
-                case ItemDescriptor.Herb:
-
-                case ItemDescriptor.Spice:
-
-                case ItemDescriptor.Sweet:
-
-                case ItemDescriptor.Meal:
-
-                case ItemDescriptor.Alcohol:
-
-                //tools
-                case ItemDescriptor.Axe:
-                case ItemDescriptor.Shovel:
-                case ItemDescriptor.Spear:
-
-                case ItemDescriptor.Sword:
-
-                case ItemDescriptor.Bottle:
-
-                case ItemDescriptor.Bowl:
-                case ItemDescriptor.Cup:
-                case ItemDescriptor.Staff:
-
-                case ItemDescriptor.Lantern:
-                case ItemDescriptor.Lockbox:
-
-                case ItemDescriptor.Compass:
-                case ItemDescriptor.Spyglass:
-                    break;
-
-            }
-        }
-
 
         return null;
     }
@@ -420,6 +505,11 @@ public class NPCGenerationData : ScriptableObject
             case ItemCategory.Decorative:
                 table = BuyerDecorativeItems;
                 break;
+        }
+
+        if(table == null)
+        {
+            return ItemDescriptor.None;
         }
 
         return table[Random.Range(0, table.Length)];

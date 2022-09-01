@@ -355,8 +355,6 @@ public enum ItemDescriptor
 
     [InspectorName("Food/Bread")]
     Bread = 9031,
-    [InspectorName("Food/Rice")]
-    Rice = 9032,
     [InspectorName("Food/Wheat")]
     Wheat = 9033,
     [InspectorName("Food/BeefItem")]
@@ -382,6 +380,9 @@ public enum ItemDescriptor
     [InspectorName("Food/GrainSpirit")]
     GrainSpirit = 9044,
 
+    [InspectorName("Food/Water")]
+    Water = 9067,
+
     [InspectorName("Food/Pancakes")]
     Pancakes = 9045,
     [InspectorName("Food/FruitSalad")]
@@ -393,8 +394,6 @@ public enum ItemDescriptor
     MintLamb = 9048,
     [InspectorName("Food/BeefStew")]
     BeefStew = 9049,
-    [InspectorName("Food/RiceBowl")]
-    RiceBowl = 9050,
     [InspectorName("Food/CousCous")]
     CousCous = 9051,
 

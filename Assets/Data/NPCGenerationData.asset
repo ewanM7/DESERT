@@ -81,8 +81,8 @@ MonoBehaviour:
     Chance: 0.1
   - Category: 8
     Chance: 0.17
-  BuyerJewelryItems: 
-  BuyerClothingItems: 
-  BuyerFoodItems: 
-  BuyerToolItems: 
-  BuyerDecorativeItems: 
+  BuyerJewelryItems: b90b0000ba0b0000b80b0000bb0b0000
+  BuyerClothingItems: ed030000ef030000e8030000e9030000ea030000ec030000
+  BuyerFoodItems: 0200000003000000060000000500000047230000502300004f2300006b23000001000000
+  BuyerToolItems: 00000000000000000000000000000000
+  BuyerDecorativeItems: 9611000097110000951100009b110000
