@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 2
   BaseDescriptors: ed0300005c1b0000
-  ID: 0
   BaseName: Bag
   BaseValue: 55
   HealthRestored: 0
@@ -27,4 +26,5 @@ MonoBehaviour:
     Material: 6013
   - Multiplier: 1.8
     Material: 6014
-  SubDescriptors: 7d1700007e170000
+  MaterialDescriptors: 7d1700007e170000
+  SubDescriptors: 

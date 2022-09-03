@@ -217,8 +217,6 @@ public enum ItemDescriptor
     Brass = 6002,
     [InspectorName("Metal/Iron")]
     Iron = 6003,
-    [InspectorName("Metal/ScrapIron")]
-    ScrapIron = 6004,
     Stone = 6005,
     Wood = 6006,
     Padauk = 6007,

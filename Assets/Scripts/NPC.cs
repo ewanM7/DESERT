@@ -101,6 +101,11 @@ public class NPC : MonoBehaviour
             {
                 Traits[i] = newTrait;
             }
+            else
+            {
+                //roll for another trait if the new one cant be added
+                i--;
+            }
         }
 
         //set up inventory items
@@ -306,6 +311,8 @@ public class NPC : MonoBehaviour
 
         bool rightCategory = false;
         bool hasRightDescriptors = false;
+
+        //to do - include traits like sweet tooth here, so they always want to buy the item
 
         foreach (ItemSpecifier itemSpecifier in WantsToBuy)
         {
@@ -528,25 +535,23 @@ public struct ItemSpecifier
 
 public enum Trait
 {
-    None,
-    Alcoholic,
-    SweetTooth,
-    Moral,
-    Shady,
-    BulkBuyer,
-    Collector,
-    Haggler,
-    Impatient,
-    Trusting,
-    AnimalLover,
-    Gambler,
-    HighStandards,
-    Modest,
-    Vain,
-    Cynical,
-    Naive,
-    LocalTrader,
-    Tourist,
+    None = 0,
+    Alcoholic = 1,
+    SweetTooth = 2,
+    BulkBuyer = 5,
+    Collector = 6,
+    Haggler = 7,
+    Impatient = 8,
+    Trusting = 9,
+    AnimalLover = 10,
+    Gambler = 11,
+    HighStandards = 12,
+    Modest = 13,
+    Vain = 14,
+    Cynical = 15,
+    Naive = 16,
+    LocalTrader = 17,
+    Tourist = 18,
 
     TRAIT_MAX,
     
@@ -571,12 +576,6 @@ static class TraitExtensions
     {
         switch (trait)
         {
-            case Trait.Moral:
-                return otherTrait == Trait.Shady;
-
-            case Trait.Shady:
-                return otherTrait == Trait.Moral;
-
             case Trait.Haggler:
                 return otherTrait == Trait.Impatient;
 

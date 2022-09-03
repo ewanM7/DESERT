@@ -14,19 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 1
   BaseDescriptors: 090000000c000000
-  ID: 0
   BaseName: Turkish Delight
   BaseValue: 25
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
+  _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 1
-    Material: 0
+  - Multiplier: 1.5
+    Material: 9026
   - Multiplier: 1.3
     Material: 18
   - Multiplier: 1.7
     Material: 19
-  - Multiplier: 2
-    Material: 20
+  - Multiplier: 1.5
+    Material: 9027
+  MaterialDescriptors: 42230000120000001300000043230000
+  SubDescriptors: 

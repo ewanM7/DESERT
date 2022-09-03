@@ -25,5 +25,10 @@ MonoBehaviour:
   - Multiplier: 0
     Material: 6003
   - Multiplier: 0
-    Material: 6004
+    Material: 6007
+  - Multiplier: 0
+    Material: 6008
+  - Multiplier: 0
+    Material: 6009
+  MaterialDescriptors: 73170000771700007817000079170000
   SubDescriptors: 
