@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TradingUI : MonoBehaviour
 {
-    public const int TradingSlotsCount = 9;
+    public const int TRADING_SLOTS_COUNT = 9;
 
     public UIItemSlot[] PlayerItemSlots;
     public UIItemSlot[] NPCItemSlots;

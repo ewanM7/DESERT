@@ -22,7 +22,7 @@ public class NPC : MonoBehaviour
     public float PriceTolerance;
 
     /// <summary>
-    /// NPC buy offers are multiplied by this value
+    /// Initial NPC buy offers are multiplied by this value
     /// </summary>
     public float BuyMultiplier;
 
@@ -38,6 +38,7 @@ public class NPC : MonoBehaviour
 
     public int FirstOfferValue;
     public int PreviousOfferValue;
+    public float LookingForSpecificItemsMultiplier;
 
     /// <summary>
     /// Interest in continuing the trade on a scale from 1 to 10 - trade ends if the interest drops to 0
@@ -70,15 +71,39 @@ public class NPC : MonoBehaviour
         PreviousOfferValue = 0;
 
         //set price multipliers
-        PriceTolerance = Random.Range(0f, 0.25f);
-        BuyMultiplier = Random.Range(0.8f, 1.2f);
-        SellMultiplier = Random.Range(0.8f, 1.2f);
+        PriceTolerance = Random.Range(0f, 0.15f);
+        BuyMultiplier = Random.Range(0.9f, 1.1f);
+        SellMultiplier = Random.Range(0.85f, 1.15f);
+        OfferMultiplier = Random.Range(1.03f, 1.07f);
 
         //set max number of items the npc will buy
         MaxNumberOfBuyItems = GameManager.Instance._NPCGenerationData.GetMaxBuyItemNumber();
 
         //set traits
-        int traitCount = Random.Range(1, 5);
+        int traitCount = 0;
+
+        float roll = Random.Range(0, 100f);
+
+        if(roll < 30f)
+        {
+            //30% chance for 1 trait
+            traitCount = 1;
+        }
+        else if (roll < 60f)
+        {
+            //30% chance for 2 traits
+            traitCount = 2;
+        }
+        else if(roll < 90f)
+        {
+            //30% chance for 3 traits
+            traitCount = 3;
+        }
+        else
+        {
+            //10% chance for 4 traits
+            traitCount = 4;
+        }
 
         Traits = new Trait[traitCount];
 
@@ -109,7 +134,7 @@ public class NPC : MonoBehaviour
         }
 
         //set up inventory items
-        inventory = new Inventory(TradingUI.TradingSlotsCount);
+        inventory = new Inventory(TradingUI.TRADING_SLOTS_COUNT);
 
 
         IsSelling = Random.Range(0, 100f) < 33f;
@@ -118,6 +143,7 @@ public class NPC : MonoBehaviour
 
         if (IsSelling)
         {
+            //generate a salesman type and add the appropriate selling items
             SalesType = (SellerType)Random.Range(1, (int)SellerType.Buyer);
 
             BaseItemData[] itemData = GameManager.Instance._NPCGenerationData.ItemsForSellerType(SalesType);
@@ -129,6 +155,7 @@ public class NPC : MonoBehaviour
         }
         else
         {
+            //add a few random items if the npc is a buyer
             SalesType = SellerType.Buyer;
 
             Item[] inventoryItems = GameManager.Instance._NPCGenerationData.RandomItemsForBuyer();
@@ -161,6 +188,7 @@ public class NPC : MonoBehaviour
             WantsToBuy = new ItemSpecifier[1];
             WantsToBuy[0].Category = typeCategory;
             WantsToBuy[0].Descriptors = new ItemDescriptor[0];
+            LookingForSpecificItemsMultiplier = 1f;
         }
         else if(seed < 20f && typeCategory != ItemCategory.Tool)
         {
@@ -170,6 +198,7 @@ public class NPC : MonoBehaviour
             WantsToBuy[0].Category = typeCategory;
             WantsToBuy[0].Descriptors = new ItemDescriptor[1];
             WantsToBuy[0].Descriptors[0] = GameManager.Instance._ItemDatabase.RandomSubDescriptorInCategory(typeCategory);
+            LookingForSpecificItemsMultiplier = 1f;
         }
         else if(seed < 80f)
         {
@@ -226,7 +255,8 @@ public class NPC : MonoBehaviour
                 WantsToBuy[i].Descriptors = new ItemDescriptor[1];
                 WantsToBuy[i].Descriptors[0] = descriptors[i];
             }
-            
+
+            LookingForSpecificItemsMultiplier = 1f;
         }
         else
         {
@@ -274,6 +304,7 @@ public class NPC : MonoBehaviour
                 }
             }
 
+            LookingForSpecificItemsMultiplier = 1.05f;
         }
     }
 
@@ -369,10 +400,12 @@ public class NPC : MonoBehaviour
     {
         int value = 0;
 
-        foreach(Item item in offer.Items)
+        if (offer != null)
         {
-            value += PerceivedValueForItem(item);
-            
+            foreach (Item item in offer.Items)
+            {
+                value += PerceivedValueForItem(item);
+            }
         }
 
         return value;
@@ -392,31 +425,58 @@ public class NPC : MonoBehaviour
         if (IsSelling)
         {
             //npc is selling to the player
-            for(int i = 0; i < CurrentTradeOffer.Items.Length; i++)
+
+            if (PlayerOffer == null)
             {
-                //discard items that the player is not interested in buying
-                if (CurrentTradeOffer.Items[i] != null && !PlayerOffer.WantedItemIndexes[i])
+                //trading has just started - add all selling items to the offer
+
+                for(int i = 0; i < CurrentTradeOffer.Items.Length; i++)
                 {
-                    CurrentTradeOffer.Items[i] = null;
+                    CurrentTradeOffer.Items[i] = inventory.ItemStacks[i].item;
                 }
             }
-
-            CurrentTradeOffer.WantedValue = 0;
-
-            foreach(Item item in CurrentTradeOffer.Items)
+            else
             {
-                if (item != null)
+                for (int i = 0; i < CurrentTradeOffer.Items.Length; i++)
                 {
-                    CurrentTradeOffer.WantedValue += item.Value;
+                    //discard items that the player is not interested in buying
+                    if (CurrentTradeOffer.Items[i] != null && !PlayerOffer.WantedItemIndexes[i])
+                    {
+                        CurrentTradeOffer.Items[i] = null;
+                    }
                 }
-            }
 
-            CurrentTradeOffer.WantedValue = Mathf.RoundToInt(CurrentTradeOffer.WantedValue * SellMultiplier);
+                //set wanted indexes for items the NPC is interested in
 
-            if (perceivedOfferValue >= CurrentTradeOffer.WantedValue * (1 - PriceTolerance))
-            {
-                //player offer is above or equal to the wanted value including the price tolerance - accept the trade
-                CurrentTradeOffer.Accepted = true;
+                for(int i = 0; i < PlayerOffer.Items.Length; i++)
+                {
+                    if (PlayerOffer.Items[i] == null || !IsLookingForItem(PlayerOffer.Items[i]))
+                    {
+                        CurrentTradeOffer.WantedItemIndexes[i] = false;
+                    }
+                    else
+                    {
+                        CurrentTradeOffer.WantedItemIndexes[i] = true;
+                    }
+                }
+
+                CurrentTradeOffer.WantedValue = 0;
+
+                foreach (Item item in CurrentTradeOffer.Items)
+                {
+                    if (item != null)
+                    {
+                        CurrentTradeOffer.WantedValue += item.Value;
+                    }
+                }
+
+                CurrentTradeOffer.WantedValue = Mathf.RoundToInt(CurrentTradeOffer.WantedValue * SellMultiplier);
+
+                if (perceivedOfferValue >= CurrentTradeOffer.WantedValue * (1f - PriceTolerance))
+                {
+                    //player offer value is above or equal to the wanted value including the price tolerance - accept the trade
+                    CurrentTradeOffer.Accepted = true;
+                }
             }
         }
         else
@@ -425,7 +485,8 @@ public class NPC : MonoBehaviour
             int z = 0;
             bool makeOffer = true;
 
-            //to do - use MaxNumberOfBuyItems field to limit the number of items the npc is interested in
+            List<int> wantedIndexes = new List<int>();
+            //CurrentTradeOffer.WantedItemIndexes[z] = true;
 
             foreach (Item item in PlayerOffer.Items)
             {
@@ -433,9 +494,8 @@ public class NPC : MonoBehaviour
                 {
                     if (IsLookingForItem(item))
                     {
-                        CurrentTradeOffer.WantedItemIndexes[z] = true;
-
-                        //to do - take traits into account here to check if they want more of the same item, or more of similar items. NPCs should also have a chance to want multiple of the same item, depening on which item it is
+                        wantedIndexes.Add(z);
+                        //to do - take traits into account here to check if they want more of the same item, or more of similar items.
                     }
                     else
                     {
@@ -446,6 +506,14 @@ public class NPC : MonoBehaviour
                 z++;
             }
 
+            //mark a random assortment of items as "wanted", up to the max number of buy items
+            for(int i = 0; i < MaxNumberOfBuyItems; i++)
+            {
+                int randomIndex = Random.Range(0, wantedIndexes.Count);
+                CurrentTradeOffer.WantedItemIndexes[wantedIndexes[randomIndex]] = true;
+                wantedIndexes.RemoveAt(randomIndex);
+            }
+
             if (makeOffer)
             {
                 if (PlayerOffer.WantedValue <= perceivedOfferValue)
@@ -454,54 +522,201 @@ public class NPC : MonoBehaviour
                     if(PreviousOfferValue == 0)
                     {
                         //first offer, start lowest
-                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, Mathf.Clamp(Mathf.RoundToInt(PlayerOffer.WantedValue * Random.Range(0.7f, 0.9f) * BuyMultiplier), 0, PlayerOffer.WantedValue));
 
-                        //to do - include items in the offer from the NPCs inventory
+                        int targetOfferValue = Mathf.RoundToInt(PlayerOffer.WantedValue * Random.Range(0.8f, 0.9f) * BuyMultiplier * LookingForSpecificItemsMultiplier);
+                        int currentOfferValue = 0;
 
+                        //add items from the NPC inventory, up to the target offer value
+                        int nextFreeIndex = 0;
+                        for (int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
+                        {
+                            Item currentItem = inventory.ItemStacks[i].item;
+                            if (currentItem != null)
+                            {
+                                if(currentItem.Value + currentOfferValue < targetOfferValue)
+                                {
+                                    CurrentTradeOffer.Items[i] = currentItem;
+                                    currentOfferValue += currentItem.Value;
+                                    nextFreeIndex = i + 1;
+                                }
+                            }
+                        }
 
+                        //add cash to fill out the offer up to the target value
+                        if(currentOfferValue < targetOfferValue && nextFreeIndex < 9)
+                        {
+                            CurrentTradeOffer.Items[nextFreeIndex] = new Item(GameManager.Instance._ItemDatabase.Cash, targetOfferValue - currentOfferValue);
+                        }
+
+                        //calculate total offer value
                         foreach (Item item in CurrentTradeOffer.Items)
                         {
                             if (item != null)
                             {
-                                PreviousOfferValue += item.CashValue;
+                                if(item.CashValue > 0)
+                                {
+                                    PreviousOfferValue += item.CashValue;
+                                }
+                                else
+                                {
+                                    PreviousOfferValue += item.Value;
+                                }
+                                
                             }
                         }
                     }
                     else
                     {
-                        //player wants more value - new offer should be higher than the previous, or close the trade
-                        PreviousOfferValue = Mathf.Clamp(Mathf.RoundToInt(PreviousOfferValue * OfferMultiplier), 0, PlayerOffer.WantedValue);
-                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, PreviousOfferValue);
+                        //remove items from the offer the player is not interested in
+                        for (int i = 0; i < PlayerOffer.WantedItemIndexes.Length; i++)
+                        {
+                            if(!PlayerOffer.WantedItemIndexes[i])
+                            {
+                                CurrentTradeOffer.Items[i] = null;
+                            }
+                        }
 
-                        
-                        //to do - remove items from the offer the player is not interested in, and increase cash value appropriately
+                        int currentItemValue = 0;
+                        int cashIndex = -1;
+                        int freeIndex = -1;
+
+                        //calculate the current value of all items in the offer
+                        for(int i = 0; i < CurrentTradeOffer.Items.Length; i++)
+                        {
+                            if(CurrentTradeOffer.Items[i] != null)
+                            {
+                                if(CurrentTradeOffer.Items[i].CashValue > 0)
+                                {
+                                    cashIndex = i;
+                                }
+                                else
+                                {
+                                    currentItemValue += CurrentTradeOffer.Items[i].Value;
+                                }
+                            }
+                            else
+                            {
+                                freeIndex = i;
+                            }
+                        }
+
+                        //player wants more value - new offer should be higher than the previous, or close the trade if interest is too low
+                        int newTargetOfferValue = Mathf.Clamp(Mathf.RoundToInt(PreviousOfferValue * OfferMultiplier), 0, PlayerOffer.WantedValue);
+                        PreviousOfferValue = newTargetOfferValue;
+
+                        //add cash to the offer. use the same slot that cash is already in, or the first free slot if there is not cash offered yet
+                        if (cashIndex > -1)
+                        {
+                            CurrentTradeOffer.Items[cashIndex] = new Item(GameManager.Instance._ItemDatabase.Cash, newTargetOfferValue - currentItemValue);
+                        }
+                        else
+                        {
+                            CurrentTradeOffer.Items[freeIndex] = new Item(GameManager.Instance._ItemDatabase.Cash, newTargetOfferValue - currentItemValue);
+                        }
 
                     }
                 }
                 else
                 {
-                    //the player wants more than the perceived value - offer around the perceived value up the the price tolerance max
+                    //the player wants more than the perceived value - offer around the perceived value up to the player's wanted value
 
-                    if(PreviousOfferValue == 0)
+                    if (PreviousOfferValue == 0)
                     {
                         //first offer, start lowest
-                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, Mathf.Clamp(Mathf.RoundToInt(perceivedOfferValue * BuyMultiplier), 0, PlayerOffer.WantedValue));
+                        int targetOfferValue = Mathf.RoundToInt(Mathf.Clamp(perceivedOfferValue * BuyMultiplier * LookingForSpecificItemsMultiplier, 0, PlayerOffer.WantedValue));
 
-                        //to do - include items in the offer from the NPCs inventory
+                        int currentOfferValue = 0;
 
+                        //add items from the NPC inventory, up to the target offer value
+                        int nextFreeIndex = 0;
+                        for (int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
+                        {
+                            Item currentItem = inventory.ItemStacks[i].item;
+                            if (currentItem != null)
+                            {
+                                if (currentItem.Value + currentOfferValue < targetOfferValue)
+                                {
+                                    CurrentTradeOffer.Items[i] = currentItem;
+                                    currentOfferValue += currentItem.Value;
+                                    nextFreeIndex = i + 1;
+                                }
+                            }
+                        }
+
+                        //add cash to fill out the offer up to the target value
+                        if (currentOfferValue < targetOfferValue && nextFreeIndex < 9)
+                        {
+                            CurrentTradeOffer.Items[nextFreeIndex] = new Item(GameManager.Instance._ItemDatabase.Cash, targetOfferValue - currentOfferValue);
+                        }
+
+                        //calculate total offer value
                         foreach (Item item in CurrentTradeOffer.Items)
                         {
                             if (item != null)
                             {
-                                PreviousOfferValue += item.CashValue;
+                                if (item.CashValue > 0)
+                                {
+                                    PreviousOfferValue += item.CashValue;
+                                }
+                                else
+                                {
+                                    PreviousOfferValue += item.Value;
+                                }
+
                             }
                         }
+
+                        FirstOfferValue = PreviousOfferValue;
                     }
                     else
                     {
-                        //player wants more value - new offer should be higher than the previous, up to the price tolerance or the player's wanted value. or close the trade
-                        PreviousOfferValue = (int)Mathf.Clamp(PreviousOfferValue * OfferMultiplier, 0, Mathf.Min((1 + PriceTolerance) * FirstOfferValue, PlayerOffer.WantedValue));
-                        CurrentTradeOffer.Items[0] = new Item(GameManager.Instance._ItemDatabase.Cash, PreviousOfferValue);
+                        //remove items from the offer the player is not interested in
+                        for (int i = 0; i < PlayerOffer.WantedItemIndexes.Length; i++)
+                        {
+                            if (!PlayerOffer.WantedItemIndexes[i])
+                            {
+                                CurrentTradeOffer.Items[i] = null;
+                            }
+                        }
+
+                        int currentItemValue = 0;
+                        int cashIndex = -1;
+                        int freeIndex = -1;
+
+                        //calculate the current value of all items in the offer
+                        for (int i = 0; i < CurrentTradeOffer.Items.Length; i++)
+                        {
+                            if (CurrentTradeOffer.Items[i] != null)
+                            {
+                                if (CurrentTradeOffer.Items[i].CashValue > 0)
+                                {
+                                    cashIndex = i;
+                                }
+                                else
+                                {
+                                    currentItemValue += CurrentTradeOffer.Items[i].Value;
+                                }
+                            }
+                            else
+                            {
+                                freeIndex = i;
+                            }
+                        }
+
+                        //player wants more value - new offer should be higher than the previous, up to the price tolerance or the player's wanted value. or close the trade if interest is too low
+                        int newTargetOfferValue = Mathf.RoundToInt(Mathf.Clamp(PreviousOfferValue * OfferMultiplier, 0, Mathf.Min((1f + PriceTolerance) * FirstOfferValue, PlayerOffer.WantedValue)));
+                        PreviousOfferValue = newTargetOfferValue;
+
+                        //add cash to the offer. use the same slot that cash is already in, or the first free slot if there is not cash offered yet
+                        if (cashIndex > -1)
+                        {
+                            CurrentTradeOffer.Items[cashIndex] = new Item(GameManager.Instance._ItemDatabase.Cash, newTargetOfferValue - currentItemValue);
+                        }
+                        else
+                        {
+                            CurrentTradeOffer.Items[freeIndex] = new Item(GameManager.Instance._ItemDatabase.Cash, newTargetOfferValue - currentItemValue);
+                        }
+
                     }
                 }
             }
@@ -514,7 +729,7 @@ public class TradeOffer
 {
     public TradeOffer()
     {
-        Items = new Item[16];
+        Items = new Item[TradingUI.TRADING_SLOTS_COUNT];
         WantedValue = 0;
         Accepted = false;
         WantedItemIndexes = new bool[] { false, false, false, false, false, false, false, false, false };
