@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 724735f8f299c28458c7ab894b80a48f, type: 3}
-  m_Name: BrewingBook
+  m_Name: JewelryBook
   m_EditorClassIdentifier: 
-  Category: 10
+  Category: 9
   BaseDescriptors: 6e230000
-  BaseName: An Introduction to Brewing
+  BaseName: The Jewelry Handbook
   BaseValue: 0
   HealthRestored: 0
   HungerRestored: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers: []
+  MaterialDescriptors: 
   SubDescriptors: 

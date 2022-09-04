@@ -41,9 +41,14 @@ public class NPC : MonoBehaviour
     public float LookingForSpecificItemsMultiplier;
 
     /// <summary>
-    /// Interest in continuing the trade on a scale from 1 to 10 - trade ends if the interest drops to 0
+    /// Interest in continuing the trade on a scale from 1 to 100 - trade ends if the interest drops to 0
     /// </summary>
-    public int TradeInterest;
+    public float TradeInterest;
+
+    /// <summary>
+    /// Decrease in interest is multiplied by this value
+    /// </summary>
+    public float InterestMultiplier;
 
 
     public NPCState State;
@@ -71,10 +76,13 @@ public class NPC : MonoBehaviour
         PreviousOfferValue = 0;
 
         //set price multipliers
-        PriceTolerance = Random.Range(0f, 0.15f);
+        PriceTolerance = Random.Range(0.02f, 0.15f);
         BuyMultiplier = Random.Range(0.9f, 1.1f);
         SellMultiplier = Random.Range(0.85f, 1.15f);
         OfferMultiplier = Random.Range(1.03f, 1.07f);
+
+        TradeInterest = 100f;
+        InterestMultiplier = Random.Range(0.9f, 1.1f);
 
         //set max number of items the npc will buy
         MaxNumberOfBuyItems = GameManager.Instance._NPCGenerationData.GetMaxBuyItemNumber();
@@ -413,6 +421,15 @@ public class NPC : MonoBehaviour
 
     public void SetResponseForTradeOffer(TradeOffer PlayerOffer)
     {
+        if(TradeInterest <= 0f)
+        {
+            //ran out of interest, close the trade
+            State = NPCState.ClosingTrade;
+        }
+
+        float InterestDecreaseForThisOffer = 0f;
+        InterestDecreaseForThisOffer += Random.Range(0.15f, 0.2f);
+
         int perceivedOfferValue = PerceivedValueForOffer(PlayerOffer);
 
         if(CurrentTradeOffer == null)
@@ -437,17 +454,24 @@ public class NPC : MonoBehaviour
             }
             else
             {
+                bool discardedItem = false;
                 for (int i = 0; i < CurrentTradeOffer.Items.Length; i++)
                 {
                     //discard items that the player is not interested in buying
                     if (CurrentTradeOffer.Items[i] != null && !PlayerOffer.WantedItemIndexes[i])
                     {
+                        discardedItem = true;
                         CurrentTradeOffer.Items[i] = null;
                     }
                 }
 
-                //set wanted indexes for items the NPC is interested in
+                if(discardedItem)
+                {
+                    InterestDecreaseForThisOffer += Random.Range(0.05f, 0.1f);
+                }
 
+                //set wanted indexes for items the NPC is interested in
+                //to do - limit number of items wanted by the max buy items value
                 for(int i = 0; i < PlayerOffer.Items.Length; i++)
                 {
                     if (PlayerOffer.Items[i] == null || !IsLookingForItem(PlayerOffer.Items[i]))
@@ -476,6 +500,10 @@ public class NPC : MonoBehaviour
                 {
                     //player offer value is above or equal to the wanted value including the price tolerance - accept the trade
                     CurrentTradeOffer.Accepted = true;
+                }
+                else if((CurrentTradeOffer.WantedValue - perceivedOfferValue) / CurrentTradeOffer.WantedValue >  (PriceTolerance + 0.15f))
+                {
+                    InterestDecreaseForThisOffer += Random.Range(0.08f, 0.15f);
                 }
             }
         }
@@ -512,6 +540,11 @@ public class NPC : MonoBehaviour
                 int randomIndex = Random.Range(0, wantedIndexes.Count);
                 CurrentTradeOffer.WantedItemIndexes[wantedIndexes[randomIndex]] = true;
                 wantedIndexes.RemoveAt(randomIndex);
+            }
+
+            if(!makeOffer)
+            {
+                InterestDecreaseForThisOffer += Random.Range(0.05f, 0.1f);
             }
 
             if (makeOffer)
@@ -567,13 +600,20 @@ public class NPC : MonoBehaviour
                     }
                     else
                     {
+                        bool discardedItem = false;
                         //remove items from the offer the player is not interested in
                         for (int i = 0; i < PlayerOffer.WantedItemIndexes.Length; i++)
                         {
                             if(!PlayerOffer.WantedItemIndexes[i])
                             {
+                                discardedItem = true;
                                 CurrentTradeOffer.Items[i] = null;
                             }
+                        }
+
+                        if(discardedItem)
+                        {
+                            InterestDecreaseForThisOffer += Random.Range(0.05f, 0.1f);
                         }
 
                         int currentItemValue = 0;
@@ -670,13 +710,21 @@ public class NPC : MonoBehaviour
                     }
                     else
                     {
+                        bool discardedItem = false;
+
                         //remove items from the offer the player is not interested in
                         for (int i = 0; i < PlayerOffer.WantedItemIndexes.Length; i++)
                         {
                             if (!PlayerOffer.WantedItemIndexes[i])
                             {
+                                discardedItem = true;
                                 CurrentTradeOffer.Items[i] = null;
                             }
+                        }
+
+                        if(discardedItem)
+                        {
+                            InterestDecreaseForThisOffer += Random.Range(0.05f, 0.1f);
                         }
 
                         int currentItemValue = 0;
@@ -703,6 +751,11 @@ public class NPC : MonoBehaviour
                             }
                         }
 
+                        if((PlayerOffer.WantedValue - perceivedOfferValue) / perceivedOfferValue > (PriceTolerance + 0.15f))
+                        {
+                            InterestDecreaseForThisOffer += Random.Range(0.08f, 0.15f);
+                        }
+
                         //player wants more value - new offer should be higher than the previous, up to the price tolerance or the player's wanted value. or close the trade if interest is too low
                         int newTargetOfferValue = Mathf.RoundToInt(Mathf.Clamp(PreviousOfferValue * OfferMultiplier, 0, Mathf.Min((1f + PriceTolerance) * FirstOfferValue, PlayerOffer.WantedValue)));
                         PreviousOfferValue = newTargetOfferValue;
@@ -721,6 +774,8 @@ public class NPC : MonoBehaviour
                 }
             }
         }
+
+        TradeInterest -= InterestDecreaseForThisOffer * InterestMultiplier;
     }
 
 }
@@ -823,7 +878,7 @@ static class TraitExtensions
 
 public enum NPCState
 {
-    Traveling,
+    Travelling,
     Trading,
     ClosingTrade,
     Speaking,

@@ -65,7 +65,12 @@ MonoBehaviour:
   NaturalsSellerItems:
   - ItemData: {fileID: 0}
     Chance: 0
-  ScholarItems: []
+  ScholarItems:
+  - {fileID: 11400000, guid: d6bedd892b7610b4785d819b01c098a1, type: 2}
+  - {fileID: 11400000, guid: be2ae1d189a314f438e0249e5a986e2a, type: 2}
+  - {fileID: 11400000, guid: d61b3f0fec6c42d439546e2714ee3f32, type: 2}
+  - {fileID: 11400000, guid: 2548b206de77e494ca60e213db3e668a, type: 2}
+  - {fileID: 0}
   BuyerItemCategories:
   - Category: 1
     Chance: 0.17
