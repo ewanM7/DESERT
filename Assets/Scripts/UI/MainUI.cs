@@ -9,6 +9,8 @@ public class MainUI : MonoBehaviour
     public TextMeshProUGUI WeekdayText;
     public TextMeshProUGUI TimeOfDayText;
 
+    public TradingUI _TradingUI;
+
     // Start is called before the first frame update
     void Start()
     {

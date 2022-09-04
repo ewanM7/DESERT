@@ -82,7 +82,7 @@ public class NPC : MonoBehaviour
         OfferMultiplier = Random.Range(1.03f, 1.07f);
 
         TradeInterest = 100f;
-        InterestMultiplier = Random.Range(0.9f, 1.1f);
+        InterestMultiplier = Random.Range(0.95f, 1.05f);
 
         //set max number of items the npc will buy
         MaxNumberOfBuyItems = GameManager.Instance._NPCGenerationData.GetMaxBuyItemNumber();
