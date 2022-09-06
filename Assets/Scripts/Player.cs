@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
     public int Hunger;
     public int Thirst;
 
+    public PlayerInteractHitbox InteractHitbox;
+
     public void OnPlayerInteract()
     {
-
+        InteractHitbox.OnPlayerInteract();
     }
 
 }

@@ -69,16 +69,15 @@ MonoBehaviour:
   EarringsData: {fileID: 11400000, guid: 7030e1ffc4e83e741b4d3488bd334631, type: 2}
   NecklaceData: {fileID: 11400000, guid: 44d8e1fddd11e1948875ff405e5c436b, type: 2}
   RingData: {fileID: 11400000, guid: 16cdaa76ccf756c4696bb3917f02e154, type: 2}
-  WatchData: {fileID: 0}
+  WatchData: {fileID: 11400000, guid: 163cc8df21102ae4ab8c86d2ca668494, type: 2}
   GlovesData: {fileID: 11400000, guid: 1661409af28dd9c4584f46f30bfc91d3, type: 2}
   HeadscarfData: {fileID: 11400000, guid: 74474fee4b8a02346aa1747341c04ea4, type: 2}
   RobesData: {fileID: 11400000, guid: 56326d64666f2974693f20ab4fe2b39e, type: 2}
   BagData: {fileID: 11400000, guid: e80ca90d0aad496468a5f120d778ad6f, type: 2}
   DressData: {fileID: 11400000, guid: 0ea62eced0f59fe41824f4808a828748, type: 2}
-  GlassesData: {fileID: 0}
-  SandalsData: {fileID: 0}
-  GogglesData: {fileID: 0}
-  CarvingData: {fileID: 11400000, guid: d9eaa6839c357d4459972379b1c62ca5, type: 2}
+  GlassesData: {fileID: 11400000, guid: 4ed3ffa8b2f16764e9a35cb2f71fb7e3, type: 2}
+  SandalsData: {fileID: 11400000, guid: 8386c96fda4eab84fbb85509b6c76c32, type: 2}
+  GogglesData: {fileID: 11400000, guid: 40d5e7afaf248914bbd45527a3914a1c, type: 2}
   AmethystData: {fileID: 11400000, guid: 85d0f386dc6d5134097d0a1fcf96de8c, type: 2}
   PearlData: {fileID: 11400000, guid: a79efd95ff94c7e48851d52f04cc4eae, type: 2}
   RubyData: {fileID: 11400000, guid: 9ab43f58f92178843b81f58572984574, type: 2}
@@ -86,6 +85,33 @@ MonoBehaviour:
   SapphireData: {fileID: 11400000, guid: 4b041082f68d35a4ebeaa998d63ec57d, type: 2}
   AmberData: {fileID: 11400000, guid: 403032ad8c0030d4e8ed53e1ebeca9f5, type: 2}
   SeashellData: {fileID: 0}
+  UrnData: {fileID: 11400000, guid: cb36f92422357554e965e53a838fad58, type: 2}
+  JugData: {fileID: 11400000, guid: 0f8f0ca49a1ef1640a92d870e11e2eb0, type: 2}
+  VaseData: {fileID: 11400000, guid: db84ffbe551a4914b8d588e98b0f616e, type: 2}
+  CarvingData: {fileID: 11400000, guid: d9eaa6839c357d4459972379b1c62ca5, type: 2}
+  AxeData: {fileID: 11400000, guid: 702b38a94a8dd5143a07082592adadf6, type: 2}
+  ShovelData: {fileID: 11400000, guid: 78feb7cfe82963c409be540a386d2d8f, type: 2}
+  SwordData: {fileID: 11400000, guid: 8ebb063e874d13b429455e9d1d00dd09, type: 2}
+  SpearData: {fileID: 11400000, guid: 7ba729afe8277e84e9c831100238ddd5, type: 2}
+  BottleData: {fileID: 11400000, guid: e21bd33b764156845912e2d3816a3737, type: 2}
+  BowlData: {fileID: 11400000, guid: 291ff16feb6cdc8479292d71f5549270, type: 2}
+  CupData: {fileID: 11400000, guid: e26dbad05ca2ede48a24401a5fb21b81, type: 2}
+  LanternData: {fileID: 11400000, guid: 1b0ee740f48af004b95bfb9e503489c1, type: 2}
+  LockboxData: {fileID: 11400000, guid: 0d9fa792437adae4384fb255409c25d5, type: 2}
+  StaffData: {fileID: 11400000, guid: 70c4d3d01139806468632424eb0d4bba, type: 2}
+  HerbData:
+  - {fileID: 11400000, guid: 33fa63f9a6867f840851dac9da1c661d, type: 2}
+  - {fileID: 11400000, guid: 8d4e14d6ff865f34fbf071cecaa5aa76, type: 2}
+  - {fileID: 11400000, guid: fa645817c16db054098f8c7563863f80, type: 2}
+  - {fileID: 11400000, guid: bf34d75984dc8504196d6a93111ee26a, type: 2}
+  SpiceData: []
+  MeatData: []
+  FruitData: []
+  VegetableData: []
+  BreadData: {fileID: 0}
+  MilkData: {fileID: 0}
+  SugarData: {fileID: 0}
+  WaterData: {fileID: 0}
   AnimalsData: []
   RawMaterialData: []
   NPCBuyCategories: 010000000200000003000000040000000600000009000000

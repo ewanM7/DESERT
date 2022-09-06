@@ -11,7 +11,22 @@ public class UIItemSlot : MonoBehaviour
 
     public TextMeshProUGUI ItemNameText;
     public TextMeshProUGUI ItemCountText;
+    public Image BackgroundImage;
 
+    public Color BackgroundBaseColor;
+    public Color BackgroundWantedColor;
+
+
+    public bool IsPlayerSlot;
+    private bool _IsWanted;
+
+    public bool IsWanted
+    {
+        get
+        {
+            return _IsWanted;
+        }
+    }
 
     public void SetItem(Item item, int count)
     {
@@ -19,6 +34,20 @@ public class UIItemSlot : MonoBehaviour
         this.count = count;
 
         ReflectItem();
+    }
+
+    public void SetIsWanted(bool wanted)
+    {
+        _IsWanted = wanted;
+
+        if(_IsWanted)
+        {
+            BackgroundImage.color = BackgroundWantedColor;
+        }
+        else
+        {
+            BackgroundImage.color = BackgroundBaseColor;
+        }
     }
 
     public void ClearItem()
@@ -49,5 +78,13 @@ public class UIItemSlot : MonoBehaviour
             ItemCountText.text = count.ToString();
         }
        
+    }
+
+    public void OnSlotClicked()
+    {
+        if (IsPlayerSlot)
+        {
+            Debug.Log("Item slot clicked");
+        }
     }
 }

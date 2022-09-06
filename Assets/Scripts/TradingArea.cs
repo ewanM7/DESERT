@@ -12,7 +12,7 @@ public class TradingArea : MonoBehaviour
     {
         if (CurrentNPC != null)
         {
-            StartTrading();
+            StartCoroutine(StartTrading());
         }
     }
 

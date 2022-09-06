@@ -13,6 +13,7 @@ public class CameraManager : MonoBehaviour
     {
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         PlayerCamera = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<CinemachineFreeLook>();
+        TradingCamera = GameObject.FindGameObjectWithTag("TradingCamera").GetComponent<CinemachineVirtualCamera>();
     }
 
     public void OnCameraMove(InputValue value)
