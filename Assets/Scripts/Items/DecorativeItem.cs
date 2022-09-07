@@ -45,17 +45,18 @@ public class DecorativeItem : Item
                 }
             }
 
-            if (DynamicDescriptors == null)
+            if(BaseItemData.BaseDescriptors[0] == ItemDescriptor.Carving)
             {
-                return BaseItemData.BaseName;
+                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
             }
-            else if(DyeValue > 0)
+
+            if(DyeValue > 0)
             {
-                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName + " " + DynamicDescriptors[1].ToString();
+                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
             }
             else
             {
-                return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
+                return BaseItemData.BaseName;
             }
         }
     }
@@ -64,7 +65,17 @@ public class DecorativeItem : Item
     {
         get
         {
-            return Mathf.RoundToInt((BaseItemData.BaseValue + DyeValue) * BaseItemData.MultiplierForMaterial(DynamicDescriptors[0]) * GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality));
+            if (BaseItemData.BaseDescriptors[0] == ItemDescriptor.Carving || BaseItemData.BaseDescriptors[0] == ItemDescriptor.Painting)
+            {
+                return Mathf.RoundToInt((BaseItemData.BaseValue * BaseItemData.MultiplierForMaterial(DynamicDescriptors[0])) * GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality));
+            }
+
+            if(DyeValue > 0)
+            {
+                return Mathf.RoundToInt((BaseItemData.BaseValue + DyeValue) * GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality));
+            }
+
+            return Mathf.RoundToInt(BaseItemData.BaseValue * GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality));
         }
     }
 }

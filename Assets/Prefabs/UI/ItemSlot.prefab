@@ -368,7 +368,7 @@ MonoBehaviour:
   BackgroundImage: {fileID: 1316687824094965234}
   BackgroundBaseColor: {r: 0.33333334, g: 0.21568628, b: 0.050980393, a: 1}
   BackgroundWantedColor: {r: 0.25255555, g: 0.49056602, b: 0.29917616, a: 1}
-  IsWanted: 0
+  IsPlayerSlot: 0
 --- !u!114 &753426469588841715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 4
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:

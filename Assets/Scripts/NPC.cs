@@ -113,7 +113,7 @@ public class NPC : MonoBehaviour
             traitCount = 4;
         }
 
-        Traits = new Trait[traitCount];
+        List<Trait> newTraits = new List<Trait>();
 
         for(int i = 0; i < traitCount; i++)
         {
@@ -123,7 +123,7 @@ public class NPC : MonoBehaviour
             //make sure mutually exclusive traits aren't added
             foreach(Trait trait in Traits)
             {
-                if (trait.IsMutuallyExclusive(newTrait))
+                if (trait.IsMutuallyExclusive(newTrait) || newTraits.Contains(newTrait))
                 {
                     addTrait = false;
                     break;
@@ -132,7 +132,7 @@ public class NPC : MonoBehaviour
 
             if (addTrait)
             {
-                Traits[i] = newTrait;
+                newTraits.Add(newTrait);
             }
             else
             {
@@ -140,6 +140,8 @@ public class NPC : MonoBehaviour
                 i--;
             }
         }
+
+        Traits = newTraits.ToArray();
 
         //set up inventory items
         inventory = new Inventory(TradingUI.TRADING_SLOTS_COUNT);

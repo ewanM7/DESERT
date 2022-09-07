@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float MoveSpeed;
     public float TurnRate;
+    public float SmoothTurnRate;
 
     public Vector2 MovementInput;
     public float VerticalMovement;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public const float Gravity = -30f;
     public const float TerminalVelocity = -30f;
 
+    private float tmpVel;
 
     private Vector3 targetPlayerForward;
     private Vector3 currentPlayerForward;
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
         if (Controller.isGrounded)
@@ -51,8 +54,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 FinalMovement = ((CameraRight * MovementInput.x) + (CameraForward * MovementInput.y)).normalized * MoveSpeed;
 
         targetPlayerForward = new Vector3(FinalMovement.x, 0, FinalMovement.z);
-        transform.forward = Vector3.Slerp(currentPlayerForward, targetPlayerForward, TurnRate * Time.deltaTime);
-        currentPlayerForward = transform.forward;
+        
+        if (targetPlayerForward != Vector3.zero)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, targetPlayerForward, TurnRate * Time.deltaTime);
+        }
 
         Controller.Move(new Vector3(FinalMovement.x, VerticalMovement, FinalMovement.z) * Time.deltaTime);
     }

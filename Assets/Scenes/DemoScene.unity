@@ -450,7 +450,7 @@ MonoBehaviour:
   DayCountText: {fileID: 1994625145}
   WeekdayText: {fileID: 1358878289}
   TimeOfDayText: {fileID: 171890354}
-  _TradingUI: {fileID: 0}
+  _TradingUI: {fileID: 85911056}
 --- !u!1 &56387684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 2
+    m_MaxSpeed: 0
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 0
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -2250,6 +2250,7 @@ MonoBehaviour:
   MainCamera: {fileID: 0}
   PlayerCamera: {fileID: 0}
   TradingCamera: {fileID: 0}
+  PlayerCameraMovementEnabled: 1
 --- !u!1 &404260978
 GameObject:
   m_ObjectHideFlags: 3
@@ -2490,7 +2491,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463369781}
-  m_LocalRotation: {x: 0.16018224, y: -0, z: -0, w: 0.9870875}
+  m_LocalRotation: {x: 0.16018224, y: 6.436416e-23, z: -2.736623e-23, w: 0.9870875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5921,8 +5922,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005180060}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 14.829, y: 1.934, z: 10.05}
+  m_LocalRotation: {x: 0.16018225, y: -3.469384e-17, z: 2.1379388e-16, w: 0.9870875}
+  m_LocalPosition: {x: 15.746, y: 6, z: -5.0200005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5978,7 +5979,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -8011,7 +8012,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 1712720330}
   MoveSpeed: 7
-  TurnRate: 10
+  TurnRate: 9
+  SmoothTurnRate: 40
   MovementInput: {x: 0, y: 0}
   VerticalMovement: 0
   CameraForward: {x: 0, y: 0, z: 0}
@@ -8435,7 +8437,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907335100}
-  m_LocalRotation: {x: 0.16018224, y: -0, z: -0, w: 0.9870875}
+  m_LocalRotation: {x: 0.16018224, y: 0.0000000059001493, z: -9.574623e-10, w: 0.9870875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8913,7 +8915,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965512578}
-  m_LocalRotation: {x: 0.16018224, y: -0, z: -0, w: 0.9870875}
+  m_LocalRotation: {x: 0.16018224, y: -1.0741094e-15, z: 3.8246777e-16, w: 0.9870875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

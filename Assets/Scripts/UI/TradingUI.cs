@@ -49,7 +49,7 @@ public class TradingUI : MonoBehaviour
                 OfferTradeButton.SetActive(false);
             }
 
-            
+            ReflectCurrentTradeOffer();
         }
     }
 

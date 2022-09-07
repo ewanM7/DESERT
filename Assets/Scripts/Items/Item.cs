@@ -29,7 +29,14 @@ public class Item
     {
         get
         {
-            return BaseItemData.BaseDescriptors.Concat(DynamicDescriptors).ToArray();
+            if(DynamicDescriptors == null)
+            {
+                return BaseItemData.BaseDescriptors;
+            }
+            else
+            {
+                return BaseItemData.BaseDescriptors.Concat(DynamicDescriptors).ToArray();
+            }
         }
     }
 
@@ -62,6 +69,11 @@ public class Item
             if(CashValue != -1)
             {
                 return CashValue;
+            }
+
+            if(BaseItemData == null)
+            {
+                return 0;
             }
 
             int value = Mathf.RoundToInt(GameManager.Instance._ItemDatabase.QualityValueCurve.Evaluate(Quality) * BaseItemData.BaseValue);

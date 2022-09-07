@@ -84,7 +84,7 @@ MonoBehaviour:
   EmeraldData: {fileID: 11400000, guid: cca9a3ed5e4aaeb4e87d1c4cc23ed835, type: 2}
   SapphireData: {fileID: 11400000, guid: 4b041082f68d35a4ebeaa998d63ec57d, type: 2}
   AmberData: {fileID: 11400000, guid: 403032ad8c0030d4e8ed53e1ebeca9f5, type: 2}
-  SeashellData: {fileID: 0}
+  SeashellData: {fileID: 11400000, guid: ce938faf6262e0d4a93857eea491106e, type: 2}
   UrnData: {fileID: 11400000, guid: cb36f92422357554e965e53a838fad58, type: 2}
   JugData: {fileID: 11400000, guid: 0f8f0ca49a1ef1640a92d870e11e2eb0, type: 2}
   VaseData: {fileID: 11400000, guid: db84ffbe551a4914b8d588e98b0f616e, type: 2}
@@ -104,16 +104,53 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d4e14d6ff865f34fbf071cecaa5aa76, type: 2}
   - {fileID: 11400000, guid: fa645817c16db054098f8c7563863f80, type: 2}
   - {fileID: 11400000, guid: bf34d75984dc8504196d6a93111ee26a, type: 2}
-  SpiceData: []
-  MeatData: []
-  FruitData: []
-  VegetableData: []
-  BreadData: {fileID: 0}
-  MilkData: {fileID: 0}
-  SugarData: {fileID: 0}
-  WaterData: {fileID: 0}
-  AnimalsData: []
-  RawMaterialData: []
+  SpiceData:
+  - {fileID: 11400000, guid: 3f8bd009447636d439c7922348065a19, type: 2}
+  - {fileID: 11400000, guid: 564e86470ba23c540bb413b55ee2ff2f, type: 2}
+  - {fileID: 11400000, guid: 3eeef826b58be2e47bec984133baf95b, type: 2}
+  - {fileID: 11400000, guid: b1fe0c8f2bee9cd4e9f3370841c3a182, type: 2}
+  - {fileID: 11400000, guid: 9a5356c20cad252439d7535138ab41a6, type: 2}
+  MeatData:
+  - {fileID: 11400000, guid: 731d2a4ce9efc104ba98f8ce334a3e82, type: 2}
+  - {fileID: 11400000, guid: 6b5913301099b0a4b9084809284a4a19, type: 2}
+  - {fileID: 11400000, guid: 978362887ed251f4f822839d623f9391, type: 2}
+  FruitData:
+  - {fileID: 11400000, guid: 3f87f849fdcd15c4ea35294395f7d794, type: 2}
+  - {fileID: 11400000, guid: 25de62e09b562da478f9ba87eae73ba3, type: 2}
+  - {fileID: 11400000, guid: 45f6a3ea6e4ed134cb9f6bd335c5fbed, type: 2}
+  - {fileID: 11400000, guid: 27934d7e5bfb215458e776cdbb33161d, type: 2}
+  VegetableData:
+  - {fileID: 11400000, guid: fd55cf9e5e86db745b9ee94a4d3f0dd5, type: 2}
+  - {fileID: 11400000, guid: 75ded44219bcfc04bb3f56e05a819139, type: 2}
+  - {fileID: 11400000, guid: 1634ecfa99829ea47bcd1066ad987735, type: 2}
+  - {fileID: 11400000, guid: 10d5bbdd095dc794eb028c5c12142684, type: 2}
+  BreadData: {fileID: 11400000, guid: d039f6c7fb7b58c4c86c83c1b8398639, type: 2}
+  MilkData: {fileID: 11400000, guid: e8e909797e78d4e42be7ad6c630f9ecd, type: 2}
+  SugarData: {fileID: 11400000, guid: d7830df7f1e7cf940b34e3116315a1a3, type: 2}
+  WaterData: {fileID: 11400000, guid: 6c3945b6cce0f2245b8a17887c0f96c3, type: 2}
+  AnimalsData:
+  - {fileID: 11400000, guid: f46954aec4336074bbfcf2bbdf5027d2, type: 2}
+  - {fileID: 11400000, guid: e88c404faec61bc40b739d6097ce5e21, type: 2}
+  - {fileID: 11400000, guid: 99260130acd555f4583defb151df9843, type: 2}
+  - {fileID: 11400000, guid: b3f763f9f53f0974283fc87da64d2433, type: 2}
+  - {fileID: 11400000, guid: fa40fba6bbc590b4eaf437609eb9c705, type: 2}
+  - {fileID: 11400000, guid: 6e7fd02c98007cc4d9352af2b6390807, type: 2}
+  - {fileID: 11400000, guid: 10cc3e588393c8848a9ac25461332db3, type: 2}
+  - {fileID: 11400000, guid: 79337629c36472c46b0431ffe004651b, type: 2}
+  - {fileID: 11400000, guid: e250e4b4c794a9842b7dbf0c3ee121c9, type: 2}
+  RawMaterialData:
+  - {fileID: 11400000, guid: 6017125335ecafb4884cda438982e64f, type: 2}
+  - {fileID: 11400000, guid: c53ec1655e7a59e4dae616f05b4c43b2, type: 2}
+  - {fileID: 11400000, guid: dfee13e5f2bfc00409d146165c37872c, type: 2}
+  - {fileID: 11400000, guid: c8399386526282e4d94ad59076c32e16, type: 2}
+  - {fileID: 11400000, guid: 856e5bd174a4009419f853326e29e0c6, type: 2}
+  - {fileID: 11400000, guid: a6d0b29c133ddb6498042722b8852faf, type: 2}
+  - {fileID: 11400000, guid: 4701c826c5e17ad418e78c4a0605df59, type: 2}
+  - {fileID: 11400000, guid: 1ae2077469821ff4c827bf93518a253c, type: 2}
+  - {fileID: 11400000, guid: e8a728b9b1ac5bc428feffdb3b61c53c, type: 2}
+  - {fileID: 11400000, guid: f95742b91b6efe548aea45195233cb8d, type: 2}
+  - {fileID: 11400000, guid: 879c2c0e61d6d134e98434ef21e69cbd, type: 2}
+  - {fileID: 11400000, guid: f23dc5701c45af744a7bf23c4a6e8f99, type: 2}
   NPCBuyCategories: 010000000200000003000000040000000600000009000000
   FoodDescriptors: 0a00000005000000060000000800000009000000
   ClothingDescriptors: e8030000e9030000ea030000ec030000ed030000ee030000ef030000f0030000f1030000

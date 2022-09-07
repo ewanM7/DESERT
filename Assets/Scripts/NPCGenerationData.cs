@@ -223,32 +223,47 @@ public class NPCGenerationData : ScriptableObject
                 //50% chance for item to be damaged if it's 1 or 2 star quality
                 isDamaged = quality < 9 && Random.Range(0, 2) == 1;
 
-                if (data.BaseDescriptors.Contains(ItemDescriptor.IsDyeable))
+                if (data.BaseDescriptors[0] == ItemDescriptor.Carving)
                 {
                     if (isDamaged)
                     {
-                        descriptors = new ItemDescriptor[3];
+                        descriptors = new ItemDescriptor[2];
                         descriptors[2] = ItemDescriptor.Damaged;
-                    }
-                    else
-                    {
-                        descriptors = new ItemDescriptor[2];
-                    }
-                }
-                else
-                {
-                    if (isDamaged)
-                    {
-                        descriptors = new ItemDescriptor[2];
-                        descriptors[1] = ItemDescriptor.Damaged;
                     }
                     else
                     {
                         descriptors = new ItemDescriptor[1];
                     }
-                }
 
-                descriptors[0] = data.MaterialDescriptors[Random.Range(0, data.MaterialDescriptors.Length)];
+                    descriptors[0] = data.MaterialDescriptors[Random.Range(0, data.MaterialDescriptors.Length)];
+                }
+                else
+                {
+                    if (data.BaseDescriptors.Contains(ItemDescriptor.IsDyeable))
+                    {
+                        if (isDamaged)
+                        {
+                            descriptors = new ItemDescriptor[2];
+                            descriptors[1] = ItemDescriptor.Damaged;
+                        }
+                        else
+                        {
+                            descriptors = new ItemDescriptor[1];
+                        }
+                    }
+                    else
+                    {
+                        if (isDamaged)
+                        {
+                            descriptors = new ItemDescriptor[1];
+                            descriptors[0] = ItemDescriptor.Damaged;
+                        }
+                        else
+                        {
+                            descriptors = null;
+                        }
+                    }
+                }
 
                 if (!data.BaseDescriptors.Contains(ItemDescriptor.IsDyeable))
                 {
@@ -256,8 +271,18 @@ public class NPCGenerationData : ScriptableObject
                 }
                 else
                 {
-                    descriptors[1] = GameManager.Instance._ItemDatabase.DyeDescriptors[Random.Range(0, GameManager.Instance._ItemDatabase.DyeDescriptors.Count)];
-                    return new DecorativeItem(data, descriptors, new Item[] { new Item(GameManager.Instance._ItemDatabase.DyeDataForDescriptor(descriptors[1]), -1, 0) }, quality);
+                    descriptors[0] = GameManager.Instance._ItemDatabase.DyeDescriptors[Random.Range(0, GameManager.Instance._ItemDatabase.DyeDescriptors.Count)];
+
+                    if(descriptors[0] == ItemDescriptor.UnDyed)
+                    {
+                        return new DecorativeItem(data, descriptors, null, quality);
+                    }
+                    else
+                    {
+                        return new DecorativeItem(data, descriptors, new Item[] { new Item(GameManager.Instance._ItemDatabase.DyeDataForDescriptor(descriptors[0]), -1, 0) }, quality);
+                    }
+
+                    
                 }
 
             case ItemCategory.Food:
@@ -441,7 +466,7 @@ public class NPCGenerationData : ScriptableObject
         }
 
 
-        Debug.LogWarning("SALES ITEM TABLE RETURNED NULL");
+        Debug.Log("SALES ITEM TABLE RETURNED NULL");
         return null;
     }
 

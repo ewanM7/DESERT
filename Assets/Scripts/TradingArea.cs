@@ -26,11 +26,14 @@ public class TradingArea : MonoBehaviour
 
         _TradingUI = GameManager.Instance._MainUI._TradingUI;
         _TradingUI.CurrentNPC = CurrentNPC;
-        _TradingUI.gameObject.SetActive(true);
 
         if (CurrentNPC.IsSelling)
         {
             CurrentNPC.SetResponseForTradeOffer(null);
         }
+
+        _TradingUI.gameObject.SetActive(true);
+
+        
     }
 }
