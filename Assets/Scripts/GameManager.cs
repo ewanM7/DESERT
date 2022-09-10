@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public MainUI _MainUI;
 
+    public House _House;
+
     public PlayerSave playerSave;
 
     public ItemDatabase _ItemDatabase;
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
     public const float DayTimeScale = 100f / 900f;
     //time of day goes from 0 to 100
     public float TimeOfDay;
+
+    public Vector2 MousePos;
 
     public static GameManager Instance
     {
@@ -101,7 +105,10 @@ public class GameManager : MonoBehaviour
         TimeOfDay = 0f;
     }
 
-    
+    public void OnMousePositionUpdate(InputValue value)
+    {
+        MousePos = value.Get<Vector2>();
+    }
 
     /// <summary>
     /// Saves player data to file

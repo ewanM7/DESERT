@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Inventory
 {
@@ -19,6 +20,17 @@ public class Inventory
         {
             ItemStacks[i] = new ItemStack();
         }
+    }
+
+    public void IncreaseSize(int additionalSize)
+    {
+        Capacity += additionalSize;
+
+        ItemStack[] stacks = new ItemStack[Capacity];
+
+        ItemStacks.CopyTo(stacks, 0);
+
+        ItemStacks = stacks;
     }
 
     /// <summary>

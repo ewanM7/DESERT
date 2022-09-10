@@ -25,31 +25,35 @@ public class TradingUI : MonoBehaviour
     public GameObject AcceptTradeButton;
     public GameObject OfferTradeButton;
 
+    public RectTransform PlayerInventoryContentRT;
+    public UIItemSlot ItemSlotPrefab;
+
+    public TradingState _TradingState;
+
+    public enum TradingState
+    {
+        InitialOffer,
+        MainTrading,
+        TradeClosed
+    }
+
     private void OnEnable()
     {
         if(CurrentNPC != null)
         {
-            if(CurrentNPC.IsSelling)
-            {
-                PlayerPriceWidget.SetActive(false);
-                NPCPriceWidget.SetActive(true);
+            _TradingState = TradingState.InitialOffer;
 
-                DeclineTradeButton.SetActive(false);
-                AcceptTradeButton.SetActive(false);
-                OfferTradeButton.SetActive(true);
-            }
-            else
-            {
-                PlayerPriceText.text = "0";
-                PlayerPriceWidget.SetActive(true);
-                NPCPriceWidget.SetActive(false);
+            PlayerPriceText.text = "0";
+            NPCPriceText.text = "0";
+            PlayerPriceWidget.SetActive(false);
+            NPCPriceWidget.SetActive(false);
 
-                DeclineTradeButton.SetActive(true);
-                AcceptTradeButton.SetActive(true);
-                OfferTradeButton.SetActive(false);
-            }
+            DeclineTradeButton.SetActive(false);
+            AcceptTradeButton.SetActive(false);
+            OfferTradeButton.SetActive(false);
 
             ReflectCurrentTradeOffer();
+            ReflectPlayerInventory();
         }
     }
 
@@ -86,7 +90,43 @@ public class TradingUI : MonoBehaviour
 
     public void ReflectCurrentTradeOffer()
     {
+        TradeOffer npcTradeOffer = CurrentNPC.CurrentTradeOffer;
 
+        if (npcTradeOffer != null)
+        {
+            for(int i = 0; i < npcTradeOffer.Items.Length; i++)
+            {
+                NPCItemSlots[i].SetItem(npcTradeOffer.Items[i]);
+            }
+
+            NPCPriceText.text = npcTradeOffer.WantedValue.ToString();
+        }
+
+        
+
+        if(CurrentPlayerTradeOffer != null)
+        {
+            //reflect player side with their items and price
+        }
+    }
+
+    public void ReflectPlayerInventory()
+    {
+        foreach(ItemStack stack in GameManager.Instance._Player.inventory.ItemStacks)
+        {
+            if(stack.item != null)
+            {
+                Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).SetItem(stack.item);
+            }
+        }
+
+        foreach(ItemStack stack in GameManager.Instance._House._Inventory.ItemStacks)
+        {
+            if (stack.item != null)
+            {
+                Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).SetItem(stack.item);
+            }
+        }
     }
 
     public void OnAcceptButton()

@@ -28,10 +28,18 @@ public class UIItemSlot : MonoBehaviour
         }
     }
 
-    public void SetItem(Item item, int count)
+    public bool IsEmpty
+    {
+        get
+        {
+            return item == null;
+        }
+    }
+
+    public void SetItem(Item item/*, int count*/)
     {
         this.item = item;
-        this.count = count;
+        //this.count = count;
 
         ReflectItem();
     }
@@ -68,7 +76,9 @@ public class UIItemSlot : MonoBehaviour
         }
 
         ItemNameText.text = item.Name;
+        ItemCountText.text = "";
 
+        /*
         if(count == 1)
         {
             ItemCountText.text = "";
@@ -76,15 +86,49 @@ public class UIItemSlot : MonoBehaviour
         else
         {
             ItemCountText.text = count.ToString();
-        }
-       
+        }*/
+
     }
 
     public void OnSlotClicked()
     {
-        if (IsPlayerSlot)
+        if (GameManager.Instance._MainUI._TradingUI._TradingState == TradingUI.TradingState.InitialOffer)
         {
-            Debug.Log("Item slot clicked");
+            if (GameManager.Instance._MainUI._TradingUI.CurrentNPC.IsSelling)
+            {
+                if (!IsPlayerSlot)
+                {
+                    SetIsWanted(!_IsWanted);
+                }
+            }
+            else
+            {
+                
+            }
         }
+        else
+        {
+
+        }
+    }
+
+    public void MouseDragBegin()
+    {
+        GameManager.Instance._MainUI.StartItemDrag(this);
+    }
+
+    public void MouseEnter()
+    {
+        GameManager.Instance._MainUI.CurrentHoveredItemSlot = this;
+    }
+
+    public void MouseExit()
+    {
+        GameManager.Instance._MainUI.CurrentHoveredItemSlot = null;
+    }
+
+    public void MouseUp() 
+    {
+        GameManager.Instance._MainUI.OnMouseUp();
     }
 }

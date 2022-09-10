@@ -12,9 +12,6 @@ public class CameraManager : MonoBehaviour
 
     public bool PlayerCameraMovementEnabled;
 
-    private Vector2 CurrentMouseDelta;
-    private Vector2 NewMouseDelta;
-
     public void FindCameras()
     {
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -22,29 +19,30 @@ public class CameraManager : MonoBehaviour
         TradingCamera = GameObject.FindGameObjectWithTag("TradingCamera").GetComponent<CinemachineVirtualCamera>();
     }
 
-    public void OnCameraMove(InputValue value)
-    {
-        if (PlayerCameraMovementEnabled)
-        {
-            NewMouseDelta = value.Get<Vector2>();
-
-            PlayerCamera.m_XAxis.Value += Mathf.Clamp(CurrentMouseDelta.x * Time.deltaTime * 8f, -5f, 5f);
-            PlayerCamera.m_YAxis.Value -= Mathf.Clamp(CurrentMouseDelta.y * Time.deltaTime / 8f, -5f, 5f);
-        }
-    }
-
     private void Update()
     {
-        //smooth the mouse delta every frame, so that the camera rotation is also smoothed slightly
-        if (PlayerCameraMovementEnabled)
+
+    }
+
+    public void SetPlayerCameraMovementEnabled(bool enabled)
+    {
+        PlayerCameraMovementEnabled = enabled;
+
+        if(enabled)
         {
-            CurrentMouseDelta = Vector2.Lerp(CurrentMouseDelta, NewMouseDelta, Time.deltaTime * 20f);
+            PlayerCamera.m_YAxis.m_MaxSpeed = 0.005f;
+            PlayerCamera.m_XAxis.m_MaxSpeed = 0.5f;
+        }
+        else
+        {
+            PlayerCamera.m_YAxis.m_MaxSpeed = 0f;
+            PlayerCamera.m_XAxis.m_MaxSpeed = 0f;
         }
     }
 
     public void SwitchToTradingCam()
     {
-        PlayerCameraMovementEnabled = false;
+        SetPlayerCameraMovementEnabled(false);
         PlayerCamera.Priority = 1;
         TradingCamera.Priority = 10;
 
@@ -55,7 +53,13 @@ public class CameraManager : MonoBehaviour
         PlayerCamera.Priority = 10;
         TradingCamera.Priority = 1;
 
-        //need a coroutine to wait for the blend to finish before re-enabling player camera movement controls
-        //PlayerCameraMovementEnabled = false;
+        StartCoroutine(WaitThenEnableCameraControls());
+    }
+
+    private IEnumerator WaitThenEnableCameraControls()
+    {
+        yield return new WaitForSeconds(2f);
+
+        SetPlayerCameraMovementEnabled(true);
     }
 }

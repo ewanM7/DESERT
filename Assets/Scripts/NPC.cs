@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour
     public ItemSpecifier[] WantsToBuy;
     public bool IsSelling;
     public SellerType SalesType;
-    private TradeOffer CurrentTradeOffer;
+    public TradeOffer CurrentTradeOffer;
 
     public int MaxNumberOfBuyItems;
 
@@ -453,6 +453,18 @@ public class NPC : MonoBehaviour
                 {
                     CurrentTradeOffer.Items[i] = inventory.ItemStacks[i].item;
                 }
+
+                CurrentTradeOffer.WantedValue = 0;
+
+                foreach (Item item in CurrentTradeOffer.Items)
+                {
+                    if (item != null)
+                    {
+                        CurrentTradeOffer.WantedValue += item.Value;
+                    }
+                }
+
+                CurrentTradeOffer.WantedValue = Mathf.RoundToInt(CurrentTradeOffer.WantedValue * SellMultiplier);
             }
             else
             {

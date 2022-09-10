@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float MoveSpeed;
     public float TurnRate;
-    public float SmoothTurnRate;
 
     public Vector2 MovementInput;
     public float VerticalMovement;
