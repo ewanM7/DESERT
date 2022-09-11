@@ -15,18 +15,18 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: a60f0000
   BaseName: Compass
-  BaseValue: 55
+  BaseValue: 75
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 1.5
     Material: 6001
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6002
-  - Multiplier: 0
+  - Multiplier: 2
     Material: 6000
   MaterialDescriptors: 711700007217000070170000
   SubDescriptors: 

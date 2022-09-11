@@ -15,16 +15,16 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: b00f00005b1b0000
   BaseName: Canteen
-  BaseValue: 0
+  BaseValue: 40
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6013
-  - Multiplier: 0
+  - Multiplier: 1.2
     Material: 6014
   MaterialDescriptors: 7d1700007e170000
   SubDescriptors: 

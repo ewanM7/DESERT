@@ -15,14 +15,14 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: ad0f0000
   BaseName: Lantern
-  BaseValue: 0
+  BaseValue: 45
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6003
   MaterialDescriptors: 73170000
   SubDescriptors: 

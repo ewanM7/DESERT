@@ -15,22 +15,22 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: a20f0000
   BaseName: Spear
-  BaseValue: 55
+  BaseValue: 50
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 0.9
     Material: 6007
-  - Multiplier: 0
+  - Multiplier: 1.1
     Material: 6008
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6009
-  - Multiplier: 0
+  - Multiplier: 1.7
     Material: 6003
-  - Multiplier: 0
+  - Multiplier: 1.4
     Material: 6005
   MaterialDescriptors: 7717000078170000791700007317000075170000
   SubDescriptors: 

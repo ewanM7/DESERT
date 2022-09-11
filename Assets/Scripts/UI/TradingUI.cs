@@ -67,6 +67,15 @@ public class TradingUI : MonoBehaviour
         for(int i = 0; i < TRADING_SLOTS_COUNT; i++)
         {
             CurrentPlayerTradeOffer.Items[i] = PlayerItemSlots[i].item;
+
+            if(PlayerItemSlots[i].IsWanted)
+            {
+                CurrentPlayerTradeOffer.WantedItemIndexes[i] = true;
+            }
+            else
+            {
+                CurrentPlayerTradeOffer.WantedItemIndexes[i] = false;
+            }
         }
 
         if(!CurrentNPC.IsSelling)
@@ -152,6 +161,7 @@ public class TradingUI : MonoBehaviour
             {
                 SetPlayerTradeOffer();
                 CurrentNPC.SetResponseForTradeOffer(CurrentPlayerTradeOffer);
+                ReflectCurrentTradeOffer();
             }
             else
             {

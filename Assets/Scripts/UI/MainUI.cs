@@ -18,6 +18,8 @@ public class MainUI : MonoBehaviour
     public UIItemSlot CurrentHoveredItemSlot;
     public UIItemSlot CurrentDraggedItemSlot;
 
+    public const float TooltipHoverTime = 0.8f;
+
     public Tooltip _Tooltip;
 
     // Update is called once per frame

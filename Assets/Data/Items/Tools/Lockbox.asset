@@ -15,20 +15,20 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: ae0f0000
   BaseName: Lockbox
-  BaseValue: 0
+  BaseValue: 55
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 2
     Material: 6003
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6007
-  - Multiplier: 0
+  - Multiplier: 1.4
     Material: 6008
-  - Multiplier: 0
+  - Multiplier: 1.2
     Material: 6009
   MaterialDescriptors: 73170000771700007817000079170000
   SubDescriptors: 

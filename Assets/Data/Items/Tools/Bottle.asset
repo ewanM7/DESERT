@@ -15,20 +15,20 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: ac0f00005b1b0000
   BaseName: Bottle
-  BaseValue: 0
+  BaseValue: 30
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 0.9
     Material: 6007
-  - Multiplier: 0
+  - Multiplier: 1.2
     Material: 6008
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6009
-  - Multiplier: 0
+  - Multiplier: 2
     Material: 6028
   MaterialDescriptors: 7717000078170000791700008c170000
   SubDescriptors: 

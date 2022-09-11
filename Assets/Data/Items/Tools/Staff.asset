@@ -15,18 +15,18 @@ MonoBehaviour:
   Category: 6
   BaseDescriptors: a90f0000
   BaseName: Staff
-  BaseValue: 55
+  BaseValue: 30
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6007
-  - Multiplier: 0
+  - Multiplier: 1.2
     Material: 6009
-  - Multiplier: 0
+  - Multiplier: 1.4
     Material: 6008
   MaterialDescriptors: 771700007817000079170000
   SubDescriptors: 

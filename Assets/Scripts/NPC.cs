@@ -92,19 +92,19 @@ public class NPC : MonoBehaviour
 
         float roll = Random.Range(0, 100f);
 
-        if(roll < 30f)
+        if(roll < 40f)
         {
-            //30% chance for 1 trait
+            //40% chance for 1 trait
             traitCount = 1;
         }
-        else if (roll < 60f)
+        else if (roll < 70f)
         {
             //30% chance for 2 traits
             traitCount = 2;
         }
         else if(roll < 90f)
         {
-            //30% chance for 3 traits
+            //20% chance for 3 traits
             traitCount = 3;
         }
         else
@@ -414,7 +414,10 @@ public class NPC : MonoBehaviour
         {
             foreach (Item item in offer.Items)
             {
-                value += PerceivedValueForItem(item);
+                if (item != null)
+                {
+                    value += PerceivedValueForItem(item);
+                }
             }
         }
 

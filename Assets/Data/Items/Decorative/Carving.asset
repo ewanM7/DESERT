@@ -15,22 +15,22 @@ MonoBehaviour:
   Category: 9
   BaseDescriptors: 9b110000
   BaseName: Carving
-  BaseValue: 0
+  BaseValue: 25
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers:
-  - Multiplier: 0
+  - Multiplier: 2
     Material: 6005
-  - Multiplier: 0
+  - Multiplier: 1
     Material: 6007
-  - Multiplier: 0
+  - Multiplier: 1.4
     Material: 6008
-  - Multiplier: 0
+  - Multiplier: 1.2
     Material: 6009
-  - Multiplier: 0
+  - Multiplier: 1.5
     Material: 6010
   MaterialDescriptors: 751700007717000078170000791700007a170000
   SubDescriptors: 

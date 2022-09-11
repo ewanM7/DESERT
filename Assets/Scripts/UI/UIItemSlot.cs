@@ -20,6 +20,8 @@ public class UIItemSlot : MonoBehaviour
     public bool IsPlayerSlot;
     private bool _IsWanted;
 
+    private Coroutine CurrentTooltipWaitCoroutine;
+
     public bool IsWanted
     {
         get
@@ -112,8 +114,9 @@ public class UIItemSlot : MonoBehaviour
 
     public void MouseDragBegin()
     {
-        if (item != null)
+        if (IsPlayerSlot && item != null)
         {
+            GameManager.Instance._MainUI._Tooltip.gameObject.SetActive(false);
             GameManager.Instance._MainUI.StartItemDrag(this);
         }
     }
@@ -121,15 +124,38 @@ public class UIItemSlot : MonoBehaviour
     public void MouseEnter()
     {
         GameManager.Instance._MainUI.CurrentHoveredItemSlot = this;
+
+        if(!IsEmpty)
+        {
+            CurrentTooltipWaitCoroutine = StartCoroutine(TooltipWaitCoroutine());
+        }
     }
 
     public void MouseExit()
     {
         GameManager.Instance._MainUI.CurrentHoveredItemSlot = null;
+
+        if (CurrentTooltipWaitCoroutine != null)
+        {
+            StopCoroutine(CurrentTooltipWaitCoroutine);
+        }
+
+        GameManager.Instance._MainUI._Tooltip.gameObject.SetActive(false);
     }
 
     public void MouseUp() 
     {
         GameManager.Instance._MainUI.OnMouseUp();
+    }
+
+    private IEnumerator TooltipWaitCoroutine()
+    {
+        yield return new WaitForSeconds(MainUI.TooltipHoverTime);
+
+        if (GameManager.Instance._MainUI.CurrentItemDragWidget == null)
+        {
+            GameManager.Instance._MainUI._Tooltip.ReflectItem(item);
+            GameManager.Instance._MainUI._Tooltip.gameObject.SetActive(true);
+        }
     }
 }
