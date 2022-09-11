@@ -16,7 +16,7 @@ public class UIItemSlot : MonoBehaviour
     public Color BackgroundBaseColor;
     public Color BackgroundWantedColor;
 
-
+    public bool DestroyOnEmpty;
     public bool IsPlayerSlot;
     private bool _IsWanted;
 
@@ -40,6 +40,12 @@ public class UIItemSlot : MonoBehaviour
     {
         this.item = item;
         //this.count = count;
+
+        if(this.item == null && DestroyOnEmpty)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         ReflectItem();
     }
@@ -101,20 +107,15 @@ public class UIItemSlot : MonoBehaviour
                     SetIsWanted(!_IsWanted);
                 }
             }
-            else
-            {
-                
-            }
-        }
-        else
-        {
-
         }
     }
 
     public void MouseDragBegin()
     {
-        GameManager.Instance._MainUI.StartItemDrag(this);
+        if (item != null)
+        {
+            GameManager.Instance._MainUI.StartItemDrag(this);
+        }
     }
 
     public void MouseEnter()

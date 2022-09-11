@@ -24,6 +24,11 @@ public class NPCGenerationData : ScriptableObject
     public ItemDescriptor[] BuyerToolItems;
     public ItemDescriptor[] BuyerDecorativeItems;
 
+    /// <summary>
+    /// Get a number of random items for buyer NPCs. pass -1 unless you want a specific number of items.
+    /// </summary>
+    /// <param name="count"></param>
+    /// <returns></returns>
     public Item[] RandomItemsForBuyer()
     {
         Item[] items;
@@ -51,6 +56,20 @@ public class NPCGenerationData : ScriptableObject
 
         for (int i = 0; i < items.Length; i++)
         {
+            items[i] = RandomItemForBuyerCategory(buyerCategory);
+        }
+
+
+        return items;
+    }
+
+    public Item[] RandomItemsForHouse(int count)
+    {
+        Item[] items = new Item[count];
+
+        for (int i = 0; i < items.Length; i++)
+        {
+            ItemCategory buyerCategory = GetBuyerItemCategory();
             items[i] = RandomItemForBuyerCategory(buyerCategory);
         }
 
@@ -228,7 +247,7 @@ public class NPCGenerationData : ScriptableObject
                     if (isDamaged)
                     {
                         descriptors = new ItemDescriptor[2];
-                        descriptors[2] = ItemDescriptor.Damaged;
+                        descriptors[1] = ItemDescriptor.Damaged;
                     }
                     else
                     {
@@ -327,7 +346,7 @@ public class NPCGenerationData : ScriptableObject
                         break;
                 }
 
-                return new FoodItem(data, new ItemDescriptor[0], -1);
+                return new FoodItem(data, null, -1);
 
             case ItemCategory.Tool:
                 data = null;
@@ -402,42 +421,42 @@ public class NPCGenerationData : ScriptableObject
         switch (type)
         {
             case SellerType.HerbsAndSpices:
-                for(int i = 0; i < 9; i++)
+                for(int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
                 {
                     dataList.Add(GetSellerItem(HerbAndSpiceSellerItems));
                 }
                 break;
 
             case SellerType.Food:
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
                 {
                     dataList.Add(GetSellerItem(FoodSellerItems));
                 }
                 break;
 
             case SellerType.Mining:
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
                 {
                     dataList.Add(GetSellerItem(MiningSellerItems));
                 }
                 break;
 
             case SellerType.Animals:
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     dataList.Add(GetSellerItem(AnimalSellerItems));
                 }
                 break;
 
             case SellerType.Fabrics:
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
                 {
                     dataList.Add(GetSellerItem(FabricsSellerItems));
                 }
                 break;
 
             case SellerType.Naturals:
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < TradingUI.TRADING_SLOTS_COUNT; i++)
                 {
                     dataList.Add(GetSellerItem(NaturalsSellerItems));
                 }

@@ -18,6 +18,8 @@ public class MainUI : MonoBehaviour
     public UIItemSlot CurrentHoveredItemSlot;
     public UIItemSlot CurrentDraggedItemSlot;
 
+    public Tooltip _Tooltip;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +30,8 @@ public class MainUI : MonoBehaviour
     {
         CurrentDraggedItemSlot = draggedFrom;
 
-        CurrentItemDragWidget = Instantiate(ItemDragWidgetPrefab).GetComponent<ItemDragWidget>();
+        CurrentItemDragWidget = Instantiate(ItemDragWidgetPrefab, transform).GetComponent<ItemDragWidget>();
+        CurrentItemDragWidget.ReflectItem(draggedFrom.item);
     }
 
     public void OnMouseUp()
@@ -38,20 +41,14 @@ public class MainUI : MonoBehaviour
             if (CurrentHoveredItemSlot != null)
             {
                 //move item into slot if its empty, otherwise let go
-                if(CurrentHoveredItemSlot.IsEmpty)
+                if(CurrentHoveredItemSlot.IsPlayerSlot && CurrentHoveredItemSlot.IsEmpty)
                 {
                     CurrentHoveredItemSlot.SetItem(CurrentDraggedItemSlot.item);
                     CurrentDraggedItemSlot.SetItem(null);
                 }
-                else
-                {
-                    Destroy(CurrentItemDragWidget);
-                }
             }
-            else
-            {
-                
-            }
+
+            Destroy(CurrentItemDragWidget.gameObject);
         }
     }
 }

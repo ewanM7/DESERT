@@ -18,7 +18,7 @@ public class ToolItem : Item
     {
         get
         {
-            return BaseItemData.BaseName + " " + DynamicDescriptors[0].ToString();
+            return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
         }
     }
 

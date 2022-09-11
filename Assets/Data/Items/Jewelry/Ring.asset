@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 4
   BaseDescriptors: b80b0000
-  BaseName: 
+  BaseName: Ring
   BaseValue: 20
   HealthRestored: 0
   HungerRestored: 0

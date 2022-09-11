@@ -30,8 +30,8 @@ public class CameraManager : MonoBehaviour
 
         if(enabled)
         {
-            PlayerCamera.m_YAxis.m_MaxSpeed = 0.005f;
-            PlayerCamera.m_XAxis.m_MaxSpeed = 0.5f;
+            PlayerCamera.m_YAxis.m_MaxSpeed = 0.0025f;
+            PlayerCamera.m_XAxis.m_MaxSpeed = 0.25f;
         }
         else
         {

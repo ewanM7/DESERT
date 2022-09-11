@@ -78,7 +78,7 @@ public class NPC : MonoBehaviour
         //set price multipliers
         PriceTolerance = Random.Range(0.02f, 0.15f);
         BuyMultiplier = Random.Range(0.9f, 1.1f);
-        SellMultiplier = Random.Range(0.85f, 1.15f);
+        SellMultiplier = Random.Range(0.9f, 1.15f);
         OfferMultiplier = Random.Range(1.03f, 1.07f);
 
         TradeInterest = 100f;
@@ -517,7 +517,13 @@ public class NPC : MonoBehaviour
                 }
                 else if((CurrentTradeOffer.WantedValue - perceivedOfferValue) / CurrentTradeOffer.WantedValue >  (PriceTolerance + 0.15f))
                 {
+                    //player offer is lower than 15% down from the price tolerance - decline the trade and decrease interest
                     InterestDecreaseForThisOffer += Random.Range(0.08f, 0.15f);
+                }
+                else
+                {
+                    //player offer is too low, but is within acceptable range - decline the trade and decrease interest slightly
+                    InterestDecreaseForThisOffer += Random.Range(0.03f, 0.08f);
                 }
             }
         }

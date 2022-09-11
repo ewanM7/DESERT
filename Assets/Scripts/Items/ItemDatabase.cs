@@ -338,16 +338,6 @@ public class ItemDatabase : ScriptableObject
         return new ItemDescriptor[0];
     }
 
-    public ItemDescriptor GetRandomAnimalItem()
-    {
-        return SpecificAnimalItems[Random.Range(0, SpecificAnimalItems.Count)];
-    }
-
-    public ItemDescriptor GetRandomToolItem()
-    {
-        return ToolDescriptors[Random.Range(0, ToolDescriptors.Count)];
-    }
-
 }
 
 [System.Serializable]

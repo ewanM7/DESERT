@@ -6,9 +6,10 @@ public class House : MonoBehaviour
 {
     public Inventory _Inventory;
 
-    private void Awake()
+    private void Start()
     {
         _Inventory = new Inventory(50);
+        GenerateRandomItems();
     }
 
     /// <summary>
@@ -16,6 +17,11 @@ public class House : MonoBehaviour
     /// </summary>
     public void GenerateRandomItems()
     {
+        Item[] items = GameManager.Instance._NPCGenerationData.RandomItemsForHouse(20);
 
+        foreach(Item item in items)
+        {
+            _Inventory.AddItem(item);
+        }
     }
 }

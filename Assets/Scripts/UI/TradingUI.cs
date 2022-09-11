@@ -49,7 +49,7 @@ public class TradingUI : MonoBehaviour
             NPCPriceWidget.SetActive(false);
 
             DeclineTradeButton.SetActive(false);
-            AcceptTradeButton.SetActive(false);
+            AcceptTradeButton.SetActive(true);
             OfferTradeButton.SetActive(false);
 
             ReflectCurrentTradeOffer();
@@ -112,11 +112,21 @@ public class TradingUI : MonoBehaviour
 
     public void ReflectPlayerInventory()
     {
-        foreach(ItemStack stack in GameManager.Instance._Player.inventory.ItemStacks)
+
+        int i = 1;
+
+        UIItemSlot cashSlot = Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).GetComponent<UIItemSlot>();
+        cashSlot.SetItem(new Item(GameManager.Instance._ItemDatabase.Cash, GameManager.Instance._Player.Money));
+        i++;
+
+        foreach (ItemStack stack in GameManager.Instance._Player.inventory.ItemStacks)
         {
             if(stack.item != null)
             {
-                Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).SetItem(stack.item);
+                UIItemSlot slot = Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).GetComponent<UIItemSlot>();
+                slot.SetItem(stack.item);
+                slot.DestroyOnEmpty = true;
+                i++;
             }
         }
 
@@ -124,15 +134,36 @@ public class TradingUI : MonoBehaviour
         {
             if (stack.item != null)
             {
-                Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).SetItem(stack.item);
+                UIItemSlot slot = Instantiate(ItemSlotPrefab, PlayerInventoryContentRT).GetComponent<UIItemSlot>();
+                slot.SetItem(stack.item);
+                slot.DestroyOnEmpty = true;
+                i++;
             }
         }
+
+        PlayerInventoryContentRT.sizeDelta = new Vector2(PlayerInventoryContentRT.sizeDelta.x , 15 + (i * 95));
     }
 
     public void OnAcceptButton()
     {
-        SetPlayerTradeOffer();
-        CurrentPlayerTradeOffer.Accepted = true;
+        if(_TradingState == TradingState.InitialOffer)
+        {
+            if(CurrentNPC.IsSelling)
+            {
+                SetPlayerTradeOffer();
+                CurrentNPC.SetResponseForTradeOffer(CurrentPlayerTradeOffer);
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            CurrentPlayerTradeOffer.Accepted = true;
+        }
+
+        
     }
 
     public void OnDeclineButton()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 4
   BaseDescriptors: bb0b0000
-  BaseName: 
+  BaseName: Earrings
   BaseValue: 30
   HealthRestored: 0
   HungerRestored: 0
@@ -39,4 +39,4 @@ MonoBehaviour:
   - Multiplier: 1.3
     Material: 6010
   MaterialDescriptors: 701700007117000072170000731700007717000078170000791700007a170000
-  SubDescriptors: 8417000085170000861700008717000088170000891700008a1700005e1b0000
+  SubDescriptors: 8417000085170000861700008717000088170000891700005e1b0000

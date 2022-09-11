@@ -36,6 +36,11 @@ public class ClothingItem : Item
             }
             else
             {
+                if(DynamicDescriptors[1] == ItemDescriptor.UnDyed)
+                {
+                    return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName;
+                }
+
                 return DynamicDescriptors[0].ToString() + " " + BaseItemData.BaseName + " (" + DynamicDescriptors[1] + ")";
             }
         }

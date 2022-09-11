@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
 
     public PlayerInteractHitbox InteractHitbox;
 
+    private void Awake()
+    {
+        inventory = new Inventory(10);
+    }
+
     public void OnPlayerInteract()
     {
         InteractHitbox.OnPlayerInteract();

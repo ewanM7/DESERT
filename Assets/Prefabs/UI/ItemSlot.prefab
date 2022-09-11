@@ -368,7 +368,8 @@ MonoBehaviour:
   BackgroundImage: {fileID: 1316687824094965234}
   BackgroundBaseColor: {r: 0.33333334, g: 0.21568628, b: 0.050980393, a: 1}
   BackgroundWantedColor: {r: 0.25255555, g: 0.49056602, b: 0.29917616, a: 1}
-  IsPlayerSlot: 0
+  CanBeGivenItems: 1
+  IsPlayerSlot: 1
 --- !u!114 &753426469588841715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +438,22 @@ MonoBehaviour:
         - m_Target: {fileID: 6878256691607289153}
           m_TargetAssemblyTypeName: UIItemSlot, Assembly-CSharp
           m_MethodName: MouseUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 13
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6878256691607289153}
+          m_TargetAssemblyTypeName: UIItemSlot, Assembly-CSharp
+          m_MethodName: MouseDragBegin
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
