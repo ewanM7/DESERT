@@ -15,11 +15,12 @@ MonoBehaviour:
   Category: 1
   BaseDescriptors: 5223000003000000
   BaseName: Eggplant
-  BaseValue: 0
+  BaseValue: 4
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers: []
+  MaterialDescriptors: 
   SubDescriptors: 

@@ -15,7 +15,7 @@ MonoBehaviour:
   Category: 9
   BaseDescriptors: 6c230000
   BaseName: Fabric Crafts Vol. 1
-  BaseValue: 0
+  BaseValue: 100
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0

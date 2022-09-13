@@ -50,6 +50,7 @@ public class NPC : MonoBehaviour
     /// </summary>
     public float InterestMultiplier;
 
+    
 
     public NPCState State;
 

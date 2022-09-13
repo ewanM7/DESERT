@@ -15,7 +15,7 @@ MonoBehaviour:
   Category: 9
   BaseDescriptors: 6e230000
   BaseName: The Jewelry Handbook
-  BaseValue: 0
+  BaseValue: 100
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0

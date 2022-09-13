@@ -17,6 +17,8 @@ public class Item
     /// </summary>
     public int CashValue;
 
+    public System.Guid UniqueID;
+
     public virtual string Name
     {
         get
@@ -42,6 +44,7 @@ public class Item
 
     public Item(BaseItemData data, int quality, int dummyParam)
     {
+        UniqueID = System.Guid.NewGuid();
         BaseItemData = data;
         Quality = quality;
         CashValue = -1;
@@ -54,8 +57,9 @@ public class Item
     /// <param name="CashValue"></param>
     public Item(BaseItemData data, int CashValue)
     {
+        UniqueID = System.Guid.NewGuid();
         BaseItemData = data;
-
+        Quality = -1;
         this.CashValue = CashValue;
     }
 
@@ -85,6 +89,16 @@ public class Item
 
             return value;
         }
+    }
+
+    public static bool operator ==(Item a, Item b)
+    {
+        return a.UniqueID == b.UniqueID;
+    }
+
+    public static bool operator !=(Item a, Item b)
+    {
+        return a.UniqueID != b.UniqueID;
     }
 
     public bool HasDescriptor(ItemDescriptor descriptor)

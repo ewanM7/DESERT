@@ -95,6 +95,22 @@ public class Inventory
             }
         }
     }
+
+    /// <summary>
+    /// Remove a single item from the inventory
+    /// </summary>
+    /// <param name="itemToRemove"></param>
+    public void RemoveItem(Item itemToRemove)
+    {
+        for(int i = 0; i < ItemStacks.Length; i++)
+        {
+            if(itemToRemove == ItemStacks[i].item)
+            {
+                ItemStacks[i].item = null;
+                return;
+            }
+        }
+    }
 }
 
 public class ItemStack

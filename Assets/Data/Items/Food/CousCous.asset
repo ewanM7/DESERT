@@ -15,11 +15,12 @@ MonoBehaviour:
   Category: 1
   BaseDescriptors: 0a0000005b23000003000000
   BaseName: Cous Cous
-  BaseValue: 0
+  BaseValue: 20
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers: []
+  MaterialDescriptors: 
   SubDescriptors: 

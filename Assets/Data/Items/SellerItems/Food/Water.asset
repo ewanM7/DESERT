@@ -15,7 +15,7 @@ MonoBehaviour:
   Category: 1
   BaseDescriptors: 6b230000
   BaseName: Water
-  BaseValue: 40
+  BaseValue: 30
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0

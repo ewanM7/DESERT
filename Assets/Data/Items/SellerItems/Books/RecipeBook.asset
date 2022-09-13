@@ -15,7 +15,7 @@ MonoBehaviour:
   Category: 9
   BaseDescriptors: 70230000
   BaseName: The Sovir Cookbook
-  BaseValue: 0
+  BaseValue: 100
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0

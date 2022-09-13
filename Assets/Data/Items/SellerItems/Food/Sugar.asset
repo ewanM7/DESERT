@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 1
   BaseDescriptors: 4f230000
-  BaseName: Milk
-  BaseValue: 0
+  BaseName: Sugar
+  BaseValue: 13
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0
   _UISprite: {fileID: 0}
   IsStackable: 0
   MaterialMultipliers: []
+  MaterialDescriptors: 
   SubDescriptors: 

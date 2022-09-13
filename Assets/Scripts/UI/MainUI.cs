@@ -18,7 +18,7 @@ public class MainUI : MonoBehaviour
     public UIItemSlot CurrentHoveredItemSlot;
     public UIItemSlot CurrentDraggedItemSlot;
 
-    public const float TooltipHoverTime = 0.8f;
+    public const float TooltipHoverTime = 0.5f;
 
     public Tooltip _Tooltip;
 

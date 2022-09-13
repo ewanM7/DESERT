@@ -21,12 +21,19 @@ public class TradingUI : MonoBehaviour
     public GameObject NPCPriceWidget;
     public TextMeshProUGUI NPCPriceText;
 
-    public GameObject DeclineTradeButton;
-    public GameObject AcceptTradeButton;
-    public GameObject OfferTradeButton;
+    public GameObject AcceptButton;
+    public GameObject OfferButton;
+    public TextMeshProUGUI OfferButtonText;
 
     public RectTransform PlayerInventoryContentRT;
     public UIItemSlot ItemSlotPrefab;
+
+    public Dialogue NPCWantsMoreDialogue;
+    public Dialogue NPCAcceptDialogue;
+    public Dialogue NPCInitialBuyDialogue;
+    public Dialogue NPCInitialSellDialogue;
+
+    public DialogueBox _DialogueBox;
 
     public TradingState _TradingState;
 
@@ -48,11 +55,10 @@ public class TradingUI : MonoBehaviour
             PlayerPriceWidget.SetActive(false);
             NPCPriceWidget.SetActive(false);
 
-            DeclineTradeButton.SetActive(false);
-            AcceptTradeButton.SetActive(true);
-            OfferTradeButton.SetActive(false);
+            AcceptButton.SetActive(false);
+            OfferButton.SetActive(true);
 
-            ReflectCurrentTradeOffer();
+            ReflectNPCTradeOffer();
             ReflectPlayerInventory();
         }
     }
@@ -97,7 +103,7 @@ public class TradingUI : MonoBehaviour
 
     }
 
-    public void ReflectCurrentTradeOffer()
+    public void ReflectNPCTradeOffer()
     {
         TradeOffer npcTradeOffer = CurrentNPC.CurrentTradeOffer;
 
@@ -109,13 +115,6 @@ public class TradingUI : MonoBehaviour
             }
 
             NPCPriceText.text = npcTradeOffer.WantedValue.ToString();
-        }
-
-        
-
-        if(CurrentPlayerTradeOffer != null)
-        {
-            //reflect player side with their items and price
         }
     }
 
@@ -155,35 +154,51 @@ public class TradingUI : MonoBehaviour
 
     public void OnAcceptButton()
     {
-        if(_TradingState == TradingState.InitialOffer)
-        {
-            if(CurrentNPC.IsSelling)
-            {
-                SetPlayerTradeOffer();
-                CurrentNPC.SetResponseForTradeOffer(CurrentPlayerTradeOffer);
-                ReflectCurrentTradeOffer();
-            }
-            else
-            {
 
-            }
-        }
-        else
+        if (_TradingState == TradingState.MainTrading)
         {
             CurrentPlayerTradeOffer.Accepted = true;
+            _TradingState = TradingState.TradeClosed;
         }
-
-        
-    }
-
-    public void OnDeclineButton()
-    {
-
     }
 
     public void OnOfferButton()
     {
+        SetPlayerTradeOffer();
+        CurrentNPC.SetResponseForTradeOffer(CurrentPlayerTradeOffer);
 
+
+        if(CurrentNPC.CurrentTradeOffer.Accepted)
+        {
+            foreach (Item item in CurrentPlayerTradeOffer.Items)
+            {
+                GameManager.Instance._House._Inventory.RemoveItem(item);
+            }
+
+            foreach (Item item in CurrentNPC.CurrentTradeOffer.Items)
+            {
+                GameManager.Instance._House._Inventory.AddItem(item);
+            }
+        }
+        else
+        {
+            ReflectNPCTradeOffer();
+            _TradingState = TradingState.MainTrading;
+
+            if (CurrentNPC.IsSelling)
+            {
+                OfferButtonText.text = "Offer";
+
+                NPCPriceWidget.SetActive(true);
+                NPCPriceText.text = CurrentNPC.CurrentTradeOffer.WantedValue.ToString();
+            }
+            else
+            {
+                OfferButtonText.text = "Counter-offer";
+                PlayerPriceWidget.SetActive(true);
+                AcceptButton.SetActive(true);
+            }
+        }
     }
 
     public void OnPriceIncreaseSmallButton()

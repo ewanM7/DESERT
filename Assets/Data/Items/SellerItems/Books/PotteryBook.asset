@@ -15,7 +15,7 @@ MonoBehaviour:
   Category: 9
   BaseDescriptors: 6d230000
   BaseName: Pottery And You
-  BaseValue: 0
+  BaseValue: 100
   HealthRestored: 0
   HungerRestored: 0
   ThirstRestored: 0

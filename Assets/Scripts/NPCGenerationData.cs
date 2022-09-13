@@ -35,13 +35,13 @@ public class NPCGenerationData : ScriptableObject
 
         float roll = Random.Range(0f, 100f);
 
-        if (roll < 33f)
+        if (roll < 40f)
         {
             //no items
             return new Item[0];
 
         }
-        else if(roll < 67f)
+        else if(roll < 70f)
         {
             //one items
             items = new Item[1];
